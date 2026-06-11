@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { ArrowRight, Sparkles, Pin, Calendar, MapPin } from "lucide-react";
-import { PageId } from "./Header";
-import { span } from "motion/react-client";
+import { ArrowRight, Calendar, MapPin } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const PARALLAX_IMAGES = [
   "/images/hero/hero1.jpg",
@@ -9,12 +8,7 @@ const PARALLAX_IMAGES = [
   "/images/hero/hero3.jpg",
 ];
 
-interface HeroProps {
-  onNavigate: (page: PageId) => void;
-  onRegisterClick: () => void;
-}
-
-export default function Hero({ onNavigate, onRegisterClick }: HeroProps) {
+export default function Hero() {
   const [currentBg, setCurrentBg] = useState(0);
   const [scrollY, setScrollY] = useState(0);
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
@@ -131,25 +125,21 @@ export default function Hero({ onNavigate, onRegisterClick }: HeroProps) {
 
         {/* Primary Call to Action Controls in Centered Layout */}
         <div className="mt-8 flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto px-4 sm:px-0">
-          <a
+          <Link
             id="desktop-register-button"
-            href="#" 
-            target="_blank"    
-            rel="noopener noreferrer"      
-            onClick={onRegisterClick}       
-            className="w-full sm:w-auto px-8 py-3.5 bg-[#eb0000] hover:bg-[#c20000] text-white font-bold rounded-2xl shadow-lg shadow-red-950/20 uppercase tracking-widest text-[11px] transition-all duration-300 transform hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
+            to="/register"
+            className="w-full sm:w-auto px-8 py-3.5 bg-[#eb0000] hover:bg-[#c20000] text-white font-bold rounded-2xl shadow-lg shadow-red-950/20 uppercase tracking-widest text-[11px] transition-all duration-300 transform hover:scale-[1.01] active:scale-[0.99] cursor-pointer text-center"
           >
-            {/* <Sparkles className="w-3.5 h-3.5 text-white animate-pulse" /> */}
             Register Now
-          </a>
+          </Link>
 
-          <button
-            onClick={() => onNavigate("agenda")}
+          <Link
+            to="/agenda"
             className="w-full sm:w-auto px-8 py-3.5 bg-white/5 hover:bg-white/10 text-white border border-white/20 font-bold rounded-2xl uppercase tracking-widest text-[11px] transition-all duration-300 flex items-center justify-center gap-2 hover:scale-[1.01] active:scale-[0.99] cursor-pointer backdrop-blur-md"
           >
             Explore Schedule
             <ArrowRight className="w-4 h-4 text-dnc-orange-light" />
-          </button>
+          </Link>
         </div>
 
         {/* Dynamic Countdown Block */}

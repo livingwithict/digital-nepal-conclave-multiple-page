@@ -2,12 +2,9 @@ import React from "react";
 import { Info, Building2, Users, ShieldCheck, HeartHandshake, Award, ExternalLink, Globe, Sparkles } from "lucide-react";
 import { TEAM_MEMBERS, PATRONS } from "../data";
 
-interface AboutProps {
-  currentSubSection: "event" | "organizer" | "team";
-  onSubSectionChange: (subSection: "event" | "organizer" | "team") => void;
-}
-
-export default function AboutComponents({ currentSubSection, onSubSectionChange }: AboutProps) {
+export default function AboutComponents() {
+  const [currentSubSection, setCurrentSubSection] = React.useState<"event" | "organizer" | "team">("event");
+  const onSubSectionChange = setCurrentSubSection;
 
   const renderEvent = () => (
     <div id="about-event-view" className="space-y-12">

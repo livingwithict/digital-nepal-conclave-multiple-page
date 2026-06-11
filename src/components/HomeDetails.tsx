@@ -1,16 +1,10 @@
 import React from "react";
 import { Users, Image, Video, Newspaper, ArrowRight } from "lucide-react";
-import { PageId } from "./Header";
+import { Link, useNavigate } from "react-router-dom";
 import { STATS_COUNTERS, SPEAKERS_LIST, NEWS_ARTICLES } from "../data";
 import VideoCard from "./videocard";
 import NewsCard from "./NewsCard";
 
-interface HomeDetailsProps {
-  setActiveMediaTab?: (tab: string) => void;
-  onNavigate: (page: PageId) => void;
-}
-
-// Your YouTube video links - just add URLs here
 const YOUTUBE_VIDEOS = [
   "https://www.youtube.com/watch?v=8PEwm-s5Ze0",
   "https://www.youtube.com/watch?v=dJ07TEPiyd4",
@@ -18,7 +12,8 @@ const YOUTUBE_VIDEOS = [
   "https://www.youtube.com/watch?v=VrZ_jsP7n3U",
 ];
 
-export default function HomeDetails({setActiveMediaTab, onNavigate }: HomeDetailsProps) {
+export default function HomeDetails() {
+  const navigate = useNavigate();
   return (
     <div id="home-details-section" className="bg-slate-50 py-16 border-t border-slate-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -58,13 +53,13 @@ export default function HomeDetails({setActiveMediaTab, onNavigate }: HomeDetail
                 </div>
               </div>
             </div>
-            <button
-              onClick={() => onNavigate("speakers")}
+            <Link
+              to="/speakers"
               className="shrink-0 self-start text-sm font-bold text-dnc-blue hover:text-dnc-orange flex items-center gap-1.5 transition-colors group cursor-pointer"
             >
-              See All Speakers & Full Bios
+              See All Speakers &amp; Full Bios
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-            </button>
+            </Link>
           </div>
 
           <div className="relative w-full overflow-hidden py-4">
@@ -75,7 +70,7 @@ export default function HomeDetails({setActiveMediaTab, onNavigate }: HomeDetail
               {[...SPEAKERS_LIST, ...SPEAKERS_LIST].map((spk, idx) => (
                 <div
                   key={`${spk.id}-${idx}`}
-                  onClick={() => onNavigate("speakers")}
+                  onClick={() => navigate("/speakers")}
                   className="inline-flex flex-col items-center bg-slate-50/50 hover:bg-slate-50 border border-slate-100 p-5 rounded-3xl w-48 sm:w-52 text-center transition-all duration-300 shadow-2xs hover:shadow-xs cursor-pointer select-none group"
                 >
                   <div className="w-32 h-32 rounded-full overflow-hidden bg-slate-100 mb-3 relative mx-auto border-2 border-slate-200">
@@ -123,7 +118,7 @@ export default function HomeDetails({setActiveMediaTab, onNavigate }: HomeDetail
               ].map((conclave) => (
                 <div
                   key={conclave.year}
-                  onClick={() => onNavigate(`past-${conclave.year}` as PageId)}
+                  onClick={() => navigate(`/past-events/${conclave.year}`)}
                   className="group cursor-pointer p-5 bg-slate-50/50 hover:bg-white rounded-2xl border border-slate-100 hover:border-dnc-orange/30 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between min-h-[140px]"
                 >
                   <div>
@@ -180,13 +175,13 @@ export default function HomeDetails({setActiveMediaTab, onNavigate }: HomeDetail
 
           {/* See More Button */}
           <div className="flex justify-center">
-            <button
-              onClick={() => onNavigate("media")}
+            <Link
+              to="/news-media"
               className="inline-flex items-center gap-2 px-6 py-3 bg-dnc-blue text-white font-bold text-sm sm:text-base rounded-xl hover:bg-dnc-blue/90 transition-all duration-300 shadow-md hover:shadow-lg group"
             >
-              See More News & Blogs
+              See More News &amp; Blogs
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </button>
+            </Link>
           </div>
         </div>
 
@@ -248,16 +243,13 @@ export default function HomeDetails({setActiveMediaTab, onNavigate }: HomeDetail
           </div>
         </div>
         <div className="flex justify-center">
-          <button
-            onClick={() => {
-              onNavigate("media");
-              setActiveMediaTab?.("videos");
-            }}
+          <Link
+            to="/news-media"
             className="inline-flex items-center gap-2 px-6 py-3 bg-dnc-blue text-white font-bold text-sm sm:text-base rounded-xl hover:bg-dnc-blue/90 transition-all duration-300 shadow-md hover:shadow-lg group"
           >
-            See More Videos & Highlights
+            See More Videos &amp; Highlights
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </button>
+          </Link>
         </div>
 
         <div className="mt-20">
