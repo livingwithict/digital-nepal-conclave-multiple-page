@@ -44,6 +44,7 @@ export default function ThemeDateVenue() {
           
           {/* Header detailing Theme intent */}
           <div className="max-w-full mb-16">
+            <p className="mb-4 text-sm sm:text-xl text-dnc-blue font-bold uppercase tracking-wider">THIS YEAR'S THEME:</p>
             <h2 className="font-display font-black text-3xl sm:text-4xl lg:text-5xl text-slate-900 tracking-tight leading-none mb-6">
               Reimagining <span className="text-dnc-blue">Governance</span>, <span className="text-[#eb0000]">Data</span> & the <span className="text-dnc-orange">Digital Economy</span>
             </h2>

@@ -93,23 +93,11 @@ export const PATRONS: TeamMember[] = [
 
 export const SPEAKERS_LIST: Speaker[] = [
   {
-    id: "biswas-dhakal",
-    name: "Mr. Biswas Dhakal",
-    title: "Tech Entrepreneur & President",
-    company: "F1Soft International Pvt. Ltd.",
-    bio: "He is a Nepali tech entrepreneur. He serves as the President of F1Soft International Pvt. Ltd, an ecosystem of digital products and services that facilitates Nepali consumers' access to financial services. His journey began in 2004 when he founded F1Soft. He founded eSewa (digital wallet company) in 2009, CashOnAd, Logica Beans, and Shiran Technologies Pvt. Ltd. Dhakal was selected by The US Department of State for the International Visitor Leadership Program (IVLP) and the Global Entrepreneurship Summit 2016 from Nepal.",
-    avatarUrl: "/images/speakers/biswas-dhakal.jpg",
-    tags: ["Fintech", "Entrepreneurship", "Digital Assets"],
-    isKeynote: true,
-    linkedinUrl: "https://linkedin.com/",
-    twitterUrl: "https://twitter.com/"
-  },
-  {
     id: "manohar-bhattarai",
     name: "Mr. Manohar K Bhattarai",
     title: "Former Vice-Chairperson",
     company: "HLCIT (ICT Expert)",
-    bio: "Manohar K. Bhattarai is a prominent ICT expert in Nepal who has served in various highly influential roles including the Vice-Chairperson of High Level Commission for Information Technology (HLCIT). He is an advocate for data-centric governance and framework deployment in emerging economies.",
+    bio: "",
     avatarUrl: "/images/speakers/manohar-bhattarai.jpg",
     tags: ["Policy", "Smart Governance", "ICT Core"],
     linkedinUrl: "https://linkedin.com/",
@@ -120,7 +108,7 @@ export const SPEAKERS_LIST: Speaker[] = [
     name: "Prof. Dr. Manish Pokharel",
     title: "Dean",
     company: "Kathmandu University (Patron, IFN)",
-    bio: "Dean at School of Engineering, Kathmandu University. Prof. Dr. Pokharel has significantly contributed to standardizing tech education and cloud-computing infrastructure guidelines in Kathmandu and Nepal's sub-regions.",
+    bio: "",
     avatarUrl: "/images/speakers/manish-pokharel.jpg",
     tags: ["Academics", "Cloud Infrastructure", "E-Governance"],
     linkedinUrl: "https://linkedin.com/",
@@ -131,7 +119,7 @@ export const SPEAKERS_LIST: Speaker[] = [
     name: "Mr. Kyle Gardner",
     title: "Government Affairs & Public Policy Lead",
     company: "Google (South Asia)",
-    bio: "Coordinates strategic dialogues representing public sector initiatives, AI integration framework policy parameters, and tech adoption synergy inside Nepal and South Asian emerging digital economies.",
+    bio: "",
     avatarUrl: "/images/speakers/kyle-gardner.jpg",
     tags: ["Global Policies", "Big Tech", "AI Sovereignity"],
     isKeynote: true,
@@ -141,9 +129,9 @@ export const SPEAKERS_LIST: Speaker[] = [
   {
     id: "gagan-thapa",
     name: "Mr. Gagan Thapa",
-    title: "Member of Parliament & General Secretary",
+    title: "President",
     company: "Nepali Congress",
-    bio: "A highly progressive national leader advocating for 'faceless' digital governments, automated bureaucratic reform, and transparent public service delivery systems in Nepal.",
+    bio: "",
     avatarUrl: "/images/speakers/gagan-thapa.jpg",
     tags: ["Public Leadership", "Governance", "100-Days Agendas"],
     linkedinUrl: "https://linkedin.com/",
@@ -154,7 +142,7 @@ export const SPEAKERS_LIST: Speaker[] = [
     name: "Mr. Ek Narayan Aryal",
     title: "Former Chief Secretary",
     company: "Government of Nepal",
-    bio: "Pioneered unified systemic integration in civil registers and smart public service channels. Argues that actual digital capability thrives on interoperable backend data exchanges.",
+    bio: "",
     avatarUrl: "/images/speakers/ek-narayan-aryal.jpg",
     tags: ["Public Service", "DPI", "System Integration"],
     linkedinUrl: "https://linkedin.com/",
@@ -165,7 +153,7 @@ export const SPEAKERS_LIST: Speaker[] = [
     name: "Mr. Nishant Nair",
     title: "Head of Street View Outsourced Operations",
     company: "Google Maps",
-    bio: "Led the milestone national deployment of Google Street View services in Nepal, supporting modern digital tourism, navigation, and location-based economies.",
+    bio: "",
     avatarUrl: "/images/speakers/nishant-nair.jpg",
     tags: ["Geo-Tech", "Digital Maps", "Spatials"],
     linkedinUrl: "https://linkedin.com/",
@@ -176,9 +164,75 @@ export const SPEAKERS_LIST: Speaker[] = [
     name: "Mr. Nilesh Man Singh Pradhan",
     title: "CEO",
     company: "Nepal Clearing House Ltd. (NCHL)",
-    bio: "Pioneered core retail transaction integration and digital payments architectures, pushing forward secure instant-payment gateways and international money linkages.",
+    bio: "",
     avatarUrl: "/images/speakers/nilesh-pradhan.jpg",
-    tags: ["Fintech", "National Gateway", "Digital Economy"],
+    tags: [],
+    linkedinUrl: "https://linkedin.com/",
+    twitterUrl: "https://twitter.com/"
+  },
+  {
+    id: "kp-oli",
+    name: "Mr. K.P. Oli",
+    title: "Former Prime Minister",
+    company: "Government of Nepal",
+    bio: "",
+    avatarUrl: "/images/speakers/kp-oli.jpg",
+    tags: [],
+    linkedinUrl: "https://linkedin.com/",
+    twitterUrl: "https://twitter.com/"
+  },
+  {
+    id: "puspa-kamal-dahal",
+    name: "Mr. Puspa Kamal Dahal",
+    title: "Former Prime Minister",
+    company: "Government of Nepal",
+    bio: "",
+    avatarUrl: "/images/speakers/puspa-kamal-dahal.jpg",
+    tags: [],
+    linkedinUrl: "https://linkedin.com/",
+    twitterUrl: "https://twitter.com/"
+  },
+  {
+    id: "rupesh-shrestha",
+    name: "Mr. Rupesh Shrestha",
+    title: "News Chief",
+    company: "Kantipur Television",
+    bio: "",
+    avatarUrl: "/images/speakers/rupesh-shrestha.jpg",
+    tags: [],
+    linkedinUrl: "https://linkedin.com/",
+    twitterUrl: "https://twitter.com/"
+  },
+  {
+    id: "chandra-dhakal",
+    name: "Mr. Chandra Dhakal",
+    title: "Chairman",
+    company: "IME Group",
+    bio: "",
+    avatarUrl: "/images/speakers/chandra-dhakal.jpg",
+    tags: [],
+    linkedinUrl: "https://linkedin.com/",
+    twitterUrl: "https://twitter.com/"
+  },
+  {
+    id: "manish-jha",
+    name: "Mr. Manish Jha",
+    title: "Member of Parliament",
+    company: "Rastriya Swatantra Party",
+    bio: "",
+    avatarUrl: "/images/speakers/manish-jha.jpg",
+    tags: [],
+    linkedinUrl: "https://linkedin.com/",
+    twitterUrl: "https://twitter.com/"
+  },
+  {
+    id: "sobita-gautam",
+    name: "Mrs. Sobita Gautam",
+    title: "Minister of law, justice and parliamentary affairs",
+    company: "Government of Nepal",
+    bio: "",
+    avatarUrl: "/images/speakers/sobita-gautam.jpg",
+    tags: [],
     linkedinUrl: "https://linkedin.com/",
     twitterUrl: "https://twitter.com/"
   }
@@ -192,7 +246,7 @@ export const PUBLICATIONS_DATA: Publication[] = [
     type: "Report",
     coverUrl: "/images/Publication/placeholder.jpg",
     description: "Comprehensive summary of the 2025 conclave containing policy directives on systems integration, summary of Google Street View launch, and digital health blueprints.",
-    url: "https://www.ictfoundation.org.np/dnc-2025-report"
+    url: ""
   },
   {
     id: "dnc-24",
@@ -201,7 +255,7 @@ export const PUBLICATIONS_DATA: Publication[] = [
     type: "Report",
     coverUrl: "/images/Publication/DNC-24-report.jpg",
     description: "Highlights from Prime Minister Dahal's inaugural program regarding the 'Decade of IT' and plans to generate over 1.5 million regional jobs.",
-    url: "https://www.ictfoundation.org.np/dnc-2024-report"
+    url: "https://drive.google.com/file/d/1NEucyNkpHKRXnLDVdLOe3oevxC43OwoX/view?usp=drive_link"
   },
   {
     id: "dnc-23",
@@ -210,7 +264,7 @@ export const PUBLICATIONS_DATA: Publication[] = [
     type: "Report",
     coverUrl: "/images/Publication/DNC-23-report.jpg",
     description: "Strategic papers examining 'Digital Capability' (Sakshyam Nepal) as the ultimate prerequisite to sustainable digital economy growth.",
-    url: "https://www.ictfoundation.org.np/dnc-2023-report"
+    url: "https://drive.google.com/file/d/1CQpzmymdF3Lg4owWXI1WzghI-2VNwaAx/view?usp=drive_link"
   },
   {
     id: "dnc-22",
@@ -219,7 +273,7 @@ export const PUBLICATIONS_DATA: Publication[] = [
     type: "Report",
     coverUrl: "/images/Publication/DNC-22-report.jpg",
     description: "The foundational report cataloging 17 strategic working papers on expanding fiber backbones, regional server sites, and secure fintech APIs.",
-    url: "https://www.ictfoundation.org.np/dnc-2022-report"
+    url: "https://drive.google.com/file/d/1NEucyNkpHKRXnLDVdLOe3oevxC43OwoX/view?usp=drive_link"
   },
   {
     id: "paridrishya-1",
@@ -228,7 +282,7 @@ export const PUBLICATIONS_DATA: Publication[] = [
     type: "Booklet",
     coverUrl: "/images/Publication/Digital-Paridisya-1.jpg",
     description: "A comprehensive digital catalog tracking smart transformation achievements and provincial readiness scores across all 7 states of Nepal.",
-    url: "https://www.ictfoundation.org.np/paridrishya-vol1"
+    url: ""
   },
   {
     id: "paridrishya-2",
@@ -237,7 +291,7 @@ export const PUBLICATIONS_DATA: Publication[] = [
     type: "Booklet",
     coverUrl: "/images/Publication/Digital-Paridisya-2.jpg",
     description: "The updated landscape document analyzing structural changes in remote sectors, cybersecurity measures, and local government digital services.",
-    url: "https://www.ictfoundation.org.np/paridrishya-vol2"
+    url: ""
   }
 ];
 

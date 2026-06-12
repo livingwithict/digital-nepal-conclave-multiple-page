@@ -141,7 +141,7 @@ export default function SpeakersComponent() {
                 </div>
               </div>
 
-              <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+              {/* <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
                 <span className="text-[10px] text-dnc-blue font-bold hover:underline">
                   Read Bio & Detail →
                 </span>
@@ -156,7 +156,7 @@ export default function SpeakersComponent() {
                     </span>
                   ))}
                 </div>
-              </div>
+              </div> */}
             </div>
           ))}
 

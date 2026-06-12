@@ -2,6 +2,7 @@ import React from "react";
 import { Users, Image, Video, Newspaper, ArrowRight } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { STATS_COUNTERS, SPEAKERS_LIST, NEWS_ARTICLES } from "../data";
+import { SPONSORS } from "../sponsordata"; // <-- Imported the new data
 import VideoCard from "./videocard";
 import NewsCard from "./NewsCard";
 
@@ -11,6 +12,31 @@ const YOUTUBE_VIDEOS = [
   // "https://www.youtube.com/watch?v=jJmOXihX-Jc",
   "https://www.youtube.com/watch?v=VrZ_jsP7n3U",
 ];
+
+// Helper component to render a sponsor block cleanly
+const SponsorBox = ({ sponsor, className = "w-40 h-20" }) => {
+  if (!sponsor || !sponsor.name || !sponsor.logoUrl) {
+    return (
+      <div className={`bg-slate-50 border-2 border-dashed border-slate-200 rounded-xl p-2 flex items-center justify-center text-center ${className}`}>
+        <span className="text-[10px] font-semibold text-slate-400">TBA</span>
+      </div>
+    );
+  }
+  return (
+    <div className={`bg-white rounded-xl shadow-xs border border-slate-100 p-3 flex items-center justify-center hover:scale-105 transition-transform text-center overflow-hidden ${className}`}>
+      <img 
+        src={sponsor.logoUrl} 
+        alt={sponsor.name} 
+        className="w-full h-full object-contain" 
+        onError={(e) => { 
+          e.currentTarget.style.display = 'none'; 
+          if (e.currentTarget.nextSibling) e.currentTarget.nextSibling.style.display = 'block'; 
+        }} 
+      />
+      <span className="font-bold text-slate-600 text-xs hidden">{sponsor.name}</span>
+    </div>
+  );
+};
 
 export default function HomeDetails() {
   const navigate = useNavigate();
@@ -79,17 +105,15 @@ export default function HomeDetails() {
                       alt={spk.name}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
-                    {/* {spk.isKeynote && (
-                      <span className="absolute bottom-1 left-1/2 -translate-x-1/2 px-1.5 py-0.5 bg-dnc-orange text-white text-[7.5px] font-sans font-bold rounded uppercase tracking-wider whitespace-nowrap">
-                        Keynote
-                      </span>
-                    )} */}
                   </div>
-                  <span className="font-display font-bold text-sm text-slate-850 group-hover:text-dnc-blue transition-colors line-clamp-1 block whitespace-normal break-words">
+                  <span className="font-display font-bold text-base text-slate-850 group-hover:text-dnc-blue transition-colors line-clamp-1 block whitespace-normal break-words">
                     {spk.name}
                   </span>
-                  <span className="text-[10px] text-dnc-blue font-sans font-bold mt-1 line-clamp-1 block whitespace-normal">
+                  <span className="text-xs text-dnc-blue font-sans font-bold mt-1 line-clamp-1 block whitespace-normal">
                     {spk.title}
+                  </span>
+                  <span className="text-[10px] text-slate-500 font-sans font-bold mt-1 line-clamp-1 block whitespace-normal">
+                    {spk.company}
                   </span>
                 </div>
               ))}
@@ -122,7 +146,6 @@ export default function HomeDetails() {
                   className="group cursor-pointer p-5 bg-slate-50/50 hover:bg-white rounded-2xl border border-slate-100 hover:border-dnc-orange/30 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between min-h-[140px]"
                 >
                   <div>
-                    {/* Logo Placeholder */}
                     <div className="mb-3">
                       <img
                         src={conclave.logo}
@@ -173,7 +196,6 @@ export default function HomeDetails() {
             ))}
           </div>
 
-          {/* See More Button */}
           <div className="flex justify-center">
             <Link
               to="/news-media"
@@ -244,7 +266,7 @@ export default function HomeDetails() {
         </div>
         <div className="flex justify-center">
           <Link
-            to="/news-media"
+            to="https://www.youtube.com/playlist?list=PL65nmC8zjA6rzbCSe_pheJEONkjI_fUyK"
             className="inline-flex items-center gap-2 px-6 py-3 bg-dnc-blue text-white font-bold text-sm sm:text-base rounded-xl hover:bg-dnc-blue/90 transition-all duration-300 shadow-md hover:shadow-lg group"
           >
             See More Videos &amp; Highlights
@@ -252,17 +274,28 @@ export default function HomeDetails() {
           </Link>
         </div>
 
-        <div className="mt-20">
+        {/* OUR OTHER INITIATIVES SECTION */}
+        <div className="relative w-full overflow-hidden py-4 mt-20">
           <div className="mb-8">
             <h3 className="font-display font-black text-xl sm:text-2xl text-slate-800">
               Our Other Initiatives & Programs
             </h3>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="absolute inset-y-0 left-0 w-16 sm:w-32 bg-gradient-to-r from-slate-50 to-transparent z-10 pointer-events-none mt-16"></div>
+          <div className="absolute inset-y-0 right-0 w-16 sm:w-32 bg-gradient-to-l from-slate-50 to-transparent z-10 pointer-events-none mt-16"></div>
+          
+          <div className="flex gap-6 animate-marquee whitespace-nowrap">
             {[
               { name: "Digital Samvad", desc: "Weekly policy talk-show broadcasts", logo: "/images/logos/digital-samvad.jpg" },
-              { name: "Digital Nepal Conclave", desc: "Flagship central business summit", logo: "/images/logos/dnc-logo.png" },
+              { name: "Digital Karnali Conclave", desc: "Decentralized state policy forums", logo: "/images/logos/dkc-logo.png" },
+              { name: "Digital Madhesh Conclave", desc: "Regional smart-services seminars", logo: "/images/logos/dmc-logo.png" },
+              { name: "AI Summit", desc: "The ultimate accolade for tech champions", logo: "/images/logos/naic.png" },
+              { name: "Startup & Idea Fest", desc: "National ecosystem pitching events", logo: "/images/logos/snif.png" },
+              { name: "ICT Gyan", desc: "Centralized analytical tech encyclopedia", logo: "/images/logos/ict-gyan.png" },
+              { name: "Digital Leadership Dialogue", desc: "Corporate-regulator interactions", logo: "/images/logos/dld-logo.png" },
+              // Duplicate the array to make the marquee loop seamless
+              { name: "Digital Samvad", desc: "Weekly policy talk-show broadcasts", logo: "/images/logos/digital-samvad.jpg" },
               { name: "Digital Karnali Conclave", desc: "Decentralized state policy forums", logo: "/images/logos/dkc-logo.png" },
               { name: "Digital Madhesh Conclave", desc: "Regional smart-services seminars", logo: "/images/logos/dmc-logo.png" },
               { name: "AI Summit", desc: "The ultimate accolade for tech champions", logo: "/images/logos/naic.png" },
@@ -270,9 +303,8 @@ export default function HomeDetails() {
               { name: "ICT Gyan", desc: "Centralized analytical tech encyclopedia", logo: "/images/logos/ict-gyan.png" },
               { name: "Digital Leadership Dialogue", desc: "Corporate-regulator interactions", logo: "/images/logos/dld-logo.png" }
             ].map((item, index) => (
-              <div key={index} className="bg-white rounded-2xl p-5 border border-slate-100 shadow-xs hover:border-dnc-blue transition-all duration-200">
-                {/* Logo Placeholder */}
-                <div className="h-40 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
+              <div key={index} className="bg-white rounded-2xl p-5 border border-slate-100 shadow-xs hover:border-dnc-blue transition-all duration-200 shrink-0">
+                <div className="h-30 w-50 rounded-lg flex items-center justify-center overflow-hidden">
                   <img 
                     src={item.logo} 
                     alt={`${item.name} logo`}
@@ -282,12 +314,86 @@ export default function HomeDetails() {
                     }}
                   />
                 </div>
-                {/* <h4 className="font-display font-bold text-base text-slate-900 mb-1 leading-tight">{item.name}</h4> */}
-                {/* <p className="text-[11px] text-slate-500">{item.desc}</p> */}
               </div>
             ))}
           </div>
         </div>
+
+        {/* SPONSORSHIP SECTION (CLEANED UP WITH EXTERNAL DATA) */}
+        {/* <div className="py-20 mt-10 border-t border-slate-200">
+          <div className="text-center mb-16">
+            <h3 className="font-display font-black text-2xl sm:text-3xl text-slate-800">
+              Our Sponsors & Partners
+            </h3>
+          </div>
+
+          <div className="flex flex-col gap-16 items-center">
+            
+            Top Tier: Association & Powered By
+            <div className="flex flex-wrap justify-center gap-12 sm:gap-32 w-full">
+              <div className="flex flex-col items-center">
+                <h4 className="text-sm font-bold text-slate-800 mb-6">In Association With</h4>
+                <SponsorBox sponsor={SPONSORS.find(s => s.category === 'In Association With')} className="w-56 h-24" />
+              </div>
+              <div className="flex flex-col items-center">
+                <h4 className="text-sm font-bold text-slate-800 mb-6">Powered by</h4>
+                <SponsorBox sponsor={SPONSORS.find(s => s.category === 'Powered by')} className="w-56 h-24" />
+              </div>
+            </div>
+
+            Ecosystem Partners
+            <div className="w-full flex flex-col items-center">
+              <h4 className="text-sm font-bold text-slate-800 mb-6">Ecosystem Partners</h4>
+              <div className="flex flex-wrap justify-center gap-6">
+                {SPONSORS.filter(s => s.category === 'Ecosystem Partners').map((sponsor, idx) => (
+                  <SponsorBox key={idx} sponsor={sponsor} />
+                ))}
+              </div>
+            </div>
+
+            Various Categories Row 1
+            <div className="w-full flex flex-wrap justify-center gap-8 md:gap-12 lg:gap-16">
+              {["Telecom Partner", "Digital Payment Partner", "Digital Education Partner", "Digital Health Partner", "EdTech Partner"].map(catName => (
+                <div key={catName} className="flex flex-col items-center w-36">
+                  <h4 className="text-xs font-bold text-slate-800 mb-4 h-8 text-center flex items-end justify-center">{catName}</h4>
+                  <SponsorBox sponsor={SPONSORS.find(s => s.category === catName)} className="w-full h-20" />
+                </div>
+              ))}
+            </div>
+
+            Various Categories Row 2
+            <div className="w-full flex flex-wrap justify-center gap-8 md:gap-12 lg:gap-16">
+              {["Digital Security Partner", "IT Infra Partner", "Ticketing Partner", "Logistic Partner", "Digital Media Partner"].map(catName => (
+                <div key={catName} className="flex flex-col items-center w-36">
+                  <h4 className="text-xs font-bold text-slate-800 mb-4 h-8 text-center flex items-end justify-center">{catName}</h4>
+                  <SponsorBox sponsor={SPONSORS.find(s => s.category === catName)} className="w-full h-20" />
+                </div>
+              ))}
+            </div>
+
+            Event Management Partners
+            <div className="w-full flex flex-col items-center">
+              <h4 className="text-sm font-bold text-slate-800 mb-6">Event Management Partners</h4>
+              <div className="flex flex-wrap justify-center gap-6">
+                {SPONSORS.filter(s => s.category === 'Event Management Partners').map((sponsor, idx) => (
+                  <SponsorBox key={idx} sponsor={sponsor} />
+                ))}
+              </div>
+            </div>
+
+            Supporting Partners
+            <div className="w-full flex flex-col items-center">
+              <h4 className="text-sm font-bold text-slate-800 mb-6">Supporting Partners</h4>
+              <div className="flex flex-wrap justify-center gap-6">
+                {SPONSORS.filter(s => s.category === 'Supporting Partners').map((sponsor, idx) => (
+                  <SponsorBox key={idx} sponsor={sponsor} />
+                ))}
+              </div>
+            </div>
+
+          </div>
+        </div> */}
+
       </div>
 
       {/* Marquee Animation Block */}
@@ -299,7 +405,7 @@ export default function HomeDetails() {
         .animate-marquee {
           display: flex;
           width: max-content;
-          animation: marquee 40s linear infinite;
+          animation: marquee 30s linear infinite;
         }
         .animate-marquee:hover {
           animation-play-state: paused;

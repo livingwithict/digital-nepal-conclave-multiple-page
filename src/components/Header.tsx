@@ -184,7 +184,7 @@ export default function Header() {
           <div className="hidden lg:flex items-center">
             <Link
               id="desktop-register-button"
-              to="/register"
+              to="#"
               className="w-full sm:w-auto px-8 py-3.5 bg-[#eb0000] hover:bg-[#c20000] text-white font-bold rounded-full shadow-lg shadow-red-950/20 uppercase tracking-widest text-sm transition-all duration-300 transform hover:scale-[1.01] active:scale-[0.99] cursor-pointer text-center block sm:inline-block"
             >
               Register Now
@@ -320,7 +320,7 @@ export default function Header() {
 
             <div className="px-4 pt-3">
               <Link
-                to="/register"
+                to="#"
                 onClick={closeMobile}
                 className="w-full px-8 py-3.5 bg-[#eb0000] hover:bg-[#c20000] text-white font-bold rounded-full shadow-lg shadow-red-950/20 uppercase tracking-widest text-sm transition-all duration-300 cursor-pointer text-center block"
               >
