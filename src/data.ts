@@ -70,25 +70,17 @@ export const TRANSFORMATIVE_PILLARS = [
 ];
 
 export const TEAM_MEMBERS: TeamMember[] = [
-  { name: "Mr. Razan Lamsal", role: "Chairperson", category: "Team", avatarText: "RL", imageUrl: "/images/team/Razan-Lamsal.jpg", },
-  { name: "Mr. Hempal Shrestha", role: "Knowledge Management Specialist", category: "Team", avatarText: "HS", imageUrl: "/images/team/Hempal Shrestha.jpg", },
-  { name: "Mr. Sushil Pokharel", role: "", category: "Team", avatarText: "SP", imageUrl: "/images/team/Sushil Pokharel.jpg", },
-  { name: "Mr. Hariram Rimal", role: "", category: "Team", avatarText: "HR", imageUrl: "/images/team/Hariram Rimal.jpg", },
-  { name: "Ms. Krishpana Poudel", role: "", category: "Team", avatarText: "KP", imageUrl: "/images/team/Krishpana Poudel.jpg", },
-  { name: "Mr. Sujal Bhakta Shrestha", role: "", category: "Team", avatarText: "SS", imageUrl: "/images/team/Sujal Bhakta Shrestha.jpg", },
-  { name: "Er. Kabir Rajbanshi", role: "", category: "Team", avatarText: "KR", imageUrl: "/images/team/Kabir Rajbanshi.jpg", },
-  { name: "Ms. Rachana Kharel", role: "", category: "Team", avatarText: "RK", imageUrl: "/images/team/Rachana Kharel.jpg", }
-];
-
-export const PATRONS: TeamMember[] = [
-  { name: "Er. Ganesh Shah", role: "Ex-Minister, Ministry of Science and Technology, GoN", category: "Patron", imageUrl: "/images/team/Ganesh Shah.jpg", },
-  { name: "Mr. Manohar Kr. Bhattarai", role: "Chairperson, Internet Governance Institute (Former Vice-Chairperson, HLCIT)", category: "Patron", imageUrl: "/images/team/Manohar Bhattarai.jpg", },
-  { name: "Prof. Dr. Subarna Shakya", role: "Director, Innovation Center (Tribhuvan University)", category: "Patron", imageUrl: "/images/team/Subarna Shakya.jpg", },
-  { name: "Prof. Dr. Manish Pokharel", role: "Dean, School of Engineering (Kathmandu University)", category: "Patron", imageUrl: "/images/team/Manish Pokharel.jpg", },
-  { name: "Mr. Birendra Kumar Mishra", role: "Former Joint Secretary, MoCIT, GoN", category: "Patron", imageUrl: "/images/team/Birendra Mishra.jpg", },
-  { name: "Mr. Vivek S. Rana", role: "ICT/MIS Consultant, Asian Development Bank (ADB)", category: "Patron", imageUrl: "/images/team/Vivek Rana.jpg", },
-  { name: "Mr. Ananda Raj Khanal", role: "Senior ICT Expert & Consultant", category: "Patron", imageUrl: "/images/team/Ananda Raj Khanal.jpg", },
-  { name: "Mrs. Guna Keshari Pradhan", role: "", category: "Patron", imageUrl: "/images/team/Guna Keshari.jpg", }
+  { name: "Er. Ganesh Shah", role: "Former Minister, Ministry of Science and Technology, GoN", category: "Patron", avatarText: "GS", imageUrl: "/images/team/Ganesh Shah.jpg", },
+  { name: "Mr. Manohar Kr. Bhattarai", role: "ICT Expert, Former Vice-Chairperson, HLCIT", category: "Patron", avatarText: "MB", imageUrl: "/images/team/Manohar Bhattarai.jpg", },
+  { name: "Prof. Dr. Manish Pokharel", role: "Dean, Kathmandu University (KU)", category: "Patron", avatarText: "MP", imageUrl: "/images/team/Manish Pokharel.jpg", },
+  { name: "Prof. Dr. Subarna Shakya", role: "Director, IT Innovation Center, TU", category: "Patron", avatarText: "SS", imageUrl: "/images/team/Subarna Shakya.jpg", },
+  { name: "Mr. Ananda Raj Khanal", role: "Chairman, Nepal Digital Leads", category: "Patron", avatarText: "AK", imageUrl: "/images/team/Ananda Raj Khanal.jpg", },
+  { name: "Mr. Birendra Kumar Mishra", role: "Former Joint Secretary, GoN", category: "Patron", avatarText: "BM", imageUrl: "/images/team/Birendra Mishra.jpg", },
+  { name: "Mr. Vivek S. Rana", role: "Digital Enterprise Architect", category: "Patron", avatarText: "VR", imageUrl: "/images/team/Vivek Rana.jpg", },
+  { name: "Mrs. Guna Keshari Pradhan", role: "President, WIIT", category: "Patron", avatarText: "GP", imageUrl: "/images/team/Guna Keshari.jpg", },
+  { name: "Mr. Razan Lamsal", role: "Chairperson, ICT Foundation Nepal (ICT)", category: "Team", avatarText: "RL", imageUrl: "/images/team/Razan-Lamsal.jpg", },
+  { name: "Mr. Hempal Shrestha", role: "Knowledge Management Specialist & DNC Coordinator, IFN", category: "Team", avatarText: "HS", imageUrl: "/images/team/Hempal Shrestha.jpg", },
+  { name: "Ms. Krishpana Poudel", role: "Communication Officer, IFN", category: "Team", avatarText: "KP", imageUrl: "/images/team/Krishpana Poudel.jpg", },
 ];
 
 export const SPEAKERS_LIST: Speaker[] = [

@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { Mail, Phone, MapPin, Send, CheckCircle, MessageSquare, ShieldCheck, Users, Building2, User } from "lucide-react";
 
 export default function RegistrationComponent() {
-  // Google Apps Script URLs - Replace with your actual deployment URLs
-  const PARTICIPANT_SCRIPT_URL = "https://script.google.com/macros/d/PARTICIPANT_DEPLOYMENT_ID/userweb?v=1";
-  const EXHIBITOR_SCRIPT_URL = "https://script.google.com/macros/d/EXHIBITOR_DEPLOYMENT_ID/userweb?v=1";
+  // Google Apps Script Web App Deployment URL
+  // Replace with your actual deployment URL from Google Apps Script
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwJ8TC3lQytHK0b53te-g964oQmA6pd-nKJ9e2ASSvKtbPlvIBJk1xgf4hPJxxlw5b5/exec";
 
   const [activeTab, setActiveTab] = useState<"participant" | "exhibitor">("participant");
 
@@ -65,37 +65,98 @@ export default function RegistrationComponent() {
     setParticipantState("sending");
 
     try {
-      const params = new URLSearchParams(participantData as any);
+      const params = new URLSearchParams({
+        ...participantData,
+        form_type: "participant"
+      });
 
-      const response = await fetch(PARTICIPANT_SCRIPT_URL, {
+      const response = await fetch(APPS_SCRIPT_URL, {
         method: "POST",
         body: params,
+        // mode: 'cors',
+        // headers: {
+        //   'Content-Type': 'application/x-www-form-urlencoded',
+        // }
       });
 
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
+      // If response is not ok but not a CORS error, try to parse it anyway
+      if (!response.ok && response.status === 0) {
+        // CORS error - response blocked
+        throw new Error("CORS Error - Please ensure Apps Script is deployed correctly");
       }
 
-      setParticipantState("success");
-      setParticipantData({
-        first_name: "",
-        last_name: "",
-        email: "",
-        phone: "",
-        organization: "",
-        designation: "",
-        sector: "",
-        heard_about: ""
-      });
+      let result = null;
+      let responseText = "";
 
-      setTimeout(() => {
-        setParticipantState("idle");
-        setParticipantError("");
-      }, 5000);
+      try {
+        responseText = await response.text();
+        console.log("Raw response:", responseText);
+        
+        // Try to parse as JSON
+        if (responseText && responseText.trim().startsWith("{")) {
+          result = JSON.parse(responseText);
+        }
+      } catch (parseError) {
+        console.log("Could not parse as JSON:", parseError);
+      }
+
+      // If we got a valid result with success flag
+      if (result && result.success === true) {
+        setParticipantState("success");
+        setParticipantData({
+          first_name: "",
+          last_name: "",
+          email: "",
+          phone: "",
+          organization: "",
+          designation: "",
+          sector: "",
+          heard_about: ""
+        });
+
+        setTimeout(() => {
+          setParticipantState("idle");
+          setParticipantError("");
+        }, 5000);
+      } else if (result && result.success === false) {
+        // Server returned an error
+        throw new Error(result.message || "Submission failed");
+      } else {
+        // Couldn't parse response - check if we got a 200 status
+        if (response.ok || response.status === 200) {
+          // Assume success if status is 200
+          setParticipantState("success");
+          setParticipantData({
+            first_name: "",
+            last_name: "",
+            email: "",
+            phone: "",
+            organization: "",
+            designation: "",
+            sector: "",
+            heard_about: ""
+          });
+
+          setTimeout(() => {
+            setParticipantState("idle");
+            setParticipantError("");
+          }, 5000);
+        } else {
+          throw new Error("Invalid response from server");
+        }
+      }
     } catch (error) {
       console.error("Error:", error);
       setParticipantState("error");
-      setParticipantError("Error submitting form. Please try again or contact us directly.");
+      
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
+      if (errorMessage.includes("CORS")) {
+        setParticipantError("Server configuration issue. Please check that the Apps Script is properly deployed as a Web App with 'Anyone' access. Error: " + errorMessage);
+      } else if (errorMessage.includes("Failed to fetch")) {
+        setParticipantError("Network error. Please check your connection and try again.");
+      } else {
+        setParticipantError("Error submitting form: " + errorMessage);
+      }
 
       setTimeout(() => {
         setParticipantState("idle");
@@ -126,42 +187,108 @@ export default function RegistrationComponent() {
     setExhibitorState("sending");
 
     try {
-      const params = new URLSearchParams(exhibitorData as any);
+      const params = new URLSearchParams({
+        ...exhibitorData,
+        form_type: "exhibitor"
+      });
 
-      const response = await fetch(EXHIBITOR_SCRIPT_URL, {
+      const response = await fetch(APPS_SCRIPT_URL, {
         method: "POST",
         body: params,
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
       });
 
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
+      // If response is not ok but not a CORS error, try to parse it anyway
+      if (!response.ok && response.status === 0) {
+        // CORS error - response blocked
+        throw new Error("CORS Error - Please ensure Apps Script is deployed correctly");
       }
 
-      setExhibitorState("success");
-      setExhibitorData({
-        organization_name: "",
-        organization_type: "",
-        contact_person: "",
-        designation: "",
-        email: "",
-        phone: "",
-        website: "",
-        product_name: "",
-        solution_category: "",
-        booth_size: "",
-        showcase_details: "",
-        special_requirements: "",
-        num_representatives: ""
-      });
+      let result = null;
+      let responseText = "";
 
-      setTimeout(() => {
-        setExhibitorState("idle");
-        setExhibitorError("");
-      }, 5000);
+      try {
+        responseText = await response.text();
+        console.log("Raw response:", responseText);
+        
+        // Try to parse as JSON
+        if (responseText && responseText.trim().startsWith("{")) {
+          result = JSON.parse(responseText);
+        }
+      } catch (parseError) {
+        console.log("Could not parse as JSON:", parseError);
+      }
+
+      // If we got a valid result with success flag
+      if (result && result.success === true) {
+        setExhibitorState("success");
+        setExhibitorData({
+          organization_name: "",
+          organization_type: "",
+          contact_person: "",
+          designation: "",
+          email: "",
+          phone: "",
+          website: "",
+          product_name: "",
+          solution_category: "",
+          booth_size: "",
+          showcase_details: "",
+          special_requirements: "",
+          num_representatives: ""
+        });
+
+        setTimeout(() => {
+          setExhibitorState("idle");
+          setExhibitorError("");
+        }, 5000);
+      } else if (result && result.success === false) {
+        // Server returned an error
+        throw new Error(result.message || "Submission failed");
+      } else {
+        // Couldn't parse response - check if we got a 200 status
+        if (response.ok || response.status === 200) {
+          // Assume success if status is 200
+          setExhibitorState("success");
+          setExhibitorData({
+            organization_name: "",
+            organization_type: "",
+            contact_person: "",
+            designation: "",
+            email: "",
+            phone: "",
+            website: "",
+            product_name: "",
+            solution_category: "",
+            booth_size: "",
+            showcase_details: "",
+            special_requirements: "",
+            num_representatives: ""
+          });
+
+          setTimeout(() => {
+            setExhibitorState("idle");
+            setExhibitorError("");
+          }, 5000);
+        } else {
+          throw new Error("Invalid response from server");
+        }
+      }
     } catch (error) {
       console.error("Error:", error);
       setExhibitorState("error");
-      setExhibitorError("Error submitting form. Please try again or contact us directly.");
+      
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
+      if (errorMessage.includes("CORS")) {
+        setExhibitorError("Server configuration issue. Please check that the Apps Script is properly deployed as a Web App with 'Anyone' access. Error: " + errorMessage);
+      } else if (errorMessage.includes("Failed to fetch")) {
+        setExhibitorError("Network error. Please check your connection and try again.");
+      } else {
+        setExhibitorError("Error submitting form: " + errorMessage);
+      }
 
       setTimeout(() => {
         setExhibitorState("idle");
@@ -342,7 +469,7 @@ export default function RegistrationComponent() {
                 </h3>
 
                 <div>
-                  <label className="block text-sm font-bold text-slate-600 mb-1">How did you hear about DNC 2026?</label>
+                  <label className="block text-sm font-bold text-slate-600 mb-1">How did you hear about DNC 2026? *</label>
                   <select
                     name="heard_about"
                     value={participantData.heard_about}

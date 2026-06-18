@@ -21,14 +21,14 @@ export default function Footer() {
               <img
                 src="/images/logo-white.png"
                 alt="Digital Nepal Logo"
-                className="h-28 mb-4"
+                className="h-26 mb-4"
               />
             </Link>
-            <p className="text-base font-sans font-bold text-dnc-orange-light tracking-wide uppercase mb-2">
+            {/* <p className="text-base font-sans font-bold text-dnc-orange-light tracking-wide uppercase mb-2">
               Digital Nepal Conclave 2026
-            </p>
+            </p> */}
             <p className="text-sm text-slate-400 leading-relaxed max-w-sm">
-              The <strong>Biggest Digital Conference</strong> in Nepal, organized by <strong>ICT Foundation Nepal (IFN)</strong>, a nonprofit, non-distributing organization, which promotes innovation, startups, and ideas guided by the vision to build Digital Nepal promoting new ideas and startups.
+              <strong>ICT Foundation Nepal</strong> is a non-profit organization promoting ICT, innovation, entrepreneurship, and digital transformation in Nepal. It organizes the flagship <strong>Digital Nepal Conclave</strong>, a national platform for shaping Nepal’s digital future.
             </p>
           </div>
 
@@ -38,11 +38,11 @@ export default function Footer() {
               Quick Links
             </h4>
             <ul className="space-y-2 text-sm text-slate-400">
-              <li><Link to="/about" className="hover:text-white transition">About the Event</Link></li>
-              <li><Link to="/about" className="hover:text-white transition">About the Organizer</Link></li>
+              <li><Link to="/about/event" className="hover:text-white transition">About the Event</Link></li>
+              <li><Link to="/about/organizer" className="hover:text-white transition">About the Organizer</Link></li>
               <li><Link to="/agenda" className="hover:text-white transition">Conference Agenda</Link></li>
               <li><Link to="/speakers" className="hover:text-white transition">Our Speakers</Link></li>
-              <li><Link to="/publications" className="hover:text-white transition">Our Publications</Link></li>
+              <li><Link to="/downloads" className="hover:text-white transition">Our Publications</Link></li>
               <li><Link to="/news-media" className="hover:text-white transition">News &amp; Media</Link></li>
               <li><Link to="/contact" className="hover:text-white transition">Contact Us</Link></li>
               <li><Link to="/register" className="hover:text-white transition">Register Now</Link></li>

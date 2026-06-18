@@ -103,9 +103,8 @@ export default function Hero() {
           transform: `translate3d(0, ${contentYTranslate}px, 0)`
         }}
       >
-        {/* ADDED EVENT INFO BADGES ABOVE TITLE */}
-        {/* OPTIMIZED MID-SIZE EVENT INFO BADGE */}
-        <div className="mb-8 flex flex-col sm:flex-row items-center gap-3 sm:gap-4 bg-white/[0.05] border border-white/15 backdrop-blur-md px-5 py-2.5 sm:px-6 sm:py-3 rounded-2xl shadow-xl">
+
+        {/* <div className="mb-8 flex flex-col sm:flex-row items-center gap-3 sm:gap-4 bg-white/[0.05] border border-white/15 backdrop-blur-md px-5 py-2.5 sm:px-6 sm:py-3 rounded-2xl shadow-xl">
           <div className="flex items-center gap-2 text-white font-sans text-sm sm:text-base font-extrabold tracking-wider">
             <Calendar className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-[#eb0000]" />
             <span>03 JULY 2026</span>
@@ -115,19 +114,22 @@ export default function Hero() {
             <MapPin className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-[#eb0000]" />
             <span>THE PLAZA, PULCHOWK</span>
           </div>
-        </div>
+        </div> */}
 
         {/* Highlighted Digital Nepal Conclave Title only */}
-        <h1 className="font-display font-black text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-white tracking-tight leading-none drop-shadow-2xl">
+        <h1 className="font-display font-black text-4xl sm:text-6xl md:text-7xl lg:text-8xl mb-4 text-white tracking-tight leading-none drop-shadow-2xl">
           Digital Nepal <br className="hidden sm:inline" />
           Conclave <span className="text-[#eb0000]">2026</span>
         </h1>
+        <div className="font-display font-black text-xl sm:text-2xl md:text-3xl lg:text-4xl text-dnc-orange leading-none drop-shadow-2xl mt-4 mb-4">
+          "Shaping Nepal’s Digital Future" <br className="hidden sm:inline" />
+        </div>
 
         {/* Primary Call to Action Controls in Centered Layout */}
         <div className="mt-8 flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto px-4 sm:px-0">
           <Link
             id="desktop-register-button"
-            to="#"
+            to="/register"
             className="w-full sm:w-auto px-8 py-3.5 bg-[#eb0000] hover:bg-[#c20000] text-white font-bold rounded-2xl shadow-lg shadow-red-950/20 uppercase tracking-widest text-[11px] transition-all duration-300 transform hover:scale-[1.01] active:scale-[0.99] cursor-pointer text-center"
           >
             Register Now
@@ -143,7 +145,7 @@ export default function Hero() {
         </div>
 
         {/* Dynamic Countdown Block */}
-        <div className="mt-14 w-full max-w-lg bg-white/[0.04] backdrop-blur-md rounded-3xl p-5.5 sm:p-6 border border-white/10 shadow-2xl">
+        {/* <div className="mt-14 w-full max-w-lg bg-white/[0.04] backdrop-blur-md rounded-3xl p-5.5 sm:p-6 border border-white/10 shadow-2xl">
           <p className="text-center text-[10px] uppercase tracking-widest text-slate-300 font-sans mb-4 font-bold tracking-widest flex items-center justify-center gap-1.5">
             <span className="w-1.5 h-1.5 bg-[#eb0000] rounded-full animate-ping" />
             CONCLAVE COUNTDOWN CLOCK
@@ -170,6 +172,13 @@ export default function Hero() {
               <p className="text-[9px] text-slate-400 uppercase font-sans mt-1 font-bold">Secs</p>
             </div>
           </div>
+        </div> */}
+
+        <div className="mt-14 w-72 max-w-lg bg-white/[0.04] backdrop-blur-md rounded-full p-5.5 sm:p-6 border border-white/10 shadow-2xl">
+          <p className="text-center text-2xl uppercase tracking-widest text-slate-300 font-sans font-bold tracking-widest flex items-center justify-center gap-1.5">
+            {/* <span className="w-1.5 h-1.5 bg-[#eb0000] rounded-full animate-ping" /> */}
+            COMING SOON
+          </p>
         </div>
 
       </div>

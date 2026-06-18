@@ -70,19 +70,19 @@ export default function Header() {
 
               <div className="absolute top-full left-0 w-56 mt-0 bg-white border border-slate-100 rounded-xl shadow-lg ring-1 ring-black/5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 py-2">
                 <Link
-                  to="/about"
+                  to="/about/event"
                   className="flex w-full px-4 py-2 text-left text-sm hover:bg-slate-50 hover:text-dnc-blue text-slate-600"
                 >
                   About the Event
                 </Link>
                 <Link
-                  to="/about"
+                  to="/about/organizer"
                   className="flex w-full px-4 py-2 text-left text-sm hover:bg-slate-50 hover:text-dnc-blue text-slate-600"
                 >
                   About the Organizer (IFN)
                 </Link>
                 <Link
-                  to="/about"
+                  to="/about/team"
                   className="flex w-full px-4 py-2 text-left text-sm hover:bg-slate-50 hover:text-dnc-blue text-slate-600"
                 >
                   Team &amp; Patrons
@@ -152,7 +152,7 @@ export default function Header() {
               </div>
             </div>
 
-            <NavLink id="nav-publications" to="/publications" className={navLinkClass}>
+            <NavLink id="nav-publications" to="/downloads" className={navLinkClass}>
               {({ isActive }) => (
                 <>
                   Publications
@@ -184,7 +184,7 @@ export default function Header() {
           <div className="hidden lg:flex items-center">
             <Link
               id="desktop-register-button"
-              to="#"
+              to="/register"
               className="w-full sm:w-auto px-8 py-3.5 bg-[#eb0000] hover:bg-[#c20000] text-white font-bold rounded-full shadow-lg shadow-red-950/20 uppercase tracking-widest text-sm transition-all duration-300 transform hover:scale-[1.01] active:scale-[0.99] cursor-pointer text-center block sm:inline-block"
             >
               Register Now
@@ -295,9 +295,9 @@ export default function Header() {
             </div>
 
             <Link
-              to="/publications"
+              to="/downloads"
               onClick={closeMobile}
-              className={`flex w-full px-4 py-3 rounded-md text-base font-medium ${pathname === "/publications" ? "bg-slate-50 text-dnc-blue font-bold" : "text-slate-700"}`}
+              className={`flex w-full px-4 py-3 rounded-md text-base font-medium ${pathname === "/downloads" ? "bg-slate-50 text-dnc-blue font-bold" : "text-slate-700"}`}
             >
               Publications
             </Link>
@@ -320,7 +320,7 @@ export default function Header() {
 
             <div className="px-4 pt-3">
               <Link
-                to="#"
+                to="/register"
                 onClick={closeMobile}
                 className="w-full px-8 py-3.5 bg-[#eb0000] hover:bg-[#c20000] text-white font-bold rounded-full shadow-lg shadow-red-950/20 uppercase tracking-widest text-sm transition-all duration-300 cursor-pointer text-center block"
               >

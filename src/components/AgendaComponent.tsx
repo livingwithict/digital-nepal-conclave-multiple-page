@@ -1,21 +1,20 @@
 import React, { useState } from "react";
 import {
   Clock,
-  Users,
   MapPin,
   Zap,
   Briefcase,
   Brain,
   TrendingUp,
   Coffee,
-  Mic,
-  Star,
-  Lectern
+  ArrowRight
 } from "lucide-react";
 import { AGENDA_DATA, AgendaItem } from "../agendaData";
+import AgendaDetailModal from "./AgendaDetailModal";
 
 export default function AgendaComponent() {
   const [activeFilter, setActiveFilter] = useState<"All" | "Inaugural" | "Governance" | "Data" | "Economy" | "Break">("All");
+  const [selectedItem, setSelectedItem] = useState<AgendaItem | null>(null);
 
   const filteredAgenda = activeFilter === "All"
     ? AGENDA_DATA
@@ -90,49 +89,20 @@ export default function AgendaComponent() {
 
   const filters = ["All", "Inaugural", "Governance", "Data", "Economy", "Break"] as const;
 
-  // Helper function to render personnel arrays inline
-  const renderPersonnelGroup = (roleLabel: string, Icon: any, people?: string[]) => {
-    if (!people || people.length === 0) return null;
-    
-    return (
-      <div className="flex flex-wrap items-center gap-2.5">
-        {/* Label acts as the first inline item */}
-        <div className="flex items-center gap-2 mr-1">
-          <div className="p-1.5 bg-slate-100/80 rounded-md">
-            <Icon className="w-3.5 h-3.5 text-slate-600" />
-          </div>
-          <span className="text-xs font-sans font-bold text-slate-600 uppercase tracking-widest">
-            {roleLabel}
-          </span>
-        </div>
-        
-        {/* Names flow immediately after on the same line, wrapping if needed */}
-        {people.map((person, idx) => (
-          <div 
-            key={`${roleLabel}-${idx}`} 
-            className="px-3 py-1.5 bg-white/80 backdrop-blur-sm border border-slate-300/60 rounded-lg text-sm font-medium text-slate-800 hover:bg-white hover:border-slate-400 transition-all duration-200 shadow-sm hover:shadow-md"
-          >
-            {person}
-          </div>
-        ))}
-      </div>
-    );
-  };
-
   return (
     <section id="agenda-section" className="bg-gradient-to-b from-white via-slate-50/30 to-white py-20 sm:py-16">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Enhanced Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center justify-center mb-4 p-3 bg-gradient-to-br from-slate-100/60 to-slate-50/60 rounded-2xl border border-slate-200/70">
+          {/* <div className="inline-flex items-center justify-center mb-4 p-3 bg-gradient-to-br from-slate-100/60 to-slate-50/60 rounded-2xl border border-slate-200/70">
             <Clock className="w-5 h-5 text-slate-600 mr-2" />
             <span className="text-sm font-sans font-bold text-slate-700 uppercase tracking-wider">
               Friday, 3rd July 2026 (2083 Asar 19)
             </span>
-          </div>
+          </div> */}
           
-          <h1 className="font-display font-black text-4xl sm:text-5xl text-slate-900 tracking-tight mb-3">
+          <h1 className="font-display font-extrabold text-3xl sm:text-4xl text-slate-900 tracking-tight">
             Schedule of Tracks & Sessions
           </h1>
         </div>
@@ -168,17 +138,17 @@ export default function AgendaComponent() {
           {filteredAgenda.map((item, index) => {
             const config = getCategoryConfig(item.category);
             const IconComponent = config.icon;
-            
-            // Check if any personnel data exists to render the border/section
-            const hasPersonnel = (item.speakers?.length || 0) > 0 || 
-                                 (item.panelists?.length || 0) > 0 || 
-                                 (item.moderators?.length || 0) > 0 || 
-                                 (item.sessionChairs?.length || 0) > 0;
-            
+
             return (
               <div
                 key={index}
-                className={`group relative overflow-hidden rounded-2xl border-2 ${config.borderColor} ${config.bgColor} transition-all duration-300 hover:shadow-lg hover:shadow-slate-200/40 hover:scale-[1.01]`}
+                onClick={() => setSelectedItem(item)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") setSelectedItem(item);
+                }}
+                className={`group relative overflow-hidden rounded-2xl border-2 ${config.borderColor} ${config.bgColor} transition-all duration-300 hover:shadow-lg hover:shadow-slate-200/40 hover:scale-[1.01] cursor-pointer`}
               >
                 <div className={`absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b ${config.accentColor}`}></div>
 
@@ -211,27 +181,22 @@ export default function AgendaComponent() {
                     </div>
                   </div>
 
-                  {/* Right Column: Title, Description & Speakers */}
-                  <div className="md:w-3/4">
+                  {/* Right Column: Title & Learn More */}
+                  <div className="md:w-3/4 flex flex-col justify-center">
                     <h3 className={`font-display font-bold text-xl sm:text-2xl leading-snug mb-2 text-slate-900`}>
                       {item.title}
                     </h3>
 
                     {item.subtitle && (
-                      <p className="text-sm sm:text-base font-sans font-semibold text-slate-700 mb-5 leading-relaxed">
+                      <p className="text-sm sm:text-base font-sans font-semibold text-slate-700 mb-4 leading-relaxed">
                         {item.subtitle}
                       </p>
                     )}
 
-                    {/* Roles Flowing Inline */}
-                    {hasPersonnel && (
-                      <div className="flex flex-col gap-3.5 mt-5 pt-5 border-t border-slate-300/40">
-                        {renderPersonnelGroup("Speaker", Lectern, item.speakers)}
-                        {renderPersonnelGroup("Panelist", Users, item.panelists)}
-                        {renderPersonnelGroup("Moderator", Mic, item.moderators)}
-                        {renderPersonnelGroup("Chair", Star, item.sessionChairs)}
-                      </div>
-                    )}
+                    <span className={`inline-flex items-center gap-1.5 text-sm font-sans font-bold ${config.color} group-hover:gap-2.5 transition-all duration-200`}>
+                      Learn More
+                      <ArrowRight className="w-4 h-4" />
+                    </span>
                   </div>
                 </div>
 
@@ -249,6 +214,13 @@ export default function AgendaComponent() {
         </div>
 
       </div>
+
+      <AgendaDetailModal
+        item={selectedItem}
+        config={selectedItem ? getCategoryConfig(selectedItem.category) : null}
+        categoryLabel={selectedItem ? getCategoryBadgeLabel(selectedItem.category) : ""}
+        onClose={() => setSelectedItem(null)}
+      />
     </section>
   );
 }

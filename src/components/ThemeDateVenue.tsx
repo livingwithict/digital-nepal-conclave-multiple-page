@@ -46,7 +46,7 @@ export default function ThemeDateVenue() {
           <div className="max-w-full mb-16">
             <p className="mb-4 text-sm sm:text-xl text-dnc-blue font-bold uppercase tracking-wider">THIS YEAR'S THEME:</p>
             <h2 className="font-display font-black text-3xl sm:text-4xl lg:text-5xl text-slate-900 tracking-tight leading-none mb-6">
-              Reimagining <span className="text-dnc-blue">Governance</span>, <span className="text-[#eb0000]">Data</span> & the <span className="text-dnc-orange">Digital Economy</span>
+              Reimagining Digital <span className="text-dnc-blue">Governance</span>, <span className="text-[#eb0000]">Data</span> & the <span className="text-dnc-orange">Digital Economy</span>
             </h2>
             
             <p className="text-slate-650 text-sm sm:text-base leading-relaxed font-sans max-w-full text-justify">
@@ -147,16 +147,14 @@ export default function ThemeDateVenue() {
       </section>
 
       {/* SECTION 2: THE NEXT SESSION - COGNITIVE EVENT DATE & VENUE */}
-      <section className="relative bg-gradient-to-b from-[#0d0f2b] to-[#111332] py-24 text-white overflow-hidden border-t border-white/[0.04]">
+      {/* <section className="relative bg-gradient-to-b from-[#0d0f2b] to-[#111332] py-24 text-white overflow-hidden border-t border-white/[0.04]">
         
-        {/* Subtle Mountain Outline Silhouette */}
         <div className="absolute inset-x-0 bottom-0 h-44 opacity-25 pointer-events-none select-none z-0">
           <svg viewBox="0 0 1440 120" className="w-full h-full absolute bottom-0 left-0" preserveAspectRatio="none">
             <path d="M0,80 L200,30 L400,90 L600,20 L800,100 L1000,40 L1200,90 L1440,50 L1440,120 L0,120 Z" fill="rgba(46, 49, 146, 0.4)" />
           </svg>
         </div>
 
-        {/* Global cyber grid pattern */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(235,0,0,0.06),transparent_60%)] z-0 pointer-events-none" />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
@@ -165,15 +163,10 @@ export default function ThemeDateVenue() {
             <h2 className="font-display font-black text-3xl sm:text-4xl text-white tracking-tight">
               Event Details
             </h2>
-            {/* <p className="mt-3 text-sm font-sans text-slate-400 uppercase tracking-widest">
-              Friday | July 3, 2026 | Asar 19, 2083
-            </p> */}
           </div>
 
-          {/* High-Contrast Interactive Split Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-stretch">
-            
-            {/* LEFT COLUMN: CONSOLIDATED EVENT DETAILS */}
+
             <div className="bg-white/[0.02] backdrop-blur-md rounded-3xl border border-white/10 p-8 sm:p-10 hover:border-white/20 transition-all duration-300 flex flex-col justify-between group relative overflow-hidden">
               <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-bl from-[#eb0000]/10 via-dnc-blue/5 to-transparent pointer-events-none" />
               
@@ -192,7 +185,6 @@ export default function ThemeDateVenue() {
 
               </div>
 
-              {/* Action sync */}
               <div className="mt-10 pt-6 border-t border-white/[0.08] relative z-10">
                 <button
                   onClick={handleAddToCalendar}
@@ -205,7 +197,6 @@ export default function ThemeDateVenue() {
 
             </div>
 
-            {/* RIGHT COLUMN: VENUE PHOTO & MAP LINK */}
             <div className="bg-slate-800 rounded-3xl border border-white/10 overflow-hidden relative group shadow-2xl flex flex-col justify-end min-h-[300px]">
               <img
                 src="/images/plaza.jpg" 
@@ -213,11 +204,9 @@ export default function ThemeDateVenue() {
                 className="w-full h-full object-cover absolute inset-0 group-hover:scale-105 transition-transform duration-1000 ease-in-out"
               />
               
-              {/* Gradient overlays to ensure text/button readability */}
               <div className="absolute inset-0 bg-gradient-to-t from-[#0d0f2b] via-[#0d0f2b]/10 to-transparent opacity-25" />
               <div className="absolute inset-0 bg-gradient-to-br from-transparent to-dnc-blue/10 mix-blend-overlay" />
 
-              {/* Map interaction overlay */}
               <div className="relative z-10 p-8 sm:p-10 flex flex-col items-start w-full">
                 <button
                   onClick={handleOpenMap}
@@ -232,7 +221,7 @@ export default function ThemeDateVenue() {
           </div>
 
         </div>
-      </section>
+      </section> */}
 
     </div>
   );

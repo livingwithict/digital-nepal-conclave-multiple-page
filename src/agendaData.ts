@@ -62,13 +62,13 @@ export const AGENDA_DATA: AgendaItem[] = [
   },
 
   // BREAK - LUNCH
-  {
-    time: "12:45 PM – 1:30 PM",
-    title: "Networking Lunch & Exhibition",
-    subtitle: "Startup Demo Zone & Networking Opportunities",
-    category: "Break",
-    speakers: [],
-  },
+  // {
+  //   time: "12:45 PM – 1:30 PM",
+  //   title: "Networking Lunch & Exhibition",
+  //   subtitle: "Startup Demo Zone & Networking Opportunities",
+  //   category: "Break",
+  //   speakers: [],
+  // },
 
   // SESSION 2: DATA, AI & CYBERSECURITY
   {
@@ -94,13 +94,13 @@ export const AGENDA_DATA: AgendaItem[] = [
   },
 
   // BREAK - TEA
-  {
-    time: "3:00 PM – 3:30 PM",
-    title: "Tea Break & Networking",
-    subtitle: "Exhibition Floor Open",
-    category: "Break",
-    speakers: [],
-  },
+  // {
+  //   time: "3:00 PM – 3:30 PM",
+  //   title: "Tea Break & Networking",
+  //   subtitle: "Exhibition Floor Open",
+  //   category: "Break",
+  //   speakers: [],
+  // },
 
   // SESSION 3: DIGITAL ECONOMY & INNOVATION
   {

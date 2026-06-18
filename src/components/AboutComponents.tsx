@@ -1,14 +1,26 @@
 import React from "react";
+import { useParams, useNavigate, Navigate } from "react-router-dom";
 import { Info, Building2, Users, ShieldCheck, HeartHandshake, Award, ExternalLink, Globe, Sparkles } from "lucide-react";
-import { TEAM_MEMBERS, PATRONS } from "../data";
+import { TEAM_MEMBERS,} from "../data";
 
 export default function AboutComponents() {
-  const [currentSubSection, setCurrentSubSection] = React.useState<"event" | "organizer" | "team">("event");
-  const onSubSectionChange = setCurrentSubSection;
+  // 1. Grab the section parameter from the URL (e.g., /about/team -> section = "team")
+  const { section } = useParams<{ section: string }>();
+  const navigate = useNavigate();
+
+  // 2. Validate the section. If someone goes to /about or /about/invalid, default to "event"
+  const validSections = ["event", "organizer", "team"];
+  const isValidSection = section && validSections.includes(section);
+
+  if (!isValidSection) {
+    return <Navigate to="/about/event" replace />;
+  }
+
+  // Safely cast it now that we know it's valid
+  const activeSection = section as "event" | "organizer" | "team";
 
   const renderEvent = () => (
     <div id="about-event-view" className="space-y-12">
-
       {/* Introduction Card */}
       <div className="bg-white rounded-3xl p-8 border border-slate-100 shadow-xs">
         <div className="max-w-auto mx-auto space-y-6 text-justify">
@@ -111,7 +123,7 @@ export default function AboutComponents() {
       {/* Theme Insight Card */}
       <div className="bg-white text-white rounded-3xl p-8 shadow-xs border border-slate-100">
         <h4 className="font-display font-extrabold text-lg sm:text-xl text-dnc-blue mb-3">
-          Behind the Theme: Reimagining Governance, Data and the Digital Economy
+          Behind the Theme: Reimagining Digital Governance, Data and the Digital Economy
         </h4>
         <div className="space-y-4 text-sm sm:text-sm text-slate-900 leading-relaxed">
           <p>
@@ -122,7 +134,6 @@ export default function AboutComponents() {
           </p>
         </div>
       </div>
-
     </div>
   );
 
@@ -145,13 +156,11 @@ export default function AboutComponents() {
                 ICT Foundation is an organization aimed to work towards the country’s mission of digital transformation. It works in policy level plans, discussions and execution of various ICT initiatives in collaboration to local and central level government bodies. It has been supporting the Nepali startups who work in the field of digital literacy with their growth and opportunity scalability.
               </p>
             </div>
-
           </div>
 
           {/* Parent grid item container */}
           <div className="md:col-span-4 flex flex-col gap-4">
-            
-            {/* 1. The Image Placeholder Box (Scaled down size) */}
+            {/* 1. The Image Placeholder Box */}
             <div className="bg-slate border border-slate-100 rounded-2xl p-6 flex flex-col items-center justify-center h-[200px] w-full group overflow-hidden relative">
               <img 
                 src="/images/IFN-Logo.png" 
@@ -160,7 +169,7 @@ export default function AboutComponents() {
               /> 
             </div>
 
-            {/* 2. The Action Button (Positioned completely outside & below) */}
+            {/* 2. The Action Button */}
             <div className="flex justify-center">
               <a
                 href="https://ictfoundation.org.np"
@@ -173,7 +182,6 @@ export default function AboutComponents() {
                 <ExternalLink className="w-3.5 h-3.5 opacity-80" />
               </a>
             </div>
-
           </div>
         </div>
       </div>
@@ -191,14 +199,14 @@ export default function AboutComponents() {
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {[
-            { name: "Digital Samvad", desc: "Weekly policy talk-show broadcasts", logo: "/images/logos/digital-samvad.jpg" },
-            { name: "Digital Nepal Conclave", desc: "Flagship central business summit", logo: "/images/logos/dnc-logo.png" },
-            { name: "Digital Karnali Conclave", desc: "Decentralized state policy forums", logo: "/images/logos/dkc-logo.png" },
-            { name: "Digital Madhesh Conclave", desc: "Regional smart-services seminars", logo: "/images/logos/dmc-logo.png" },
-            { name: "ICT Award", desc: "The ultimate accolade for tech champions", logo: "/images/logos/ict-award.png" },
-            { name: "Startup & Idea Fest", desc: "National ecosystem pitching events", logo: "/images/logos/snif.png" },
-            { name: "ICT Gyan", desc: "Centralized analytical tech encyclopedia", logo: "/images/logos/ict-gyan.png" },
-            { name: "Digital Leadership Dialogue", desc: "Corporate-regulator interactions", logo: "/images/logos/dld-logo.png" }
+            { name: "Digital Samvad", logo: "/images/logos/digital-samvad.jpg" },
+            { name: "Digital Nepal Conclave", logo: "/images/logos/dnc-logo.png" },
+            { name: "Digital Karnali Conclave", logo: "/images/logos/dkc-logo.png" },
+            { name: "Digital Madhesh Conclave", logo: "/images/logos/dmc-logo.png" },
+            { name: "ICT Award", logo: "/images/logos/ict-award.png" },
+            { name: "Startup & Idea Fest", logo: "/images/logos/snif.png" },
+            { name: "ICT Gyan", logo: "/images/logos/ict-gyan.png" },
+            { name: "Digital Leadership Dialogue", logo: "/images/logos/dld-logo.png" }
           ].map((item, index) => (
             <div key={index} className="bg-white rounded-2xl p-5 border border-slate-100 shadow-xs hover:border-dnc-blue transition-all duration-200">
               {/* Logo Placeholder */}
@@ -213,95 +221,87 @@ export default function AboutComponents() {
                 />
               </div>
               <h4 className="font-display font-bold text-base text-slate-900 mb-1 leading-tight">{item.name}</h4>
-              {/* <p className="text-[11px] text-slate-500">{item.desc}</p> */}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+
+  const renderTeam = () => (
+    <div id="about-team-view" className="space-y-16 animate-infinite-slide">
+      {/* Team Section */}
+      <div>
+        <div className="text-center mb-10 max-w-lg mx-auto">
+          <span className="px-2 py-1 bg-dnc-blue/5 text-dnc-blue text-2xl font-bold rounded font-sans uppercase tracking-widest">
+            Patrons & Sectretariat of IFN
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {TEAM_MEMBERS.map((member, index) => (
+            <div
+              key={index}
+              className="bg-white rounded-2xl p-6 border border-slate-100 shadow-2xs flex flex-col items-center text-center hover:shadow-md hover:border-slate-200 transition-all duration-300 group"
+            >
+              {/* Circular Photo Placeholder */}
+              <div className="w-36 h-36 rounded-full bg-slate-50 border border-slate-100 font-display font-bold text-slate-400 flex items-center justify-center mb-4 overflow-hidden group-hover:border-dnc-orange/30 transition-colors duration-300 shrink-0">
+                {member.imageUrl ? (
+                  <img src={member.imageUrl} alt={member.name} className="w-full h-full object-cover" />
+                ) : (
+                  <span className="text-xl tracking-wider">{member.avatarText || "IFN"}</span>
+                )}
+              </div>
+
+              {/* Name */}
+              <h4 className="font-display font-bold text-base text-slate-900 leading-tight mb-1">
+                {member.name}
+              </h4>
+
+              {/* Designation */}
+              <p className="text-sm font-medium text-dnc-blue leading-snug">
+                {member.role}
+              </p>
             </div>
           ))}
         </div>
       </div>
 
+      {/* Patrons Section */}
+      {/* <div id="advisory-patrons">
+        <div className="text-center mb-10 max-w-lg mx-auto">
+          <span className="px-2 py-1 bg-dnc-blue/5 text-dnc-blue text-2xl font-bold rounded font-sans uppercase tracking-widest">
+            Our Patrons
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {PATRONS.map((patron, index) => (
+            <div
+              key={index}
+              className="bg-white rounded-2xl p-6 border border-slate-100 shadow-2xs flex flex-col items-center text-center hover:shadow-md hover:border-slate-200 transition-all duration-300 group"
+            >
+              <div className="w-36 h-36 rounded-full bg-slate-50 border border-slate-100 font-display font-bold text-slate-400 flex items-center justify-center mb-4 overflow-hidden group-hover:border-dnc-blue/30 transition-colors duration-300 shrink-0">
+                {patron.imageUrl ? (
+                  <img src={patron.imageUrl} alt={patron.name} className="w-full h-full object-cover" />
+                ) : (
+                  <span className="text-xl tracking-wider text-slate-300">Patron</span>
+                )}
+              </div>
+
+              <h4 className="font-display font-bold text-base text-slate-900 leading-tight mb-1">
+                {patron.name}
+              </h4>
+
+              <p className="text-sm font-medium text-dnc-blue leading-snug">
+                {patron.role}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div> */}
     </div>
   );
-
-  const renderTeam = () => (
-  <div id="about-team-view" className="space-y-16 animate-infinite-slide">
-
-    {/* Team Section */}
-    <div>
-      <div className="text-center mb-10 max-w-lg mx-auto">
-        <span className="px-2 py-1 bg-dnc-blue/5 text-dnc-blue text-2xl font-bold rounded font-sans uppercase tracking-widest">
-          Our Team
-        </span>
-      </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {TEAM_MEMBERS.map((member, index) => (
-          <div
-            key={index}
-            className="bg-white rounded-2xl p-6 border border-slate-100 shadow-2xs flex flex-col items-center text-center hover:shadow-md hover:border-slate-200 transition-all duration-300 group"
-          >
-            {/* Circular Photo Placeholder */}
-            <div className="w-36 h-36 rounded-full bg-slate-50 border border-slate-100 font-display font-bold text-slate-400 flex items-center justify-center mb-4 overflow-hidden group-hover:border-dnc-orange/30 transition-colors duration-300 shrink-0">
-              {member.imageUrl ? (
-                <img src={member.imageUrl} alt={member.name} className="w-full h-full object-cover" />
-              ) : (
-                <span className="text-xl tracking-wider">{member.avatarText || "IFN"}</span>
-              )}
-            </div>
-
-            {/* Name */}
-            <h4 className="font-display font-bold text-base text-slate-900 leading-tight mb-1">
-              {member.name}
-            </h4>
-
-            {/* Designation */}
-            <p className="text-sm font-medium text-dnc-blue leading-snug">
-              {member.role}
-            </p>
-
-          </div>
-        ))}
-      </div>
-    </div>
-
-    {/* Patrons Section */}
-    <div id="advisory-patrons">
-      <div className="text-center mb-10 max-w-lg mx-auto">
-        <span className="px-2 py-1 bg-dnc-blue/5 text-dnc-blue text-2xl font-bold rounded font-sans uppercase tracking-widest">
-          Our Patrons
-        </span>
-      </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {PATRONS.map((patron, index) => (
-          <div
-            key={index}
-            className="bg-white rounded-2xl p-6 border border-slate-100 shadow-2xs flex flex-col items-center text-center hover:shadow-md hover:border-slate-200 transition-all duration-300 group"
-          >
-            {/* Circular Photo Placeholder matching Team profile sizes */}
-            <div className="w-36 h-36 rounded-full bg-slate-50 border border-slate-100 font-display font-bold text-slate-400 flex items-center justify-center mb-4 overflow-hidden group-hover:border-dnc-blue/30 transition-colors duration-300 shrink-0">
-              {patron.imageUrl ? (
-                <img src={patron.imageUrl} alt={patron.name} className="w-full h-full object-cover" />
-              ) : (
-                <span className="text-xl tracking-wider text-slate-300">Patron</span>
-              )}
-            </div>
-
-            {/* Name */}
-            <h4 className="font-display font-bold text-base text-slate-900 leading-tight mb-1">
-              {patron.name}
-            </h4>
-
-            {/* Designation */}
-            <p className="text-sm font-medium text-dnc-blue leading-snug">
-              {patron.role}
-            </p>
-          </div>
-        ))}
-      </div>
-    </div>
-
-  </div>
-);
 
   return (
     <div id="about-group-page" className="bg-white py-12">
@@ -316,23 +316,26 @@ export default function AboutComponents() {
           {/* Sub Navigation Pills */}
           <div className="mt-6 inline-flex p-1.5 bg-slate-100 rounded-2xl border border-slate-200/50">
             <button
-              onClick={() => onSubSectionChange("event")}
-              className={`px-5 py-2 rounded-xl text-sm sm:text-sm font-semibold transition ${currentSubSection === "event" ? "bg-white text-dnc-blue shadow-xs" : "text-slate-600 hover:text-slate-900"
-                }`}
+              onClick={() => navigate("/about/event")}
+              className={`px-5 py-2 rounded-xl text-sm sm:text-sm font-semibold transition ${
+                activeSection === "event" ? "bg-white text-dnc-blue shadow-xs" : "text-slate-600 hover:text-slate-900"
+              }`}
             >
               About the Event
             </button>
             <button
-              onClick={() => onSubSectionChange("organizer")}
-              className={`px-5 py-2 rounded-xl text-sm sm:text-sm font-semibold transition ${currentSubSection === "organizer" ? "bg-white text-dnc-orange shadow-xs" : "text-slate-600 hover:text-slate-900"
-                }`}
+              onClick={() => navigate("/about/organizer")}
+              className={`px-5 py-2 rounded-xl text-sm sm:text-sm font-semibold transition ${
+                activeSection === "organizer" ? "bg-white text-dnc-orange shadow-xs" : "text-slate-600 hover:text-slate-900"
+              }`}
             >
               The Organizer (IFN)
             </button>
             <button
-              onClick={() => onSubSectionChange("team")}
-              className={`px-5 py-2 rounded-xl text-sm sm:text-sm font-semibold transition ${currentSubSection === "team" ? "bg-white text-dnc-black shadow-xs" : "text-slate-600 hover:text-slate-900"
-                }`}
+              onClick={() => navigate("/about/team")}
+              className={`px-5 py-2 rounded-xl text-sm sm:text-sm font-semibold transition ${
+                activeSection === "team" ? "bg-white text-dnc-black shadow-xs" : "text-slate-600 hover:text-slate-900"
+              }`}
             >
               Team & Patrons
             </button>
@@ -340,9 +343,9 @@ export default function AboutComponents() {
         </div>
 
         {/* Selected subsection rendering */}
-        {currentSubSection === "event" && renderEvent()}
-        {currentSubSection === "organizer" && renderOrganizer()}
-        {currentSubSection === "team" && renderTeam()}
+        {activeSection === "event" && renderEvent()}
+        {activeSection === "organizer" && renderOrganizer()}
+        {activeSection === "team" && renderTeam()}
 
       </div>
     </div>

@@ -16,12 +16,17 @@ export default function App() {
     <Routes>
       <Route element={<Layout />}>
         <Route index element={<HomePage />} />
-        <Route path="about" element={<AboutPage />} />
+        
+        {/* Updated About Route: The '?' makes the :section parameter optional */}
+        <Route path="about/:section?" element={<AboutPage />} />
+        
         <Route path="agenda" element={<AgendaPage />} />
         <Route path="speakers" element={<SpeakersPage />} />
+        
         <Route path="past-events" element={<Navigate to="/past-events/2025" replace />} />
         <Route path="past-events/:year" element={<PastEventsPage />} />
-        <Route path="publications" element={<PublicationsPage />} />
+        
+        <Route path="downloads" element={<PublicationsPage />} />
         <Route path="news-media" element={<NewsMediaPage />} />
         <Route path="contact" element={<ContactPage />} />
         <Route path="register" element={<RegistrationPage />} />
