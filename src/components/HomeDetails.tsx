@@ -1,5 +1,5 @@
-import React from "react";
-import { Users, Image, Video, Newspaper, ArrowRight } from "lucide-react";
+import { useState, useEffect, useCallback } from "react";
+import { Users, Image, Video, Newspaper, ArrowRight, X, ChevronLeft, ChevronRight, CalendarDays } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { STATS_COUNTERS, SPEAKERS_LIST, NEWS_ARTICLES } from "../data";
 import { SPONSORS } from "../sponsordata"; // <-- Imported the new data
@@ -38,8 +38,50 @@ const SponsorBox = ({ sponsor, className = "w-40 h-20" }) => {
   );
 };
 
+const GALLERY_PHOTOS = [
+  { title: "DNC 2025", url: "/images/gallery/2025/25-1.jpg", gridClass: "md:col-span-2 md:row-span-2" },
+  { title: "DNC 2025", url: "/images/gallery/2025/25-2.jpg", gridClass: "md:col-span-1 md:row-span-1" },
+  { title: "DNC 2025", url: "/images/gallery/2025/25-3.jpg", gridClass: "md:col-span-1 md:row-span-1" },
+  { title: "DNC 2025", url: "/images/gallery/2025/25-4.jpg", gridClass: "md:col-span-2 md:row-span-1" },
+  { title: "DNC 2025", url: "/images/gallery/2025/25-5.jpg", gridClass: "md:col-span-1 md:row-span-1" },
+  { title: "DNC 2025", url: "/images/gallery/2025/25-7.jpg", gridClass: "md:col-span-2 md:row-span-1" },
+  { title: "DNC 2025", url: "/images/gallery/2025/25-6.jpg", gridClass: "md:col-span-1 md:row-span-1" },
+];
+
 export default function HomeDetails() {
   const navigate = useNavigate();
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
+  const closeLightbox = useCallback(() => setLightboxIndex(null), []);
+  const showPrev = useCallback(() => setLightboxIndex(i => i !== null ? (i - 1 + GALLERY_PHOTOS.length) % GALLERY_PHOTOS.length : null), []);
+  const showNext = useCallback(() => setLightboxIndex(i => i !== null ? (i + 1) % GALLERY_PHOTOS.length : null), []);
+
+  useEffect(() => {
+    const header = document.getElementById("app-header");
+    if (lightboxIndex !== null) {
+      document.body.style.overflow = "hidden";
+      if (header) header.style.display = "none";
+    } else {
+      document.body.style.overflow = "";
+      if (header) header.style.display = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+      if (header) header.style.display = "";
+    };
+  }, [lightboxIndex]);
+
+  useEffect(() => {
+    if (lightboxIndex === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowLeft") showPrev();
+      if (e.key === "ArrowRight") showNext();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [lightboxIndex, closeLightbox, showPrev, showNext]);
+
   return (
     <div id="home-details-section" className="bg-slate-50 py-16 border-t border-slate-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -62,6 +104,67 @@ export default function HomeDetails() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* AGENDA HIGHLIGHTS */}
+        <div className="mb-20">
+          <div className="flex items-center gap-2 mb-6">
+            <span className="p-2 bg-blue-50 text-dnc-blue rounded-xl border border-blue-100">
+              <CalendarDays className="w-5 h-5" />
+            </span>
+            <div>
+              <h3 className="font-display font-black text-xl sm:text-2xl text-slate-800">
+                What's on the Agenda
+              </h3>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-3xl border border-slate-100 shadow-xs px-6 sm:px-10 py-2 mb-8">
+            {[
+              { time: "9:30 AM",  title: "Inaugural Session",   subtitle: "Lighting the Digital Path",                              },
+              { time: "10:45 AM", title: "Power Samvad @ DNC",  subtitle: "Nepal's Digital Transformation: Reimagining Governance", },
+              { time: "1:45 PM",  title: "AI & Tech Keynote",   subtitle: "Ethical AI Integration for Smart Governance",            },
+              { time: "6:30 PM",  title: "Closing Note",        subtitle: "Thank You & The Road to DNC 2027",                      },
+            ].map((item, idx, arr) => (
+              <Link
+                to="/agenda"
+                key={idx}
+                className="group flex items-stretch gap-5 hover:bg-slate-50 rounded-xl px-2 -mx-2 transition-colors duration-200"
+              >
+                {/* time */}
+                <span className="w-20 sm:w-24 shrink-0 text-right text-sm font-semibold text-slate-400 group-hover:text-dnc-blue transition-colors tabular-nums py-4 self-start pt-[1.1rem]">
+                  {item.time}
+                </span>
+
+                {/* dot + line column */}
+                <div className="flex flex-col items-center shrink-0">
+                  <div className={"w-2.5 h-2.5 rounded-full mt-[1.1rem] shrink-0 bg-dnc-blue"} />
+                  {idx < arr.length - 1 && <div className="w-px flex-1 bg-slate-100 mt-1" />}
+                </div>
+
+                {/* content */}
+                <div className="flex-1 min-w-0 flex items-center gap-4 py-4">
+                  <div className="flex-1 min-w-0">
+                    <p className="font-display font-bold text-base text-slate-800 group-hover:text-dnc-blue transition-colors leading-tight">
+                      {item.title}
+                    </p>
+                    <p className="text-sm text-slate-400 mt-0.5 line-clamp-1">{item.subtitle}</p>
+                  </div>
+                  <ArrowRight className="w-4 h-4 text-slate-300 group-hover:text-dnc-blue group-hover:translate-x-0.5 transition-all shrink-0" />
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          <div className="flex justify-center">
+            <Link
+              to="/agenda"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-dnc-blue text-white font-bold text-sm sm:text-base rounded-xl hover:bg-dnc-blue/90 transition-all duration-300 shadow-md hover:shadow-lg group"
+            >
+              See Full Schedule
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
         </div>
 
         {/* PREVIOUS SPEAKERS HORIZONTAL GALLERY */}
@@ -221,24 +324,74 @@ export default function HomeDetails() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-1 auto-rows-[180px] sm:auto-rows-[220px]">
-            {[
-              { title: "Inaugural Plenary Debate", url: "/images/gallery/2025/25-1.jpg", gridClass: "md:col-span-2 md:row-span-2" },
-              { title: "Startup Pitch Showcase", url: "/images/gallery/2025/25-2.jpg", gridClass: "md:col-span-1 md:row-span-1" },
-              { title: "Digital Public Goods Panel", url: "/images/gallery/2025/25-3.jpg", gridClass: "md:col-span-1 md:row-span-1" },
-              { title: "Provincial Exhibition Booths", url: "/images/gallery/2025/25-4.jpg", gridClass: "md:col-span-2 md:row-span-1" },
-              { title: "B2B Strategic Cooperation Launch", url: "/images/gallery/2025/25-5.jpg", gridClass: "md:col-span-1 md:row-span-1" },
-              { title: "Valedictory Networking & Reception", url: "/images/gallery/2025/25-7.jpg", gridClass: "md:col-span-2 md:row-span-1" },
-              { title: "Academic & Research Symposium", url: "/images/gallery/2025/25-6.jpg", gridClass: "md:col-span-1 md:row-span-1" },
-            ].map((photo, pIdx) => (
-              <div key={pIdx} className={`group relative rounded-s overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 ${photo.gridClass}`}>
+            {GALLERY_PHOTOS.map((photo, pIdx) => (
+              <div
+                key={pIdx}
+                onClick={() => setLightboxIndex(pIdx)}
+                className={`group relative rounded-s overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 cursor-pointer ${photo.gridClass}`}
+              >
                 <img
                   src={`${photo.url}?auto=format&fit=crop&q=80&w=800`}
                   alt={photo.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                 />
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent px-3 py-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                  <p className="text-white text-sm font-semibold drop-shadow leading-tight">{photo.title}</p>
+                </div>
               </div>
             ))}
           </div>
+
+          {/* LIGHTBOX MODAL */}
+          {lightboxIndex !== null && (
+            <div
+              className="fixed inset-0 z-50 flex items-center justify-center bg-black/95"
+              onClick={closeLightbox}
+            >
+              {/* Close */}
+              <button
+                onClick={closeLightbox}
+                className="absolute top-3 right-3 text-white bg-white/10 hover:bg-white/25 rounded-full p-2 transition-colors z-10"
+                aria-label="Close"
+              >
+                <X className="w-5 h-5 sm:w-6 sm:h-6" />
+              </button>
+
+              {/* Prev */}
+              <button
+                onClick={(e) => { e.stopPropagation(); showPrev(); }}
+                className="absolute left-2 sm:left-5 text-white bg-white/10 hover:bg-white/25 rounded-full p-2 sm:p-3 transition-colors z-10"
+                aria-label="Previous photo"
+              >
+                <ChevronLeft className="w-6 h-6 sm:w-7 sm:h-7" />
+              </button>
+
+              {/* Image + caption */}
+              <div
+                className="flex flex-col items-center w-full px-12 sm:px-20 max-w-5xl"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <img
+                  src={GALLERY_PHOTOS[lightboxIndex].url}
+                  alt={GALLERY_PHOTOS[lightboxIndex].title}
+                  className="max-h-[75vh] w-auto max-w-full rounded-lg shadow-2xl object-contain"
+                />
+                <p className="mt-3 text-white text-sm sm:text-base font-semibold text-center px-4 drop-shadow">
+                  {GALLERY_PHOTOS[lightboxIndex].title}
+                </p>
+                <p className="text-white/40 text-xs mt-1">{lightboxIndex + 1} / {GALLERY_PHOTOS.length}</p>
+              </div>
+
+              {/* Next */}
+              <button
+                onClick={(e) => { e.stopPropagation(); showNext(); }}
+                className="absolute right-2 sm:right-5 text-white bg-white/10 hover:bg-white/25 rounded-full p-2 sm:p-3 transition-colors z-10"
+                aria-label="Next photo"
+              >
+                <ChevronRight className="w-6 h-6 sm:w-7 sm:h-7" />
+              </button>
+            </div>
+          )}
         </div>
 
         {/* YOUTUBE VIDEOS SECTION */}
