@@ -1,7 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
-import { Users, Image, Video, Newspaper, ArrowRight, X, ChevronLeft, ChevronRight, CalendarDays } from "lucide-react";
+import { Users, Image, Video, Newspaper, ArrowRight, X, ChevronLeft, ChevronRight, CalendarDays, Briefcase, Brain, TrendingUp, CheckCircle2, Sparkles, Zap, Clock } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { STATS_COUNTERS, SPEAKERS_LIST, NEWS_ARTICLES } from "../data";
+import { AGENDA_DATA, getSessionSlug } from "../agendaData";
 import { SPONSORS } from "../sponsordata"; // <-- Imported the new data
 import VideoCard from "./videocard";
 import NewsCard from "./NewsCard";
@@ -47,6 +48,44 @@ const GALLERY_PHOTOS = [
   { title: "DNC 2025", url: "/images/gallery/2025/25-7.jpg", gridClass: "md:col-span-2 md:row-span-1" },
   { title: "DNC 2025", url: "/images/gallery/2025/25-6.jpg", gridClass: "md:col-span-1 md:row-span-1" },
 ];
+
+const HOME_AGENDA_SESSIONS = [
+  {
+    session: "Session 0: Inaugural Session",
+    time: "9:00 AM – 10:30 AM",
+    icon: Zap,
+    color: "text-slate-700",
+    bg: "bg-slate-100",
+    border: "border-slate-200",
+  },
+  {
+    session: "Session 1: Governance & Digital Public Infrastructure",
+    time: "10:50 AM – 12:30 PM",
+    icon: Briefcase,
+    color: "text-dnc-blue",
+    bg: "bg-blue-50",
+    border: "border-blue-100",
+  },
+  {
+    session: "Session 2: Data, AI & Innovation",
+    time: "2:30 PM – 4:30 PM",
+    icon: Brain,
+    color: "text-dnc-orange",
+    bg: "bg-orange-50",
+    border: "border-orange-100",
+  },
+  {
+    session: "Session 3: Digital Economy & Innovation",
+    time: "4:30 PM – 7:00 PM",
+    icon: TrendingUp,
+    color: "text-dnc-red",
+    bg: "bg-red-50",
+    border: "border-red-100",
+  },
+].map((group) => ({
+  ...group,
+  titles: AGENDA_DATA.filter((item) => item.session === group.session).map((item) => item.title),
+}));
 
 export default function HomeDetails() {
   const navigate = useNavigate();
@@ -119,41 +158,43 @@ export default function HomeDetails() {
             </div>
           </div>
 
-          <div className="bg-white rounded-3xl border border-slate-100 shadow-xs px-6 sm:px-10 py-2 mb-8">
-            {[
-              { time: "9:30 AM",  title: "Inaugural Session",   subtitle: "Lighting the Digital Path",                              },
-              { time: "10:45 AM", title: "Power Samvad @ DNC",  subtitle: "Nepal's Digital Transformation: Reimagining Governance", },
-              { time: "1:45 PM",  title: "AI & Tech Keynote",   subtitle: "Ethical AI Integration for Smart Governance",            },
-              { time: "6:30 PM",  title: "Closing Note",        subtitle: "Thank You & The Road to DNC 2027",                      },
-            ].map((item, idx, arr) => (
-              <Link
-                to="/agenda"
-                key={idx}
-                className="group flex items-stretch gap-5 hover:bg-slate-50 rounded-xl px-2 -mx-2 transition-colors duration-200"
-              >
-                {/* time */}
-                <span className="w-20 sm:w-24 shrink-0 text-right text-sm font-semibold text-slate-400 group-hover:text-dnc-blue transition-colors tabular-nums py-4 self-start pt-[1.1rem]">
-                  {item.time}
-                </span>
-
-                {/* dot + line column */}
-                <div className="flex flex-col items-center shrink-0">
-                  <div className={"w-2.5 h-2.5 rounded-full mt-[1.1rem] shrink-0 bg-dnc-blue"} />
-                  {idx < arr.length - 1 && <div className="w-px flex-1 bg-slate-100 mt-1" />}
-                </div>
-
-                {/* content */}
-                <div className="flex-1 min-w-0 flex items-center gap-4 py-4">
-                  <div className="flex-1 min-w-0">
-                    <p className="font-display font-bold text-base text-slate-800 group-hover:text-dnc-blue transition-colors leading-tight">
-                      {item.title}
-                    </p>
-                    <p className="text-sm text-slate-400 mt-0.5 line-clamp-1">{item.subtitle}</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+            {HOME_AGENDA_SESSIONS.map((group, idx) => {
+              const IconComponent = group.icon;
+              return (
+                <Link
+                  to={`/agenda#${getSessionSlug(group.session)}`}
+                  key={idx}
+                  className={`group flex flex-col bg-white rounded-2xl border ${group.border} shadow-xs p-6 hover:shadow-md transition-all duration-300`}
+                >
+                  <div className="mb-4">
+                    <div className="flex items-center gap-2">
+                      <IconComponent className={`w-5 h-5 shrink-0 ${group.color}`} />
+                      <h4 className="font-display font-bold text-lg sm:text-xl text-slate-800">
+                        {group.session}
+                      </h4>
+                    </div>
+                    <span className="inline-flex items-center gap-1.5 mt-1 text-sm sm:text-base font-sans font-semibold text-slate-500">
+                      <Clock className="w-4 h-4" />
+                      {group.time}
+                    </span>
                   </div>
-                  <ArrowRight className="w-4 h-4 text-slate-300 group-hover:text-dnc-blue group-hover:translate-x-0.5 transition-all shrink-0" />
-                </div>
-              </Link>
-            ))}
+                  <ul className="flex flex-col gap-2.5 pl-1">
+                    {group.titles.map((title, tIdx) => (
+                      <li key={tIdx} className="flex items-start gap-2 text-sm text-slate-900 font-sans leading-snug">
+                        <CheckCircle2 className={`w-3.5 h-3.5 mt-0.5 shrink-0 ${group.color} opacity-70`} />
+                        {title}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="flex justify-end mt-auto">
+                    <span className={`inline-flex items-center text-sm font-sans font-bold ${group.color} pt-5 group-hover:translate-x-1 transition-transform duration-200`}>
+                      <ArrowRight className="w-4 h-4" />
+                    </span>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
 
           <div className="flex justify-center">
@@ -283,7 +324,7 @@ export default function HomeDetails() {
               </span>
               <div>
                 <h3 className="font-display font-black text-xl sm:text-2xl text-slate-800">
-                  Latest Conclave News & Blogs
+                  News & Updates
                 </h3>
               </div>
             </div>
@@ -318,7 +359,7 @@ export default function HomeDetails() {
             </span>
             <div>
               <h3 className="font-display font-black text-xl sm:text-2xl text-slate-800">
-                Conclave Moments & Photo Gallery
+                Gallery & Moments
               </h3>
             </div>
           </div>
@@ -402,7 +443,7 @@ export default function HomeDetails() {
             </span>
             <div>
               <h3 className="font-display font-black text-xl sm:text-2xl text-slate-800">
-                Videos & Event Highlights
+                Featured Videos
               </h3>
             </div>
           </div>
@@ -429,9 +470,12 @@ export default function HomeDetails() {
 
         {/* OUR OTHER INITIATIVES SECTION */}
         <div className="relative w-full overflow-hidden py-4 mt-20">
-          <div className="mb-8">
+          <div className="flex items-center gap-2 mb-8">
+            <span className="p-2 bg-blue-50 text-dnc-blue rounded-xl border border-blue-100">
+              <Sparkles className="w-5 h-5" />
+            </span>
             <h3 className="font-display font-black text-xl sm:text-2xl text-slate-800">
-              Our Other Initiatives & Programs
+              Additional Initiatives
             </h3>
           </div>
 

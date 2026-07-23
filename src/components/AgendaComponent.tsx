@@ -9,7 +9,7 @@ import {
   Coffee,
   ArrowRight
 } from "lucide-react";
-import { AGENDA_DATA, AgendaItem } from "../agendaData";
+import { AGENDA_DATA, AgendaItem, getSessionSlug } from "../agendaData";
 import AgendaDetailModal from "./AgendaDetailModal";
 
 export default function AgendaComponent() {
@@ -95,12 +95,12 @@ export default function AgendaComponent() {
 
         {/* Enhanced Header */}
         <div className="text-center mb-16">
-          {/* <div className="inline-flex items-center justify-center mb-4 p-3 bg-gradient-to-br from-slate-100/60 to-slate-50/60 rounded-2xl border border-slate-200/70">
+          <div className="inline-flex items-center justify-center mb-4 p-3 bg-gradient-to-br from-slate-100/60 to-slate-50/60 rounded-2xl border border-slate-200/70">
             <Clock className="w-5 h-5 text-slate-600 mr-2" />
             <span className="text-sm font-sans font-bold text-slate-700 uppercase tracking-wider">
-              Friday, 3rd July 2026 (2083 Asar 19)
+              Thursday, 27th August 2026
             </span>
-          </div> */}
+          </div>
           
           <h1 className="font-display font-extrabold text-3xl sm:text-4xl text-slate-900 tracking-tight">
             Schedule of Tracks & Sessions
@@ -138,10 +138,19 @@ export default function AgendaComponent() {
           {filteredAgenda.map((item, index) => {
             const config = getCategoryConfig(item.category);
             const IconComponent = config.icon;
+            const showSessionHeader =
+              index === 0 || filteredAgenda[index - 1].session !== item.session;
 
             return (
-              <div
-                key={index}
+              <React.Fragment key={index}>
+                {showSessionHeader && (
+                  <div id={getSessionSlug(item.session)} className="pt-6 first:pt-0 scroll-mt-24">
+                    <h2 className="font-display font-extrabold text-lg sm:text-xl text-slate-800 tracking-tight border-l-4 border-slate-300 pl-4">
+                      {item.session}
+                    </h2>
+                  </div>
+                )}
+                <div
                 onClick={() => setSelectedItem(item)}
                 role="button"
                 tabIndex={0}
@@ -200,8 +209,9 @@ export default function AgendaComponent() {
                   </div>
                 </div>
 
-                <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent opacity-60"></div>
-              </div>
+                  <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent opacity-60"></div>
+                </div>
+              </React.Fragment>
             );
           })}
 

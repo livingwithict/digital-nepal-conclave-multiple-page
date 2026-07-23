@@ -10,7 +10,6 @@ const PARALLAX_IMAGES = [
 
 export default function Hero() {
   const [currentBg, setCurrentBg] = useState(0);
-  const [scrollY, setScrollY] = useState(0);
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   // Handle crossfade slideshow
@@ -21,18 +20,9 @@ export default function Hero() {
     return () => clearInterval(slideTimer);
   }, []);
 
-  // Listen to mouse wheel / window scroll coordinates
+  // Countdown timer to August 27th, 2026 (Nepal Time coordinate Zone GST+5:45)
   useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Countdown timer to July 3rd, 2026 (Nepal Time coordinate Zone GST+5:45)
-  useEffect(() => {
-    const targetDate = new Date("2026-07-03T09:00:00+05:45").getTime();
+    const targetDate = new Date("2026-08-27T09:00:00+05:45").getTime();
 
     const interval = setInterval(() => {
       const now = new Date().getTime();
@@ -53,23 +43,13 @@ export default function Hero() {
     return () => clearInterval(interval);
   }, []);
 
-  // Soft depth calculations for parallax layers
-  const backgroundYTranslate = scrollY * 0.45;
-  const contentYTranslate = scrollY * 0.18;
-  const overlayOpacity = Math.min(0.85, 0.4 + scrollY / 1200);
-
   return (
     <section
       id="hero-parallax-section"
       className="relative w-full h-[85vh] sm:h-[90vh] md:h-[95vh] overflow-hidden bg-[#0d0f2b] flex items-center justify-center select-none"
     >
-      {/* BACKGROUND LAYER: Parallax scrolling carousel */}
-      <div
-        className="absolute inset-0 w-full h-[120%] -top-[10%] z-0 will-change-transform"
-        style={{
-          transform: `translate3d(0, ${backgroundYTranslate}px, 0)`
-        }}
-      >
+      {/* BACKGROUND LAYER: Crossfade carousel */}
+      <div className="absolute inset-0 w-full h-full z-0">
         {PARALLAX_IMAGES.map((img, idx) => (
           <div
             key={idx}
@@ -89,32 +69,22 @@ export default function Hero() {
       </div>
 
       {/* MIDGROUND LAYER: Linear Gradient Falloffs to assure flawless text readability */}
-      <div
-        className="absolute inset-0 z-10 pointer-events-none"
-        style={{
-          background: `linear-gradient(to bottom, rgba(13,15,43,0.55) 0%, rgba(13,15,43,${overlayOpacity}) 60%, #0d0f2b 100%)`
-        }}
-      />
+      <div className="absolute inset-0 z-10 pointer-events-none bg-gradient-to-b from-[#0d0f2b]/55 via-[#0d0f2b]/70 to-[#0d0f2b]" />
 
-      {/* FOREGROUND CONTENT LAYER: Translates slower than background, creating amazing 3D depth */}
-      <div
-        className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center justify-center h-full will-change-transform"
-        style={{
-          transform: `translate3d(0, ${contentYTranslate}px, 0)`
-        }}
-      >
+      {/* FOREGROUND CONTENT LAYER */}
+      <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center justify-center h-full">
 
-        {/* <div className="mb-8 flex flex-col sm:flex-row items-center gap-3 sm:gap-4 bg-white/[0.05] border border-white/15 backdrop-blur-md px-5 py-2.5 sm:px-6 sm:py-3 rounded-2xl shadow-xl">
+        <div className="mb-8 flex flex-col sm:flex-row items-center gap-3 sm:gap-4 bg-white/[0.05] border border-white/15 backdrop-blur-md px-5 py-2.5 sm:px-6 sm:py-3 rounded-2xl shadow-xl">
           <div className="flex items-center gap-2 text-white font-sans text-sm sm:text-base font-extrabold tracking-wider">
             <Calendar className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-[#eb0000]" />
-            <span>03 JULY 2026</span>
+            <span>27 AUGUST 2026</span>
           </div>
           <span className="hidden sm:inline text-white/30 text-sm">|</span>
           <div className="flex items-center gap-2 text-slate-100 font-sans text-sm sm:text-base font-semibold tracking-wide">
             <MapPin className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-[#eb0000]" />
             <span>THE PLAZA, PULCHOWK</span>
           </div>
-        </div> */}
+        </div>
 
         {/* Highlighted Digital Nepal Conclave Title only */}
         <h1 className="font-display font-black text-4xl sm:text-6xl md:text-7xl lg:text-8xl mb-4 text-white tracking-tight leading-none drop-shadow-2xl">
@@ -145,7 +115,7 @@ export default function Hero() {
         </div>
 
         {/* Dynamic Countdown Block */}
-        {/* <div className="mt-14 w-full max-w-lg bg-white/[0.04] backdrop-blur-md rounded-3xl p-5.5 sm:p-6 border border-white/10 shadow-2xl">
+        <div className="mt-14 w-full max-w-lg bg-white/[0.04] backdrop-blur-md rounded-3xl p-5.5 sm:p-6 border border-white/10 shadow-2xl">
           <p className="text-center text-[10px] uppercase tracking-widest text-slate-300 font-sans mb-4 font-bold tracking-widest flex items-center justify-center gap-1.5">
             <span className="w-1.5 h-1.5 bg-[#eb0000] rounded-full animate-ping" />
             CONCLAVE COUNTDOWN CLOCK
@@ -172,13 +142,6 @@ export default function Hero() {
               <p className="text-[9px] text-slate-400 uppercase font-sans mt-1 font-bold">Secs</p>
             </div>
           </div>
-        </div> */}
-
-        <div className="mt-14 w-72 max-w-lg bg-white/[0.04] backdrop-blur-md rounded-full p-5.5 sm:p-6 border border-white/10 shadow-2xl">
-          <p className="text-center text-2xl uppercase tracking-widest text-slate-300 font-sans font-bold tracking-widest flex items-center justify-center gap-1.5">
-            {/* <span className="w-1.5 h-1.5 bg-[#eb0000] rounded-full animate-ping" /> */}
-            COMING SOON
-          </p>
         </div>
 
       </div>
