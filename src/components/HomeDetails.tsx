@@ -15,7 +15,7 @@ const YOUTUBE_VIDEOS = [
 ];
 
 // Helper component to render a sponsor block cleanly
-const SponsorBox = ({ sponsor, className = "w-40 h-20" }) => {
+const SponsorBox = ({ sponsor, className = "w-40 h-20" }: { sponsor?: { name: string; logoUrl: string }; className?: string }) => {
   if (!sponsor || !sponsor.name || !sponsor.logoUrl) {
     return (
       <div className={`bg-slate-50 border-2 border-dashed border-slate-200 rounded-xl p-2 flex items-center justify-center text-center ${className}`}>
@@ -31,7 +31,8 @@ const SponsorBox = ({ sponsor, className = "w-40 h-20" }) => {
         className="w-full h-full object-contain" 
         onError={(e) => { 
           e.currentTarget.style.display = 'none'; 
-          if (e.currentTarget.nextSibling) e.currentTarget.nextSibling.style.display = 'block'; 
+          const sibling = e.currentTarget.nextElementSibling as HTMLElement | null;
+          if (sibling) sibling.style.display = 'block';
         }} 
       />
       <span className="font-bold text-slate-600 text-xs hidden">{sponsor.name}</span>
