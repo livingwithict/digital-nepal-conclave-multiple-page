@@ -18,7 +18,7 @@ import {
 export default function ThemeDateVenue() {
   const handleAddToCalendar = () => {
     const title = encodeURIComponent("Digital Nepal Conclave 2026");
-    const dates = "20260703T031500Z/20260703T121500Z"; // UTC bounds
+    const dates = "20260827T031500Z/20260827T121500Z"; // UTC bounds
     const details = encodeURIComponent("Reimagining Governance, Data and the Digital Economy.");
     const location = encodeURIComponent("The Plaza Hotel, Pulchowk, Lalitpur, Nepal");
     const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${dates}&details=${details}&location=${location}`;
@@ -147,7 +147,7 @@ export default function ThemeDateVenue() {
       </section>
 
       {/* SECTION 2: THE NEXT SESSION - COGNITIVE EVENT DATE & VENUE */}
-      {/* <section className="relative bg-gradient-to-b from-[#0d0f2b] to-[#111332] py-24 text-white overflow-hidden border-t border-white/[0.04]">
+      <section className="relative bg-gradient-to-b from-[#0d0f2b] to-[#111332] py-24 text-white overflow-hidden border-t border-white/[0.04]">
         
         <div className="absolute inset-x-0 bottom-0 h-44 opacity-25 pointer-events-none select-none z-0">
           <svg viewBox="0 0 1440 120" className="w-full h-full absolute bottom-0 left-0" preserveAspectRatio="none">
@@ -173,7 +173,7 @@ export default function ThemeDateVenue() {
               <div className="space-y-8 relative z-10">
                 <div className="flex flex-col sm:flex-row gap-3 items-center sm:items-start text-center sm:text-left">
                   <Calendar className="w-6 h-6 text-dnc-orange shrink-0" />
-                  <span className="text-2xl font-bold text-white">July 3, 2026 | Asar 19, 2083</span>
+                  <span className="text-2xl font-bold text-white">August 27, 2026 | Bhadra 11, 2083</span>
                 </div>
 
                 <hr className="border-white/[0.08]" />
@@ -221,7 +221,7 @@ export default function ThemeDateVenue() {
           </div>
 
         </div>
-      </section> */}
+      </section>
 
     </div>
   );

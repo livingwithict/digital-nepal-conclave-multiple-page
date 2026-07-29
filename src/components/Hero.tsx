@@ -87,12 +87,11 @@ export default function Hero() {
         </div>
 
         {/* Highlighted Digital Nepal Conclave Title only */}
-        <h1 className="font-display font-black text-4xl sm:text-6xl md:text-7xl lg:text-8xl mb-4 text-white tracking-tight leading-none drop-shadow-2xl">
-          Digital Nepal <br className="hidden sm:inline" />
-          Conclave <span className="text-[#eb0000]">2026</span>
+        <h1 className="font-display font-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-4 text-white tracking-tight leading-none drop-shadow-2xl">
+          Digital Nepal Conclave <span className="text-[#eb0000]">2026</span>
         </h1>
         <div className="font-display font-black text-xl sm:text-2xl md:text-3xl lg:text-4xl text-dnc-orange leading-none drop-shadow-2xl mt-4 mb-4">
-          "Shaping Nepal’s Digital Future" <br className="hidden sm:inline" />
+          "Shaping Nepal’s Digital Future"
         </div>
 
         {/* Primary Call to Action Controls in Centered Layout */}
@@ -116,11 +115,6 @@ export default function Hero() {
 
         {/* Dynamic Countdown Block */}
         <div className="mt-14 w-full max-w-lg bg-white/[0.04] backdrop-blur-md rounded-3xl p-5.5 sm:p-6 border border-white/10 shadow-2xl">
-          <p className="text-center text-[10px] uppercase tracking-widest text-slate-300 font-sans mb-4 font-bold tracking-widest flex items-center justify-center gap-1.5">
-            <span className="w-1.5 h-1.5 bg-[#eb0000] rounded-full animate-ping" />
-            CONCLAVE COUNTDOWN CLOCK
-          </p>
-
           <div className="grid grid-cols-4 gap-3.5 text-center">
             <div className="bg-slate-900/40 p-2.5 rounded-2xl border border-white/5">
               <p className="font-display font-black text-2xl sm:text-3xl text-white">{String(timeLeft.days).padStart(2, '0')}</p>
