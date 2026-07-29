@@ -87,7 +87,7 @@ export default function AgendaComponent() {
     return category;
   };
 
-  const filters = ["All", "Inaugural", "Governance", "Data", "Economy", "Break"] as const;
+  const filters = ["All", "Inaugural", "Governance", "Data", "Economy"] as const;
 
   return (
     <section id="agenda-section" className="bg-gradient-to-b from-white via-slate-50/30 to-white py-20 sm:py-16">

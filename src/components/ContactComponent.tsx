@@ -129,7 +129,6 @@ export default function ContactComponent() {
                   </div>
                   <div>
                     <p className="text-sm font-semibold text-slate-900 select-all">+977 9851141348</p>
-                    <p className="text-[10px] text-slate-500 font-sans">Mobile - Razan Lamsal</p>
                   </div>
                 </div>
 
@@ -139,7 +138,6 @@ export default function ContactComponent() {
                   </div>
                   <div>
                     <p className="text-sm font-semibold text-slate-900 select-all">+977 9801263604</p>
-                    <p className="text-[10px] text-slate-500 font-sans">Mobile - Support Desk</p>
                   </div>
                 </div>
 
@@ -149,7 +147,6 @@ export default function ContactComponent() {
                   </div>
                   <div>
                     <p className="text-sm font-semibold text-slate-900 select-all">01-5314322</p>
-                    <p className="text-[10px] text-slate-500 font-sans">Landline Office Hotline</p>
                   </div>
                 </div>
               </div>

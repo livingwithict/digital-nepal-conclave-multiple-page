@@ -231,15 +231,15 @@ export const SPEAKERS_LIST: Speaker[] = [
 ];
 
 export const PUBLICATIONS_DATA: Publication[] = [
-  {
-    id: "dnc-25",
-    title: "Digital Nepal Conclave Report 2025",
-    year: "2025",
-    type: "Report",
-    coverUrl: "/images/Publication/placeholder.jpg",
-    description: "Comprehensive summary of the 2025 conclave containing policy directives on systems integration, summary of Google Street View launch, and digital health blueprints.",
-    url: ""
-  },
+  // {
+  //   id: "dnc-25",
+  //   title: "Digital Nepal Conclave Report 2025",
+  //   year: "2025",
+  //   type: "Report",
+  //   coverUrl: "/images/Publication/placeholder.jpg",
+  //   description: "Comprehensive summary of the 2025 conclave containing policy directives on systems integration, summary of Google Street View launch, and digital health blueprints.",
+  //   url: ""
+  // },
   {
     id: "dnc-24",
     title: "Digital Nepal Conclave Report 2024",

@@ -30,7 +30,7 @@ export default function MediaComponent() {
             Press Room & YouTube highlights
           </span> */}
           <h1 className="font-display font-extrabold text-3xl sm:text-4xl text-slate-900 tracking-tight">
-            News & Multimedia Corridor
+            News & Multimedia
           </h1>
           {/* <p className="mt-2 text-sm text-slate-500 max-w-2xl mx-auto leading-relaxed">
             Follow articles from major publishing lines, stream high-fidelity speeches, panel recordings, and download official press assets.

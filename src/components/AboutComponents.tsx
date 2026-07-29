@@ -203,7 +203,7 @@ export default function AboutComponents() {
             { name: "Digital Nepal Conclave", logo: "/images/logos/dnc-logo.png" },
             { name: "Digital Karnali Conclave", logo: "/images/logos/dkc-logo.png" },
             { name: "Digital Madhesh Conclave", logo: "/images/logos/dmc-logo.png" },
-            { name: "ICT Award", logo: "/images/logos/ict-award.png" },
+            { name: "Nepal AI Summit", logo: "/images/logos/naic.png" },
             { name: "Startup & Idea Fest", logo: "/images/logos/snif.png" },
             { name: "ICT Gyan", logo: "/images/logos/ict-gyan.png" },
             { name: "Digital Leadership Dialogue", logo: "/images/logos/dld-logo.png" }
@@ -238,7 +238,7 @@ export default function AboutComponents() {
           </span>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {TEAM_MEMBERS.map((member, index) => (
             <div
               key={index}
@@ -275,7 +275,7 @@ export default function AboutComponents() {
           </span>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {PATRONS.map((patron, index) => (
             <div
               key={index}
