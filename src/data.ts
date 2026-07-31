@@ -29,7 +29,7 @@ export const SPONSOR_GROUPS: SponsorGroup[] = [
   { title: "Digital Health Partner", sponsors: [{ name: "Mavorian", logoUrl: "/images/partners/mavorian-Logo_Only-600x138.png" }] },
   { title: "Digital Education Partner", sponsors: [{ name: "Neema Education Academy", logoUrl: "/images/partners/neema_education_foundation.png" }] },
   { title: "Event Partner", sponsors: [{ name: "Global Spark", logoUrl: "/images/partners/Global Spark.png" }] },
-  { title: "MSP Partner", sponsors: [{ name: "SkyIT", logoUrl: "/images/logos/dnc-logo.png" }] },
+  { title: "MSP Partner", sponsors: [{ name: "SkyIT", logoUrl: "/images/partners/skyit.jpg" }] },
 ];
 
 export interface Publication {
