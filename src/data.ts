@@ -11,6 +11,27 @@ export interface Speaker {
   twitterUrl?: string;
 }
 
+export interface SponsorGroup {
+  title: string;
+  sponsors: { name: string; logoUrl: string }[];
+}
+
+export const SPONSOR_GROUPS: SponsorGroup[] = [
+  { title: "Organized by", sponsors: [{ name: "ICT Foundation Nepal", logoUrl: "/images/partners/ifn.png" }] },
+  {
+    title: "In Association with",
+    sponsors: [
+      { name: "TingTing", logoUrl: "/images/partners/TingTing Logo (1).png" },
+      { name: "ThirdFactor", logoUrl: "/images/partners/thirdfactor-logo.png" },
+    ],
+  },
+  { title: "Associated Partner", sponsors: [{ name: "Ncell", logoUrl: "/images/partners/ncell_footer_logo.png" }] },
+  { title: "Digital Health Partner", sponsors: [{ name: "Mavorian", logoUrl: "/images/partners/mavorian-Logo_Only-600x138.png" }] },
+  { title: "Digital Education Partner", sponsors: [{ name: "Neema Education Academy", logoUrl: "/images/partners/neema_education_foundation.png" }] },
+  { title: "Event Partner", sponsors: [{ name: "Global Spark", logoUrl: "/images/partners/Global Spark.png" }] },
+  { title: "MSP Partner", sponsors: [{ name: "SkyIT", logoUrl: "/images/logos/dnc-logo.png" }] },
+];
+
 export interface Publication {
   id: string;
   title: string;

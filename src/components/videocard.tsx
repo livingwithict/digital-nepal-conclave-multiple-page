@@ -108,7 +108,7 @@ export default function VideoCard({ youtubeUrl, onError }: VideoCardProps) {
       href={videoUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="group relative rounded-xs overflow-hidden border border-slate-100 shadow-2xs bg-slate-50 block transition-all duration-300 hover:shadow-md"
+      className="group relative rounded-xs overflow-hidden border border-slate-100 shadow-2xs bg-white block transition-all duration-300 hover:shadow-md"
     >
       {/* Thumbnail Container */}
       <div className="aspect-video relative overflow-hidden bg-slate-100">

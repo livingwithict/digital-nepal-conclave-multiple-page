@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { Users, Image, Video, Newspaper, ArrowRight, X, ChevronLeft, ChevronRight, CalendarDays, Briefcase, Brain, TrendingUp, CheckCircle2, Sparkles, Zap, Clock } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
-import { STATS_COUNTERS, SPEAKERS_LIST, NEWS_ARTICLES } from "../data";
+import { STATS_COUNTERS, SPEAKERS_LIST, NEWS_ARTICLES, SPONSOR_GROUPS } from "../data";
 import { AGENDA_DATA, getSessionSlug } from "../agendaData";
 import { SPONSORS } from "../sponsordata"; // <-- Imported the new data
 import VideoCard from "./videocard";
@@ -123,7 +123,7 @@ export default function HomeDetails() {
   }, [lightboxIndex, closeLightbox, showPrev, showNext]);
 
   return (
-    <div id="home-details-section" className="bg-slate-50 py-16 border-t border-slate-100">
+    <div id="home-details-section" className="bg-slate-50 pt-16 border-t border-slate-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* STATS COUNT GRID */}
@@ -148,15 +148,16 @@ export default function HomeDetails() {
 
         {/* AGENDA HIGHLIGHTS */}
         <div className="mb-20">
-          <div className="flex items-center gap-2 mb-6">
-            <span className="p-2 bg-blue-50 text-dnc-blue rounded-xl border border-blue-100">
-              <CalendarDays className="w-5 h-5" />
-            </span>
-            <div>
-              <h3 className="font-display font-black text-xl sm:text-2xl text-slate-800">
+          <div className="flex flex-col items-center gap-3 mb-10">
+            <div className="flex items-center gap-2">
+              <span className="p-2.5 bg-blue-50 text-dnc-blue rounded-xl border border-blue-100">
+                <CalendarDays className="w-6 h-6" />
+              </span>
+              <h3 className="font-display font-black text-2xl sm:text-3xl text-slate-800">
                 What's on the Agenda
               </h3>
             </div>
+            <span className="w-12 h-1 rounded-full bg-gradient-to-r from-dnc-blue via-dnc-orange to-dnc-red"></span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
@@ -208,29 +209,21 @@ export default function HomeDetails() {
             </Link>
           </div>
         </div>
+      </div>
 
-        {/* PREVIOUS SPEAKERS HORIZONTAL GALLERY */}
-        <div className="bg-white rounded-3xl p-8 border border-slate-100 shadow-xs mb-20 overflow-hidden relative">
-          <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <span className="p-2 bg-blue-50 text-dnc-blue rounded-xl border border-blue-100">
-                  <Users className="w-5 h-5" />
-                </span>
-                <div>
-                  <h3 className="font-display font-black text-xl sm:text-2xl text-slate-800">
-                    Our Previous Speakers
-                  </h3>
-                </div>
-              </div>
+      {/* PREVIOUS SPEAKERS HORIZONTAL GALLERY */}
+      <section className="w-full bg-white py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden relative">
+          <div className="flex flex-col items-center gap-3 mb-10">
+            <div className="flex items-center gap-2">
+              <span className="p-2.5 bg-blue-50 text-dnc-blue rounded-xl border border-blue-100">
+                <Users className="w-6 h-6" />
+              </span>
+              <h3 className="font-display font-black text-2xl sm:text-3xl text-slate-800">
+                Our Previous Speakers
+              </h3>
             </div>
-            <Link
-              to="/speakers"
-              className="shrink-0 self-start text-sm font-bold text-dnc-blue hover:text-dnc-orange flex items-center gap-1.5 transition-colors group cursor-pointer"
-            >
-              See All Speakers &amp; Full Bios
-              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-            </Link>
+            <span className="w-12 h-1 rounded-full bg-gradient-to-r from-dnc-blue via-dnc-orange to-dnc-red"></span>
           </div>
 
           <div className="relative w-full overflow-hidden py-4">
@@ -264,18 +257,103 @@ export default function HomeDetails() {
               ))}
             </div>
           </div>
-        </div>
 
-        {/* PAST CONCLAVES */}
-        <div className="grid grid-cols-1 gap-8 mb-20 items-stretch">
-          <div className="bg-white text-slate-900 rounded-3xl p-8 flex flex-col justify-between shadow-sm border border-slate-100">
-            <div className="max-w-full mb-4">
-              <h3 className="font-display font-black text-xl sm:text-2xl text-slate-800">
-                Our Past Conclaves
+          <div className="flex justify-center mt-8">
+            <Link
+              to="/speakers"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-dnc-blue text-white font-bold text-sm sm:text-base rounded-xl hover:bg-dnc-blue/90 transition-all duration-300 shadow-md hover:shadow-lg group"
+            >
+              See All Speakers &amp; Full Bios
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* PARTNERS AND SPONSORS */}
+      <section className="w-full bg-slate-50 py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col items-center gap-3 mb-10">
+            <div className="flex items-center gap-2">
+              <span className="p-2.5 bg-blue-50 text-dnc-blue rounded-xl border border-blue-100">
+                <Users className="w-6 h-6" />
+              </span>
+              <h3 className="font-display font-black text-2xl sm:text-3xl text-slate-800">
+                Partners &amp; Sponsors
               </h3>
-              <p className="text-slate-500 text-base leading-relaxed">
+            </div>
+            <span className="w-12 h-1 rounded-full bg-gradient-to-r from-dnc-blue via-dnc-orange to-dnc-red"></span>
+          </div>
+
+          <div className="space-y-6">
+            {SPONSOR_GROUPS.slice(0, 2).map((group) => (
+              <div key={group.title} className="text-center">
+                <h4 className="text-xs font-sans font-bold text-slate-500 uppercase tracking-widest mb-3">
+                  {group.title}
+                </h4>
+                <div className="flex flex-wrap justify-center gap-4">
+                  {group.sponsors.map((sponsor) => (
+                    <div
+                      key={sponsor.name}
+                      className="flex items-center justify-center bg-white border border-slate-100 rounded-xl p-3 w-32 h-20"
+                    >
+                      <img
+                        src={sponsor.logoUrl}
+                        alt={sponsor.name}
+                        className="h-10 w-auto object-contain"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+
+            <div className="flex flex-wrap justify-center gap-8">
+              {SPONSOR_GROUPS.slice(2).map((group) => (
+                <div key={group.title} className="text-center">
+                  <h4 className="text-xs font-sans font-bold text-slate-500 uppercase tracking-widest mb-3">
+                    {group.title}
+                  </h4>
+                  <div className="flex flex-wrap justify-center gap-4">
+                    {group.sponsors.map((sponsor) => (
+                      <div
+                        key={sponsor.name}
+                        className="flex items-center justify-center bg-white border border-slate-100 rounded-xl p-3 w-32 h-20"
+                      >
+                        <img
+                          src={sponsor.logoUrl}
+                          alt={sponsor.name}
+                          className="h-10 w-auto object-contain"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* PAST CONCLAVES */}
+      <section className="w-full bg-white py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 gap-8 items-stretch">
+          <div className="text-slate-900 flex flex-col justify-between">
+            <div className="max-w-full mb-4">
+              <div className="flex flex-col items-center gap-3 mb-4">
+                <div className="flex items-center gap-2">
+                  <span className="p-2.5 bg-blue-50 text-dnc-blue rounded-xl border border-blue-100">
+                    <Clock className="w-6 h-6" />
+                  </span>
+                  <h3 className="font-display font-black text-2xl sm:text-3xl text-slate-800">
+                    Our Past Conclaves
+                  </h3>
+                </div>
+                <span className="w-12 h-1 rounded-full bg-gradient-to-r from-dnc-blue via-dnc-orange to-dnc-red"></span>
+              </div>
+              {/* <p className="text-slate-500 text-base leading-relaxed">
                 From the inception of the Digital Nepal framework in 2019, our yearly summits have solidified cross-border payment protocols, digital health structures, and national software exports strategy.
-              </p>
+              </p> */}
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -288,7 +366,7 @@ export default function HomeDetails() {
                 <div
                   key={conclave.year}
                   onClick={() => navigate(`/past-events/${conclave.year}`)}
-                  className="group cursor-pointer p-5 bg-slate-50/50 hover:bg-white rounded-2xl border border-slate-100 hover:border-dnc-orange/30 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between min-h-[140px]"
+                  className="group cursor-pointer p-5 bg-slate-50 rounded-2xl border border-slate-100 hover:border-dnc-orange/30 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between min-h-[140px]"
                 >
                   <div>
                     <div className="mb-3">
@@ -315,20 +393,21 @@ export default function HomeDetails() {
             </div>
           </div>
         </div>
+      </section>
 
-        {/* CONCLAVE INTEL & NEWS */}
-        <div className="mb-20">
-          <div className="flex items-center justify-between mb-6">
+      {/* CONCLAVE INTEL & NEWS */}
+      <section className="w-full bg-slate-50 py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col items-center gap-3 mb-8">
             <div className="flex items-center gap-2">
-              <span className="p-2 bg-blue-50 text-dnc-blue rounded-xl border border-blue-100">
-                <Newspaper className="w-5 h-5" />
+              <span className="p-2.5 bg-blue-50 text-dnc-blue rounded-xl border border-blue-100">
+                <Newspaper className="w-6 h-6" />
               </span>
-              <div>
-                <h3 className="font-display font-black text-xl sm:text-2xl text-slate-800">
-                  News & Updates
-                </h3>
-              </div>
+              <h3 className="font-display font-black text-2xl sm:text-3xl text-slate-800">
+                News & Updates
+              </h3>
             </div>
+            <span className="w-12 h-1 rounded-full bg-gradient-to-r from-dnc-blue via-dnc-orange to-dnc-red"></span>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
@@ -351,18 +430,21 @@ export default function HomeDetails() {
             </Link>
           </div>
         </div>
+      </section>
 
-        {/* CONCLAVE MOMENTS & PHOTO GALLERY */}
-        <div className="mb-20">
-          <div className="flex items-center gap-2 mb-6">
-            <span className="p-2 bg-red-50 text-dnc-red rounded-xl border border-red-100">
-              <Image className="w-5 h-5" />
-            </span>
-            <div>
-              <h3 className="font-display font-black text-xl sm:text-2xl text-slate-800">
+      {/* CONCLAVE MOMENTS & PHOTO GALLERY */}
+      <section className="w-full bg-white py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col items-center gap-3 mb-8">
+            <div className="flex items-center gap-2">
+              <span className="p-2.5 bg-red-50 text-dnc-red rounded-xl border border-red-100">
+                <Image className="w-6 h-6" />
+              </span>
+              <h3 className="font-display font-black text-2xl sm:text-3xl text-slate-800">
                 Gallery & Moments
               </h3>
             </div>
+            <span className="w-12 h-1 rounded-full bg-gradient-to-r from-dnc-blue via-dnc-orange to-dnc-red"></span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-1 auto-rows-[180px] sm:auto-rows-[220px]">
@@ -435,18 +517,22 @@ export default function HomeDetails() {
             </div>
           )}
         </div>
+      </section>
 
-        {/* YOUTUBE VIDEOS SECTION */}
+      {/* YOUTUBE VIDEOS SECTION */}
+      <section className="w-full bg-slate-50 py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-10">
-          <div className="flex items-center gap-2 mb-6">
-            <span className="p-2 bg-red-50 text-dnc-red rounded-xl border border-red-100">
-              <Video className="w-5 h-5" />
-            </span>
-            <div>
-              <h3 className="font-display font-black text-xl sm:text-2xl text-slate-800">
+          <div className="flex flex-col items-center gap-3 mb-8">
+            <div className="flex items-center gap-2">
+              <span className="p-2.5 bg-red-50 text-dnc-red rounded-xl border border-red-100">
+                <Video className="w-6 h-6" />
+              </span>
+              <h3 className="font-display font-black text-2xl sm:text-3xl text-slate-800">
                 Featured Videos
               </h3>
             </div>
+            <span className="w-12 h-1 rounded-full bg-gradient-to-r from-dnc-blue via-dnc-orange to-dnc-red"></span>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -468,21 +554,28 @@ export default function HomeDetails() {
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
+        </div>
+      </section>
 
-        {/* OUR OTHER INITIATIVES SECTION */}
-        <div className="relative w-full overflow-hidden py-4 mt-20">
-          <div className="flex items-center gap-2 mb-8">
-            <span className="p-2 bg-blue-50 text-dnc-blue rounded-xl border border-blue-100">
-              <Sparkles className="w-5 h-5" />
-            </span>
-            <h3 className="font-display font-black text-xl sm:text-2xl text-slate-800">
-              Additional Initiatives
-            </h3>
+      {/* OUR OTHER INITIATIVES SECTION */}
+      <section className="w-full bg-white py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col items-center gap-3 mb-10">
+            <div className="flex items-center gap-2">
+              <span className="p-2.5 bg-blue-50 text-dnc-blue rounded-xl border border-blue-100">
+                <Sparkles className="w-6 h-6" />
+              </span>
+              <h3 className="font-display font-black text-2xl sm:text-3xl text-slate-800">
+                Additional Initiatives
+              </h3>
+            </div>
+            <span className="w-12 h-1 rounded-full bg-gradient-to-r from-dnc-blue via-dnc-orange to-dnc-red"></span>
           </div>
 
-          <div className="absolute inset-y-0 left-0 w-16 sm:w-32 bg-gradient-to-r from-slate-50 to-transparent z-10 pointer-events-none mt-16"></div>
-          <div className="absolute inset-y-0 right-0 w-16 sm:w-32 bg-gradient-to-l from-slate-50 to-transparent z-10 pointer-events-none mt-16"></div>
-          
+          <div className="relative overflow-hidden">
+          <div className="absolute inset-y-0 left-0 w-16 sm:w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
+          <div className="absolute inset-y-0 right-0 w-16 sm:w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
+
           <div className="flex gap-6 animate-marquee whitespace-nowrap">
             {[
               { name: "Digital Samvad", desc: "Weekly policy talk-show broadcasts", logo: "/images/logos/digital-samvad.jpg" },
@@ -501,7 +594,7 @@ export default function HomeDetails() {
               { name: "ICT Gyan", desc: "Centralized analytical tech encyclopedia", logo: "/images/logos/ict-gyan.png" },
               { name: "Digital Leadership Dialogue", desc: "Corporate-regulator interactions", logo: "/images/logos/dld-logo.png" }
             ].map((item, index) => (
-              <div key={index} className="bg-white rounded-2xl p-5 border border-slate-100 shadow-xs hover:border-dnc-blue transition-all duration-200 shrink-0">
+              <div key={index} className="bg-slate-50 rounded-2xl p-5 border border-slate-100 shadow-xs hover:border-dnc-blue transition-all duration-200 shrink-0">
                 <div className="h-30 w-50 rounded-lg flex items-center justify-center overflow-hidden">
                   <img 
                     src={item.logo} 
@@ -515,9 +608,11 @@ export default function HomeDetails() {
               </div>
             ))}
           </div>
+          </div>
         </div>
+      </section>
 
-        {/* SPONSORSHIP SECTION (CLEANED UP WITH EXTERNAL DATA) */}
+      {/* SPONSORSHIP SECTION (CLEANED UP WITH EXTERNAL DATA) */}
         {/* <div className="py-20 mt-10 border-t border-slate-200">
           <div className="text-center mb-16">
             <h3 className="font-display font-black text-2xl sm:text-3xl text-slate-800">
@@ -591,8 +686,6 @@ export default function HomeDetails() {
 
           </div>
         </div> */}
-
-      </div>
 
       {/* Marquee Animation Block */}
       <style>{`

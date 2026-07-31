@@ -1,12 +1,8 @@
 import React from "react";
-import { Mail, Phone, MapPin, Facebook, Instagram, Linkedin, Youtube, ArrowUp } from "lucide-react";
+import { Mail, Phone, MapPin, Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export default function Footer() {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
   return (
     <footer id="app-footer" className="bg-slate-900 text-white border-t border-slate-800">
 
@@ -120,16 +116,8 @@ export default function Footer() {
 
         </div>
 
-        <div className="mt-12 pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-500">
+        <div className="mt-12 pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-slate-500">
           <p>© Digital Nepal Conclave 2026. All Rights Reserved.</p>
-          <button
-            onClick={scrollToTop}
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold rounded-lg transition"
-            title="Scroll to Top"
-          >
-            Top
-            <ArrowUp className="w-3.5 h-3.5" />
-          </button>
         </div>
 
       </div>

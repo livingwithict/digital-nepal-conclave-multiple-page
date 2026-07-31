@@ -3,6 +3,7 @@ import { Outlet, useLocation } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 import PageTransition from "./PageTransition";
+import ScrollToTop from "./ScrollToTop";
 
 export default function Layout() {
   const { pathname, hash } = useLocation();
@@ -27,6 +28,7 @@ export default function Layout() {
         </PageTransition>
       </main>
       <Footer />
+      <ScrollToTop />
     </div>
   );
 }
