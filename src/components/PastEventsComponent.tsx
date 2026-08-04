@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Award, Download, Calendar, Play, X } from "lucide-react";
+import React, { useState, useEffect, useCallback } from "react";
+import { Award, Download, Calendar, Play, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { EVENTS_DATA, EventYear } from "../eventData";
 import ReactMarkdown from 'react-markdown';
 
@@ -15,6 +15,37 @@ export default function PastEventsComponent({ initialYear = "2025" }: PastEvents
   } | null>(null);
 
   const event = EVENTS_DATA[activeYear];
+
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const closeLightbox = useCallback(() => setLightboxIndex(null), []);
+  const showPrev = useCallback(() => setLightboxIndex(i => i !== null ? (i - 1 + event.galleryImages.length) % event.galleryImages.length : null), [event.galleryImages.length]);
+  const showNext = useCallback(() => setLightboxIndex(i => i !== null ? (i + 1) % event.galleryImages.length : null), [event.galleryImages.length]);
+
+  useEffect(() => {
+    const header = document.getElementById("app-header");
+    if (lightboxIndex !== null) {
+      document.body.style.overflow = "hidden";
+      if (header) header.style.display = "none";
+    } else {
+      document.body.style.overflow = "";
+      if (header) header.style.display = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+      if (header) header.style.display = "";
+    };
+  }, [lightboxIndex]);
+
+  useEffect(() => {
+    if (lightboxIndex === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowLeft") showPrev();
+      if (e.key === "ArrowRight") showNext();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [lightboxIndex, closeLightbox, showPrev, showNext]);
 
   // Helper to extract clean ID from links
   const getEmbedUrl = (url: string) => {
@@ -66,6 +97,7 @@ export default function PastEventsComponent({ initialYear = "2025" }: PastEvents
                 onClick={() => {
                   setActiveYear(year);
                   setSelectedVideo(null);
+                  setLightboxIndex(null);
                 }}
                 className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 ${
                   activeYear === year
@@ -150,6 +182,7 @@ export default function PastEventsComponent({ initialYear = "2025" }: PastEvents
               {event.galleryImages.map((image, index) => (
                 <div
                   key={image.id}
+                  onClick={() => setLightboxIndex(index)}
                   className={`relative rounded-xs overflow-hidden border border-dnc-blue/10 shadow-sm hover:shadow-lg hover:border-dnc-blue/30 transition-all duration-300 group cursor-pointer ${
                     // Bento grid pattern: alternate larger items
                     index === 0 ? "col-span-2 row-span-2" :
@@ -177,6 +210,7 @@ export default function PastEventsComponent({ initialYear = "2025" }: PastEvents
               {event.galleryImages.map((image, index) => (
                 <div
                   key={image.id}
+                  onClick={() => setLightboxIndex(index)}
                   className="relative rounded-xs overflow-hidden border border-dnc-blue/10 shadow-sm hover:shadow-lg hover:border-dnc-blue/30 transition-all duration-300 group cursor-pointer"
                 >
                   <img
@@ -192,6 +226,55 @@ export default function PastEventsComponent({ initialYear = "2025" }: PastEvents
                 </div>
               ))}
             </div>
+
+            {/* LIGHTBOX MODAL */}
+            {lightboxIndex !== null && (
+              <div
+                className="fixed inset-0 z-50 flex items-center justify-center bg-black/95"
+                onClick={closeLightbox}
+              >
+                <button
+                  onClick={closeLightbox}
+                  className="absolute top-3 right-3 text-white bg-white/10 hover:bg-white/25 rounded-full p-2 transition-colors z-10"
+                  aria-label="Close"
+                >
+                  <X className="w-5 h-5 sm:w-6 sm:h-6" />
+                </button>
+
+                <button
+                  onClick={(e) => { e.stopPropagation(); showPrev(); }}
+                  className="absolute left-2 sm:left-5 text-white bg-white/10 hover:bg-white/25 rounded-full p-2 sm:p-3 transition-colors z-10"
+                  aria-label="Previous photo"
+                >
+                  <ChevronLeft className="w-6 h-6 sm:w-7 sm:h-7" />
+                </button>
+
+                <div
+                  className="flex flex-col items-center w-full px-12 sm:px-20 max-w-5xl"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <img
+                    src={event.galleryImages[lightboxIndex].src}
+                    alt={event.galleryImages[lightboxIndex].alt || `Gallery image ${lightboxIndex + 1}`}
+                    className="max-h-[75vh] w-auto max-w-full rounded-lg shadow-2xl object-contain"
+                  />
+                  {event.galleryImages[lightboxIndex].alt && (
+                    <p className="mt-3 text-white text-sm sm:text-base font-semibold text-center px-4 drop-shadow">
+                      {event.galleryImages[lightboxIndex].alt}
+                    </p>
+                  )}
+                  <p className="text-white/40 text-xs mt-1">{lightboxIndex + 1} / {event.galleryImages.length}</p>
+                </div>
+
+                <button
+                  onClick={(e) => { e.stopPropagation(); showNext(); }}
+                  className="absolute right-2 sm:right-5 text-white bg-white/10 hover:bg-white/25 rounded-full p-2 sm:p-3 transition-colors z-10"
+                  aria-label="Next photo"
+                >
+                  <ChevronRight className="w-6 h-6 sm:w-7 sm:h-7" />
+                </button>
+              </div>
+            )}
           </div>
 
           {/* Video Playlists Section */}

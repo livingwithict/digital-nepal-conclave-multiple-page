@@ -38,7 +38,7 @@ export const EVENTS_DATA: Record<EventYear, EventData> = {
       "The conclave witnessed participation from more than 600 senior representatives from government institutions, development agencies, the private sector, startups, and national and international technology organizations. Over eight thematic sessions featured discussions on digital governance, digital public infrastructure, digital health, digital economy, innovation, interoperability, and the future of Nepal’s ICT industry.",
     ],
     agendaDriveLink: "https://drive.google.com/file/d/1XAHl-VTSDZJ_Q78rEjeEGx7Bbl4i1AEN/view?usp=drive_link",
-    reportDriveLink: "https://drive.google.com/file/d/1XAHl-VTSDZJ_Q78rEjeEGx7Bbl4i1AEN/view?usp=drive_link",
+    reportDriveLink: "https://drive.google.com/file/d/1fkIfDCeB-VlzF-Z1AoHnMKtRkaLmrUCj/view?usp=drive_link",
     galleryImages: [
       {id: "img-1", src: "/images/gallery/2025/25-1.jpg", alt: "",},
       {id: "img-2", src: "/images/gallery/2025/25-2.jpg", alt: "",},
@@ -86,7 +86,7 @@ export const EVENTS_DATA: Record<EventYear, EventData> = {
       "More than 600 representatives from federal, provincial, and local governments, private institutions, startups, academia, development agencies, and technology companies participated in the conclave, making it one of Nepal’s largest and most influential technology and policy dialogue platforms."
     ],
     agendaDriveLink: "https://drive.google.com/file/d/1e_M49yGQesWynakuN-jclx58ydd5BcH0/view?usp=drive_link",
-    reportDriveLink: "https://drive.google.com/file/d/1NEucyNkpHKRXnLDVdLOe3oevxC43OwoX/view?usp=drive_link",
+    reportDriveLink: "https://drive.google.com/file/d/1qbxqDC5d6xZSHEj03OfIXpPi8OtquKG-/view?usp=drive_link",
     galleryImages: [
       {id: "img-1", src: "/images/gallery/2024/24-1.jpg", alt: "",},
       {id: "img-2", src: "/images/gallery/2024/24-2.jpg", alt: "",},

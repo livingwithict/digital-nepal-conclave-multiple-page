@@ -56,56 +56,20 @@ export default function NewsCard({
           return;
         }
 
-        // Try multiple APIs in order of preference
-        const apis = [
-          {
-            name: "microlink",
-            url: `https://api.microlink.io/?url=${encodeURIComponent(url)}`,
-            parse: (data: any) => ({
-              title: data.data?.title || "Article",
-              description: data.data?.description || "Read the full article",
-              image: data.data?.image?.url || data.data?.logo?.url || "",
-            }),
-          },
-          {
-            name: "noembed",
-            url: `https://noembed.com/embed?url=${encodeURIComponent(url)}`,
-            parse: (data: any) => ({
-              title: data.title || "Article",
-              description: data.description || "Read the full article",
-              image: data.thumbnail_url || "",
-            }),
-          },
-        ];
-
-        let fetchedData = null;
-
-        for (const api of apis) {
-          try {
-            const response = await fetch(api.url);
-            if (response.ok) {
-              const data = await response.json();
-              const parsed = api.parse(data);
-              if (parsed.title && parsed.title !== "Article") {
-                fetchedData = parsed;
-                break;
-              } else if (parsed.image) {
-                // If we got an image, use this data even if title is generic
-                fetchedData = parsed;
-                break;
-              }
-            }
-          } catch (err) {
-            // Try next API
-            continue;
+        // No custom title/image supplied — fall back to microlink at runtime.
+        // Prefer adding { url, title, thumbnail } to NEWS_ARTICLES in data.ts
+        // and running `node scripts/fetch-media-metadata.mjs` instead, since
+        // that scrapes once at author time and never hits microlink's daily limit.
+        try {
+          const response = await fetch(`https://api.microlink.io/?url=${encodeURIComponent(url)}`);
+          if (response.ok) {
+            const data = await response.json();
+            title = data.data?.title || title;
+            description = data.data?.description || description;
+            imageUrl = data.data?.image?.url || data.data?.logo?.url || "";
           }
-        }
-
-        // Use fetched data if available
-        if (fetchedData) {
-          title = fetchedData.title || "Article";
-          description = fetchedData.description || "Click to read the full article";
-          imageUrl = fetchedData.image || "";
+        } catch {
+          // ignore — fallback image generated below
         }
 
         // Generate fallback image if we still don't have one

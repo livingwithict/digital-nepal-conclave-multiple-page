@@ -411,10 +411,12 @@ export default function HomeDetails() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            {NEWS_ARTICLES.slice(0, 4).map((articleUrl, idx) => (
+            {NEWS_ARTICLES.slice(0, 4).map((article, idx) => (
               <NewsCard
                 key={idx}
-                url={articleUrl}
+                url={article.url}
+                customTitle={article.title}
+                customImage={article.thumbnail}
                 onError={(error) => console.error(`Article ${idx + 1} error:`, error)}
               />
             ))}

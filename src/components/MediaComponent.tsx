@@ -64,10 +64,12 @@ export default function MediaComponent() {
           /* Press articles section */
           <div className="space-y-12">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-              {NEWS_ARTICLES.map((articleUrl, idx) => (
+              {NEWS_ARTICLES.map((article, idx) => (
                 <NewsCard
                   key={idx}
-                  url={articleUrl}
+                  url={article.url}
+                  customTitle={article.title}
+                  customImage={article.thumbnail}
                   onError={(error) => console.error(`Article ${idx + 1} error:`, error)}
                 />
               ))}

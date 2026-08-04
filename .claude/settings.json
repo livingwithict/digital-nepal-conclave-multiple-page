@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node scripts/fetch-media-metadata.mjs)",
+      "Bash(./node_modules/.bin/tsc --noEmit)"
+    ],
+    "additionalDirectories": [
+      "D:\\ICT\\IFN\\src\\data",
+      "D:\\ICT\\IFN\\scripts",
+      "D:\\ICT\\IFN"
+    ]
+  }
+}
