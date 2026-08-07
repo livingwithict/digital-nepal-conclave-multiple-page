@@ -46,7 +46,7 @@ export default function Hero() {
   return (
     <section
       id="hero-parallax-section"
-      className="relative w-full h-[85vh] sm:h-[90vh] md:h-[95vh] overflow-hidden bg-[#0d0f2b] flex items-center justify-center select-none"
+      className="relative w-full h-[85vh] sm:h-[90vh] md:h-[95vh] overflow-hidden bg-[#121652] flex items-center justify-center select-none"
     >
       {/* BACKGROUND LAYER: Crossfade carousel */}
       <div className="absolute inset-0 w-full h-full z-0">
@@ -69,7 +69,7 @@ export default function Hero() {
       </div>
 
       {/* MIDGROUND LAYER: Linear Gradient Falloffs to assure flawless text readability */}
-      <div className="absolute inset-0 z-10 pointer-events-none bg-gradient-to-b from-[#0d0f2b]/55 via-[#0d0f2b]/70 to-[#0d0f2b]" />
+      <div className="absolute inset-0 z-10 pointer-events-none bg-gradient-to-b from-[#121652]/30 via-[#121652]/40 to-[#121652]/50" />
 
       {/* FOREGROUND CONTENT LAYER */}
       <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center justify-center h-full">
@@ -91,7 +91,7 @@ export default function Hero() {
           Digital Nepal Conclave <span className="text-[#eb0000]">2026</span>
         </h1>
         <div className="font-display font-black text-xl sm:text-2xl md:text-3xl lg:text-4xl text-dnc-orange leading-none drop-shadow-2xl mt-4 mb-4">
-          "Shaping Nepal’s Digital Future"
+          "Driving Nepal’s Digital Future"
         </div>
 
         {/* Primary Call to Action Controls in Centered Layout */}
@@ -141,7 +141,7 @@ export default function Hero() {
       </div>
 
       {/* Bottom Scenic mountain outline path for smooth transition to layout body */}
-      <div className="absolute bottom-0 inset-x-0 h-16 w-full bg-gradient-to-t from-[#0d0f2b] to-transparent pointer-events-none z-10" />
+      <div className="absolute bottom-0 inset-x-0 h-16 w-full bg-gradient-to-t from-[#121652] to-transparent pointer-events-none z-10" />
     </section>
   );
 }

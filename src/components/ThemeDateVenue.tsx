@@ -1,19 +1,5 @@
 import React from "react";
-import { 
-  Calendar, 
-  MapPin, 
-  Compass, 
-  Lightbulb, 
-  Sparkles, 
-  Clock, 
-  Globe, 
-  Shield, 
-  Database, 
-  TrendingUp, 
-  ArrowRight,
-  ChevronRight,
-  CheckCircle2
-} from "lucide-react";
+import { Calendar, MapPin, Globe, Shield, Database, TrendingUp, CheckCircle2 } from "lucide-react";
 
 export default function ThemeDateVenue() {
   const handleAddToCalendar = () => {
@@ -146,80 +132,68 @@ export default function ThemeDateVenue() {
         </div>
       </section>
 
-      {/* SECTION 2: THE NEXT SESSION - COGNITIVE EVENT DATE & VENUE */}
-      <section className="relative bg-gradient-to-b from-[#0d0f2b] to-[#111332] py-24 text-white overflow-hidden border-t border-white/[0.04]">
-        
-        <div className="absolute inset-x-0 bottom-0 h-44 opacity-25 pointer-events-none select-none z-0">
-          <svg viewBox="0 0 1440 120" className="w-full h-full absolute bottom-0 left-0" preserveAspectRatio="none">
-            <path d="M0,80 L200,30 L400,90 L600,20 L800,100 L1000,40 L1200,90 L1440,50 L1440,120 L0,120 Z" fill="rgba(46, 49, 146, 0.4)" />
-          </svg>
-        </div>
+      {/* SECTION 2: EVENT DATE & VENUE */}
+      <section className="relative bg-gradient-to-b from-[#121652] to-[#111332] py-16 text-white overflow-hidden border-t border-white/[0.04]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(235,0,0,0.06),transparent_60%)] z-0 pointer-events-none" />
+          <p className="mb-3 text-sm text-dnc-orange font-bold uppercase tracking-wider">EVENT DETAILS</p>
+          <h2 className="font-display font-black text-2xl sm:text-3xl text-white tracking-tight mb-8">
+            When &amp; Where
+          </h2>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
-          
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="font-display font-black text-3xl sm:text-4xl text-white tracking-tight">
-              Event Details
-            </h2>
-          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-stretch">
-
-            <div className="bg-white/[0.02] backdrop-blur-md rounded-3xl border border-white/10 p-8 sm:p-10 hover:border-white/20 transition-all duration-300 flex flex-col justify-between group relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-bl from-[#eb0000]/10 via-dnc-blue/5 to-transparent pointer-events-none" />
-              
-              <div className="space-y-8 relative z-10">
-                <div className="flex flex-col sm:flex-row gap-3 items-center sm:items-start text-center sm:text-left">
-                  <Calendar className="w-6 h-6 text-dnc-orange shrink-0" />
-                  <span className="text-2xl font-bold text-white">August 27, 2026 | Bhadra 11, 2083</span>
+            <div className="bg-white/[0.03] backdrop-blur-md border border-white/10 rounded-3xl p-8 flex flex-col justify-between">
+              <div className="space-y-6">
+                <div className="flex gap-4 items-start">
+                  <span className="w-11 h-11 shrink-0 rounded-2xl bg-white/10 border border-white/10 flex items-center justify-center text-dnc-orange">
+                    <Calendar className="w-5 h-5" />
+                  </span>
+                  <div>
+                    <p className="font-display font-bold text-lg text-white leading-snug">Thursday, August 27, 2026</p>
+                    <p className="mt-1 text-sm text-slate-300 font-sans">Bhadra 11, 2083</p>
+                  </div>
                 </div>
 
-                <hr className="border-white/[0.08]" />
-
-                <div className="flex flex-col sm:flex-row gap-3 items-center sm:items-start text-center sm:text-left">
-                  <MapPin className="w-6 h-6 text-dnc-orange shrink-0" />
-                  <span className="text-2xl font-bold text-white">The Plaza, Pulchowk, Lalitpur</span>
+                <div className="flex gap-4 items-start">
+                  <span className="w-11 h-11 shrink-0 rounded-2xl bg-white/10 border border-white/10 flex items-center justify-center text-dnc-orange">
+                    <MapPin className="w-5 h-5" />
+                  </span>
+                  <div>
+                    <p className="font-display font-bold text-lg text-white leading-snug">The Plaza</p>
+                    <p className="mt-1 text-sm text-slate-300 font-sans">Pulchowk, Lalitpur, Nepal</p>
+                  </div>
                 </div>
-
               </div>
 
-              <div className="mt-10 pt-6 border-t border-white/[0.08] relative z-10">
+              <div className="mt-8 pt-6 border-t border-white/[0.08] flex flex-col sm:flex-row gap-3">
                 <button
                   onClick={handleAddToCalendar}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#eb0000] hover:bg-[#c20000] text-white text-[10.5px] font-bold font-sans uppercase tracking-wider rounded-xl transition-all duration-300 shadow-md cursor-pointer"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-[#eb0000] hover:bg-[#c20000] text-white text-sm font-bold rounded-xl transition-all duration-300 shadow-md hover:shadow-lg cursor-pointer whitespace-nowrap"
                 >
                   <Calendar className="w-4 h-4" />
-                  Sync to Calendar
+                  Add to Calendar
                 </button>
-              </div>
-
-            </div>
-
-            <div className="bg-slate-800 rounded-3xl border border-white/10 overflow-hidden relative group shadow-2xl flex flex-col justify-end min-h-[300px]">
-              <img
-                src="/images/plaza.jpg" 
-                alt="The Plaza Hotel, Pulchowk"
-                className="w-full h-full object-cover absolute inset-0 group-hover:scale-105 transition-transform duration-1000 ease-in-out"
-              />
-              
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0d0f2b] via-[#0d0f2b]/10 to-transparent opacity-25" />
-              <div className="absolute inset-0 bg-gradient-to-br from-transparent to-dnc-blue/10 mix-blend-overlay" />
-
-              <div className="relative z-10 p-8 sm:p-10 flex flex-col items-start w-full">
                 <button
                   onClick={handleOpenMap}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-white hover:bg-slate-100 text-slate-800 text-[10.5px] font-bold font-sans uppercase tracking-wider rounded-xl transition-all duration-300 shadow-xl cursor-pointer"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-white/5 hover:bg-white/10 border border-white/20 text-white text-sm font-bold rounded-xl transition-all duration-300 cursor-pointer whitespace-nowrap"
                 >
                   <Globe className="w-4 h-4 text-dnc-orange" />
-                  Open Google Maps
+                  View on Map
                 </button>
               </div>
+            </div>
+
+            <div className="rounded-3xl border border-white/10 overflow-hidden relative group min-h-[16rem]">
+              <img
+                src="/images/plaza.jpg"
+                alt="The Plaza, Pulchowk, Lalitpur"
+                loading="lazy"
+                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out"
+              />
             </div>
 
           </div>
-
         </div>
       </section>
 

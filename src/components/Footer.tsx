@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
-    <footer id="app-footer" className="bg-slate-900 text-white border-t border-slate-800">
+    <footer id="app-footer" className="bg-[#121652] text-white border-t border-white/10">
 
       <div className="h-1.5 bg-gradient-to-r from-dnc-blue via-dnc-orange to-dnc-red"></div>
 
@@ -23,17 +23,17 @@ export default function Footer() {
             {/* <p className="text-base font-sans font-bold text-dnc-orange-light tracking-wide uppercase mb-2">
               Digital Nepal Conclave 2026
             </p> */}
-            <p className="text-sm text-slate-400 leading-relaxed max-w-sm">
+            <p className="text-sm text-slate-300 leading-relaxed max-w-sm">
               <strong>ICT Foundation Nepal</strong> is a non-profit organization promoting ICT, innovation, entrepreneurship, and digital transformation in Nepal. It organizes the flagship <strong>Digital Nepal Conclave</strong>, a national platform for shaping Nepal’s digital future.
             </p>
           </div>
 
           {/* Quick Links */}
           <div className="md:col-span-3 space-y-4">
-            <h4 className="font-display font-bold text-sm uppercase tracking-widest text-slate-300 font-sans">
+            <h4 className="font-display font-bold text-sm uppercase tracking-widest text-slate-0 font-sans">
               Quick Links
             </h4>
-            <ul className="space-y-2 text-sm text-slate-400">
+            <ul className="space-y-2 text-sm text-slate-300">
               <li><Link to="/about/event" className="hover:text-white transition">About the Event</Link></li>
               <li><Link to="/about/organizer" className="hover:text-white transition">About the Organizer</Link></li>
               <li><Link to="/agenda" className="hover:text-white transition">Conference Agenda</Link></li>
@@ -47,11 +47,11 @@ export default function Footer() {
 
           {/* Location & Contact */}
           <div className="md:col-span-4 space-y-4">
-            <h4 className="font-display font-bold text-sm uppercase tracking-widest text-slate-300 font-sans">
+            <h4 className="font-display font-bold text-sm uppercase tracking-widest text-slate-0 font-sans">
               Office Location &amp; Contact
             </h4>
 
-            <div className="space-y-3.5 text-sm text-slate-400">
+            <div className="space-y-3.5 text-sm text-slate-300">
               <div className="flex items-start gap-2.5">
                 <MapPin className="w-5 h-5 text-dnc-orange-light shrink-0 mt-0.5" />
                 <span>Sankhamul, Kathmandu-31, Nepal</span>
@@ -116,7 +116,7 @@ export default function Footer() {
 
         </div>
 
-        <div className="mt-12 pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-slate-500">
+        <div className="mt-12 pt-8 border-t border-slate-500 flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-slate-400">
           <p>© Digital Nepal Conclave 2026. All Rights Reserved.</p>
         </div>
 

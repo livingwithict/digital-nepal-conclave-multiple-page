@@ -1,11 +1,30 @@
 import { useState, useEffect, useCallback } from "react";
-import { Users, Image, Video, Newspaper, ArrowRight, X, ChevronLeft, ChevronRight, CalendarDays, Briefcase, Brain, TrendingUp, CheckCircle2, Sparkles, Zap, Clock } from "lucide-react";
+import { Users, Image, Video, Newspaper, ArrowRight, X, ChevronLeft, ChevronRight, CalendarDays, Briefcase, Brain, TrendingUp, CheckCircle2, Sparkles, Zap, Clock, Download } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
-import { STATS_COUNTERS, SPEAKERS_LIST, NEWS_ARTICLES, SPONSOR_GROUPS } from "../data";
+import { STATS_COUNTERS, SPEAKERS_LIST, NEWS_ARTICLES, SPONSOR_GROUPS, PUBLICATIONS_DATA } from "../data";
 import { AGENDA_DATA, getSessionSlug } from "../agendaData";
 import { SPONSORS } from "../sponsordata"; // <-- Imported the new data
 import VideoCard from "./videocard";
 import NewsCard from "./NewsCard";
+
+function SponsorLogo({ sponsor }: { sponsor: { name: string; logoUrl: string; url?: string } }) {
+  const box = "flex items-center justify-center bg-white border border-slate-100 rounded-xl p-4 w-44 h-28";
+  const img = (
+    <img src={sponsor.logoUrl} alt={sponsor.name} className="max-h-20 w-auto object-contain" />
+  );
+  if (!sponsor.url) return <div className={box}>{img}</div>;
+  return (
+    <a
+      href={sponsor.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      title={sponsor.name}
+      className={`${box} hover:border-dnc-blue/40 hover:shadow-md transition-all duration-300`}
+    >
+      {img}
+    </a>
+  );
+}
 
 const YOUTUBE_VIDEOS = [
   "https://www.youtube.com/watch?v=8PEwm-s5Ze0",
@@ -293,16 +312,7 @@ export default function HomeDetails() {
                 </h4>
                 <div className="flex flex-wrap justify-center gap-4">
                   {group.sponsors.map((sponsor) => (
-                    <div
-                      key={sponsor.name}
-                      className="flex items-center justify-center bg-white border border-slate-100 rounded-xl p-3 w-32 h-20"
-                    >
-                      <img
-                        src={sponsor.logoUrl}
-                        alt={sponsor.name}
-                        className="h-10 w-auto object-contain"
-                      />
-                    </div>
+                    <SponsorLogo key={sponsor.name} sponsor={sponsor} />
                   ))}
                 </div>
               </div>
@@ -316,16 +326,7 @@ export default function HomeDetails() {
                   </h4>
                   <div className="flex flex-wrap justify-center gap-4">
                     {group.sponsors.map((sponsor) => (
-                      <div
-                        key={sponsor.name}
-                        className="flex items-center justify-center bg-white border border-slate-100 rounded-xl p-3 w-32 h-20"
-                      >
-                        <img
-                          src={sponsor.logoUrl}
-                          alt={sponsor.name}
-                          className="h-10 w-auto object-contain"
-                        />
-                      </div>
+                      <SponsorLogo key={sponsor.name} sponsor={sponsor} />
                     ))}
                   </div>
                 </div>
@@ -362,11 +363,15 @@ export default function HomeDetails() {
                 { year: "2024", title: "Harmonizing Digitalization and Development", logo: "/images/logos/DNC_24.png" },
                 { year: "2023", title: "Fostering Digitally Sakshyam Nepal", logo: "/images/logos/DNC_23.png" },
                 { year: "2022", title: "Digital Nepal Framework Collaboration", logo: "/images/logos/DNC_22.png" }
-              ].map((conclave) => (
+              ].map((conclave) => {
+                const report = PUBLICATIONS_DATA.find(
+                  (p) => p.type === "Report" && p.year === conclave.year && p.url
+                );
+                return (
+                <div key={conclave.year} className="flex flex-col gap-2">
                 <div
-                  key={conclave.year}
                   onClick={() => navigate(`/past-events/${conclave.year}`)}
-                  className="group cursor-pointer p-5 bg-slate-50 rounded-2xl border border-slate-100 hover:border-dnc-orange/30 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between min-h-[140px]"
+                  className="group cursor-pointer h-full p-5 bg-slate-50 rounded-2xl border border-slate-100 hover:border-dnc-orange/30 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between min-h-[140px]"
                 >
                   <div>
                     <div className="mb-3">
@@ -389,7 +394,21 @@ export default function HomeDetails() {
                     </span>
                   </div>
                 </div>
-              ))}
+
+                {report && (
+                  <a
+                    href={report.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-dnc-blue hover:bg-dnc-blue/90 text-white text-xs font-bold rounded-xl shadow-md hover:shadow-lg transition-all duration-300"
+                  >
+                    <Download className="w-4 h-4" />
+                    Download Report
+                  </a>
+                )}
+                </div>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -435,7 +454,7 @@ export default function HomeDetails() {
       </section>
 
       {/* CONCLAVE MOMENTS & PHOTO GALLERY */}
-      <section className="w-full bg-white py-20">
+      {/* <section className="w-full bg-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center gap-3 mb-8">
             <div className="flex items-center gap-2">
@@ -468,13 +487,12 @@ export default function HomeDetails() {
             ))}
           </div>
 
-          {/* LIGHTBOX MODAL */}
           {lightboxIndex !== null && (
             <div
               className="fixed inset-0 z-50 flex items-center justify-center bg-black/95"
               onClick={closeLightbox}
             >
-              {/* Close */}
+  
               <button
                 onClick={closeLightbox}
                 className="absolute top-3 right-3 text-white bg-white/10 hover:bg-white/25 rounded-full p-2 transition-colors z-10"
@@ -483,7 +501,6 @@ export default function HomeDetails() {
                 <X className="w-5 h-5 sm:w-6 sm:h-6" />
               </button>
 
-              {/* Prev */}
               <button
                 onClick={(e) => { e.stopPropagation(); showPrev(); }}
                 className="absolute left-2 sm:left-5 text-white bg-white/10 hover:bg-white/25 rounded-full p-2 sm:p-3 transition-colors z-10"
@@ -492,7 +509,6 @@ export default function HomeDetails() {
                 <ChevronLeft className="w-6 h-6 sm:w-7 sm:h-7" />
               </button>
 
-              {/* Image + caption */}
               <div
                 className="flex flex-col items-center w-full px-12 sm:px-20 max-w-5xl"
                 onClick={(e) => e.stopPropagation()}
@@ -508,7 +524,6 @@ export default function HomeDetails() {
                 <p className="text-white/40 text-xs mt-1">{lightboxIndex + 1} / {GALLERY_PHOTOS.length}</p>
               </div>
 
-              {/* Next */}
               <button
                 onClick={(e) => { e.stopPropagation(); showNext(); }}
                 className="absolute right-2 sm:right-5 text-white bg-white/10 hover:bg-white/25 rounded-full p-2 sm:p-3 transition-colors z-10"
@@ -519,10 +534,10 @@ export default function HomeDetails() {
             </div>
           )}
         </div>
-      </section>
+      </section> */}
 
       {/* YOUTUBE VIDEOS SECTION */}
-      <section className="w-full bg-slate-50 py-20">
+      <section className="w-full bg-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-10">
           <div className="flex flex-col items-center gap-3 mb-8">
@@ -560,7 +575,7 @@ export default function HomeDetails() {
       </section>
 
       {/* OUR OTHER INITIATIVES SECTION */}
-      <section className="w-full bg-white py-20">
+      {/* <section className="w-full bg-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center gap-3 mb-10">
             <div className="flex items-center gap-2">
@@ -612,82 +627,7 @@ export default function HomeDetails() {
           </div>
           </div>
         </div>
-      </section>
-
-      {/* SPONSORSHIP SECTION (CLEANED UP WITH EXTERNAL DATA) */}
-        {/* <div className="py-20 mt-10 border-t border-slate-200">
-          <div className="text-center mb-16">
-            <h3 className="font-display font-black text-2xl sm:text-3xl text-slate-800">
-              Our Sponsors & Partners
-            </h3>
-          </div>
-
-          <div className="flex flex-col gap-16 items-center">
-            
-            Top Tier: Association & Powered By
-            <div className="flex flex-wrap justify-center gap-12 sm:gap-32 w-full">
-              <div className="flex flex-col items-center">
-                <h4 className="text-sm font-bold text-slate-800 mb-6">In Association With</h4>
-                <SponsorBox sponsor={SPONSORS.find(s => s.category === 'In Association With')} className="w-56 h-24" />
-              </div>
-              <div className="flex flex-col items-center">
-                <h4 className="text-sm font-bold text-slate-800 mb-6">Powered by</h4>
-                <SponsorBox sponsor={SPONSORS.find(s => s.category === 'Powered by')} className="w-56 h-24" />
-              </div>
-            </div>
-
-            Ecosystem Partners
-            <div className="w-full flex flex-col items-center">
-              <h4 className="text-sm font-bold text-slate-800 mb-6">Ecosystem Partners</h4>
-              <div className="flex flex-wrap justify-center gap-6">
-                {SPONSORS.filter(s => s.category === 'Ecosystem Partners').map((sponsor, idx) => (
-                  <SponsorBox key={idx} sponsor={sponsor} />
-                ))}
-              </div>
-            </div>
-
-            Various Categories Row 1
-            <div className="w-full flex flex-wrap justify-center gap-8 md:gap-12 lg:gap-16">
-              {["Telecom Partner", "Digital Payment Partner", "Digital Education Partner", "Digital Health Partner", "EdTech Partner"].map(catName => (
-                <div key={catName} className="flex flex-col items-center w-36">
-                  <h4 className="text-xs font-bold text-slate-800 mb-4 h-8 text-center flex items-end justify-center">{catName}</h4>
-                  <SponsorBox sponsor={SPONSORS.find(s => s.category === catName)} className="w-full h-20" />
-                </div>
-              ))}
-            </div>
-
-            Various Categories Row 2
-            <div className="w-full flex flex-wrap justify-center gap-8 md:gap-12 lg:gap-16">
-              {["Digital Security Partner", "IT Infra Partner", "Ticketing Partner", "Logistic Partner", "Digital Media Partner"].map(catName => (
-                <div key={catName} className="flex flex-col items-center w-36">
-                  <h4 className="text-xs font-bold text-slate-800 mb-4 h-8 text-center flex items-end justify-center">{catName}</h4>
-                  <SponsorBox sponsor={SPONSORS.find(s => s.category === catName)} className="w-full h-20" />
-                </div>
-              ))}
-            </div>
-
-            Event Management Partners
-            <div className="w-full flex flex-col items-center">
-              <h4 className="text-sm font-bold text-slate-800 mb-6">Event Management Partners</h4>
-              <div className="flex flex-wrap justify-center gap-6">
-                {SPONSORS.filter(s => s.category === 'Event Management Partners').map((sponsor, idx) => (
-                  <SponsorBox key={idx} sponsor={sponsor} />
-                ))}
-              </div>
-            </div>
-
-            Supporting Partners
-            <div className="w-full flex flex-col items-center">
-              <h4 className="text-sm font-bold text-slate-800 mb-6">Supporting Partners</h4>
-              <div className="flex flex-wrap justify-center gap-6">
-                {SPONSORS.filter(s => s.category === 'Supporting Partners').map((sponsor, idx) => (
-                  <SponsorBox key={idx} sponsor={sponsor} />
-                ))}
-              </div>
-            </div>
-
-          </div>
-        </div> */}
+      </section> */}
 
       {/* Marquee Animation Block */}
       <style>{`

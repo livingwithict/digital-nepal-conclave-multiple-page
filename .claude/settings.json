@@ -2,7 +2,10 @@
   "permissions": {
     "allow": [
       "Bash(node scripts/fetch-media-metadata.mjs)",
-      "Bash(./node_modules/.bin/tsc --noEmit)"
+      "Bash(./node_modules/.bin/tsc --noEmit)",
+      "Bash(git checkout *)",
+      "Bash(python -)",
+      "Bash(node -e \"new Function\\(require\\('fs'\\).readFileSync\\('scripts/apps-script/Code.gs','utf8'\\)\\); console.log\\('parses ok'\\)\")"
     ],
     "additionalDirectories": [
       "D:\\ICT\\IFN\\src\\data",

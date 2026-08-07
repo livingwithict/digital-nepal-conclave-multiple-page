@@ -126,7 +126,7 @@ export default function SpeakersComponent() {
                   </div> */}
                 </div>
 
-                <div className="space-y-1">
+                <div className="space-y-1 text-center">
                   <h3 className="font-display font-bold text-slate-900 group-hover:text-dnc-blue transition-colors text-sm sm:text-base leading-tight">
                     {spk.name}
                   </h3>

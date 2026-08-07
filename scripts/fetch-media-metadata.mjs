@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Populates title/thumbnail for NEWS_ARTICLES entries in src/data.ts by
+// Populates title/thumbnail for NEWS_ARTICLES entries in src/data/news.ts by
 // scraping each article's og:title / og:image at author time. Run this
 // after adding a new { url } entry — the site itself makes no runtime
 // network calls for this, so page loads never hit an external API's daily limit.
@@ -11,11 +11,11 @@ import { fileURLToPath } from 'node:url'
 import path from 'node:path'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const dataPath = path.join(__dirname, '..', 'src', 'data.ts')
+const dataPath = path.join(__dirname, '..', 'src', 'data', 'news.ts')
 let source = readFileSync(dataPath, 'utf8')
 
 const arrayMatch = source.match(/export const NEWS_ARTICLES: NewsArticle\[\] = \[([\s\S]*?)\n\];/)
-if (!arrayMatch) throw new Error('Could not find NEWS_ARTICLES array in data.ts')
+if (!arrayMatch) throw new Error('Could not find NEWS_ARTICLES array in news.ts')
 
 const entryRe = /\{\s*url:\s*"((?:[^"\\]|\\.)*)"(?:,\s*title:\s*"((?:[^"\\]|\\.)*)")?(?:,\s*thumbnail:\s*"((?:[^"\\]|\\.)*)")?\s*\}/g
 
