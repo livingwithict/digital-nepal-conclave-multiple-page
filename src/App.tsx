@@ -10,6 +10,7 @@ import PublicationsPage from "./pages/PublicationsPage";
 import NewsMediaPage from "./pages/NewsMediaPage";
 import ContactPage from "./pages/ContactPage";
 import RegistrationPage from "./pages/RegistrationPage";
+import VolunteersPage from "./pages/VolunteersPage";
 
 export default function App() {
   return (
@@ -30,6 +31,7 @@ export default function App() {
         <Route path="news-media" element={<NewsMediaPage />} />
         <Route path="contact" element={<ContactPage />} />
         <Route path="register" element={<RegistrationPage />} />
+        <Route path="volunteers" element={<VolunteersPage />} />
       </Route>
     </Routes>
   );

@@ -72,7 +72,7 @@ export default function PastEventsComponent({ initialYear = "2025" }: PastEvents
   }, [event.videoPlaylists, selectedVideo]);
 
     return (
-    <section className="min-h-screen bg-gradient-to-br from-white via-white to-slate-50 py-16">
+    <section className="min-h-screen bg-slate-50 py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header Section - Title and Year Selector */}
         <div className="text-center mb-12">

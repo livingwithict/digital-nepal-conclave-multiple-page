@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { Users, Image, Video, Newspaper, ArrowRight, X, ChevronLeft, ChevronRight, CalendarDays, Briefcase, Brain, TrendingUp, CheckCircle2, Sparkles, Zap, Clock, Download } from "lucide-react";
+import { Users, Image, Video, Newspaper, ArrowRight, X, ChevronLeft, ChevronRight, CalendarDays, Briefcase, Brain, TrendingUp, Sparkles, Zap, Clock, Download } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { STATS_COUNTERS, SPEAKERS_LIST, NEWS_ARTICLES, SPONSOR_GROUPS, PUBLICATIONS_DATA } from "../data";
 import { AGENDA_DATA, getSessionSlug } from "../agendaData";
@@ -8,9 +8,9 @@ import VideoCard from "./videocard";
 import NewsCard from "./NewsCard";
 
 function SponsorLogo({ sponsor }: { sponsor: { name: string; logoUrl: string; url?: string } }) {
-  const box = "flex items-center justify-center bg-white border border-slate-100 rounded-xl p-4 w-44 h-28";
+  const box = "flex items-center justify-center bg-white border border-slate-100 rounded-xl p-4 w-36 h-24 sm:w-44 sm:h-28";
   const img = (
-    <img src={sponsor.logoUrl} alt={sponsor.name} className="max-h-20 w-auto object-contain" />
+    <img src={sponsor.logoUrl} alt={sponsor.name} className="max-h-16 sm:max-h-20 w-auto object-contain" />
   );
   if (!sponsor.url) return <div className={box}>{img}</div>;
   return (
@@ -104,7 +104,11 @@ const HOME_AGENDA_SESSIONS = [
   },
 ].map((group) => ({
   ...group,
-  titles: AGENDA_DATA.filter((item) => item.session === group.session).map((item) => item.title),
+  items: AGENDA_DATA.filter((item) => item.session === group.session).map((item) => ({
+    time: item.time,
+    title: item.title,
+    subtitle: item.subtitle,
+  })),
 }));
 
 export default function HomeDetails() {
@@ -165,9 +169,12 @@ export default function HomeDetails() {
           ))}
         </div>
 
-        {/* AGENDA HIGHLIGHTS */}
-        <div className="mb-20">
-          <div className="flex flex-col items-center gap-3 mb-10">
+      </div>
+
+      {/* AGENDA HIGHLIGHTS */}
+      <section className="w-full bg-slate-50 py-20 border-y border-slate-100">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col items-center gap-3 mb-14">
             <div className="flex items-center gap-2">
               <span className="p-2.5 bg-blue-50 text-dnc-blue rounded-xl border border-blue-100">
                 <CalendarDays className="w-6 h-6" />
@@ -176,49 +183,76 @@ export default function HomeDetails() {
                 What's on the Agenda
               </h3>
             </div>
-            <span className="w-12 h-1 rounded-full bg-gradient-to-r from-dnc-blue via-dnc-orange to-dnc-red"></span>
+            <span className="w-12 h-1 rounded-full bg-dnc-blue"></span>
+            <p className="text-sm sm:text-base text-slate-500 font-sans text-center max-w-lg">
+              One day, four sessions, from the inaugural keynotes to the closing note.
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-            {HOME_AGENDA_SESSIONS.map((group, idx) => {
-              const IconComponent = group.icon;
-              return (
-                <Link
-                  to={`/agenda#${getSessionSlug(group.session)}`}
-                  key={idx}
-                  className={`group flex flex-col bg-white rounded-2xl border ${group.border} shadow-xs p-6 hover:shadow-md transition-all duration-300`}
-                >
-                  <div className="mb-4">
-                    <div className="flex items-center gap-2">
-                      <IconComponent className={`w-5 h-5 shrink-0 ${group.color}`} />
-                      <h4 className="font-display font-bold text-lg sm:text-xl text-slate-800">
-                        {group.session}
-                      </h4>
-                    </div>
-                    <span className="inline-flex items-center gap-1.5 mt-1 text-sm sm:text-base font-sans font-semibold text-slate-500">
-                      <Clock className="w-4 h-4" />
-                      {group.time}
+          <div className="relative">
+            {/* connecting timeline rail */}
+            <span className="hidden sm:block absolute left-[27px] top-3 bottom-3 w-px bg-gradient-to-b from-dnc-blue via-dnc-orange to-dnc-red opacity-30"></span>
+
+            <div className="flex flex-col gap-10">
+              {HOME_AGENDA_SESSIONS.map((group, idx) => {
+                const IconComponent = group.icon;
+                return (
+                  <div key={idx} className="relative sm:pl-[68px]">
+                    <span className={`hidden sm:flex absolute left-0 top-0 items-center justify-center w-14 h-14 rounded-2xl ${group.bg} border ${group.border} ${group.color}`}>
+                      <IconComponent className="w-6 h-6" />
                     </span>
+
+                    <Link
+                      to={`/agenda#${getSessionSlug(group.session)}`}
+                      className={`group block bg-white rounded-2xl border ${group.border} shadow-xs hover:shadow-md transition-all duration-300 overflow-hidden`}
+                    >
+                      <div className={`flex flex-wrap items-center justify-between gap-2 px-6 py-4 ${group.bg} border-b ${group.border}`}>
+                        <div className="flex items-center gap-2">
+                          <IconComponent className={`w-5 h-5 shrink-0 sm:hidden ${group.color}`} />
+                          <h4 className="font-display font-bold text-lg sm:text-xl text-slate-800">
+                            {group.session}
+                          </h4>
+                        </div>
+                        <span className={`inline-flex items-center gap-1.5 text-sm font-sans font-bold ${group.color}`}>
+                          <Clock className="w-4 h-4" />
+                          {group.time}
+                        </span>
+                      </div>
+
+                      <ul className="divide-y divide-slate-100">
+                        {group.items.map((item, tIdx) => (
+                          <li key={tIdx} className="flex items-start gap-3 px-6 py-4">
+                            <span className={`shrink-0 w-16 sm:w-20 pt-0.5 text-xs sm:text-sm font-sans font-bold ${group.color}`}>
+                              {item.time}
+                            </span>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-sm sm:text-base font-sans font-semibold text-slate-900 leading-snug">
+                                {item.title}
+                              </p>
+                              {item.subtitle && (
+                                <p className="text-xs sm:text-sm text-slate-500 font-sans italic mt-1 leading-snug">
+                                  {item.subtitle}
+                                </p>
+                              )}
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+
+                      <div className="flex justify-end px-6 py-3 bg-slate-50/60">
+                        <span className={`inline-flex items-center gap-1 text-sm font-sans font-bold ${group.color} group-hover:translate-x-1 transition-transform duration-200`}>
+                          View session details
+                          <ArrowRight className="w-4 h-4" />
+                        </span>
+                      </div>
+                    </Link>
                   </div>
-                  <ul className="flex flex-col gap-2.5 pl-1">
-                    {group.titles.map((title, tIdx) => (
-                      <li key={tIdx} className="flex items-start gap-2 text-sm text-slate-900 font-sans leading-snug">
-                        <CheckCircle2 className={`w-3.5 h-3.5 mt-0.5 shrink-0 ${group.color} opacity-70`} />
-                        {title}
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="flex justify-end mt-auto">
-                    <span className={`inline-flex items-center text-sm font-sans font-bold ${group.color} pt-5 group-hover:translate-x-1 transition-transform duration-200`}>
-                      <ArrowRight className="w-4 h-4" />
-                    </span>
-                  </div>
-                </Link>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
 
-          <div className="flex justify-center">
+          <div className="flex justify-center mt-12">
             <Link
               to="/agenda"
               className="inline-flex items-center gap-2 px-6 py-3 bg-dnc-blue text-white font-bold text-sm sm:text-base rounded-xl hover:bg-dnc-blue/90 transition-all duration-300 shadow-md hover:shadow-lg group"
@@ -228,7 +262,7 @@ export default function HomeDetails() {
             </Link>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* PREVIOUS SPEAKERS HORIZONTAL GALLERY */}
       <section className="w-full bg-white py-20">
@@ -242,7 +276,7 @@ export default function HomeDetails() {
                 Our Previous Speakers
               </h3>
             </div>
-            <span className="w-12 h-1 rounded-full bg-gradient-to-r from-dnc-blue via-dnc-orange to-dnc-red"></span>
+            <span className="w-12 h-1 rounded-full bg-dnc-blue"></span>
           </div>
 
           <div className="relative w-full overflow-hidden py-4">
@@ -301,7 +335,7 @@ export default function HomeDetails() {
                 Partners &amp; Sponsors
               </h3>
             </div>
-            <span className="w-12 h-1 rounded-full bg-gradient-to-r from-dnc-blue via-dnc-orange to-dnc-red"></span>
+            <span className="w-12 h-1 rounded-full bg-dnc-blue"></span>
           </div>
 
           <div className="space-y-6">
@@ -318,7 +352,7 @@ export default function HomeDetails() {
               </div>
             ))}
 
-            <div className="flex flex-wrap justify-center gap-8">
+            <div className="flex flex-wrap justify-center gap-6 sm:gap-8">
               {SPONSOR_GROUPS.slice(2).map((group) => (
                 <div key={group.title} className="text-center">
                   <h4 className="text-xs font-sans font-bold text-slate-500 uppercase tracking-widest mb-3">
@@ -350,8 +384,8 @@ export default function HomeDetails() {
                     Our Past Conclaves
                   </h3>
                 </div>
-                <span className="w-12 h-1 rounded-full bg-gradient-to-r from-dnc-blue via-dnc-orange to-dnc-red"></span>
-              </div>
+                <span className="w-12 h-1 rounded-full bg-dnc-blue"></span>
+                  </div>
               {/* <p className="text-slate-500 text-base leading-relaxed">
                 From the inception of the Digital Nepal framework in 2019, our yearly summits have solidified cross-border payment protocols, digital health structures, and national software exports strategy.
               </p> */}
@@ -426,7 +460,7 @@ export default function HomeDetails() {
                 News & Updates
               </h3>
             </div>
-            <span className="w-12 h-1 rounded-full bg-gradient-to-r from-dnc-blue via-dnc-orange to-dnc-red"></span>
+            <span className="w-12 h-1 rounded-full bg-dnc-blue"></span>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
@@ -465,7 +499,6 @@ export default function HomeDetails() {
                 Gallery & Moments
               </h3>
             </div>
-            <span className="w-12 h-1 rounded-full bg-gradient-to-r from-dnc-blue via-dnc-orange to-dnc-red"></span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-1 auto-rows-[180px] sm:auto-rows-[220px]">
@@ -549,7 +582,7 @@ export default function HomeDetails() {
                 Featured Videos
               </h3>
             </div>
-            <span className="w-12 h-1 rounded-full bg-gradient-to-r from-dnc-blue via-dnc-orange to-dnc-red"></span>
+            <span className="w-12 h-1 rounded-full bg-dnc-blue"></span>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -586,7 +619,6 @@ export default function HomeDetails() {
                 Additional Initiatives
               </h3>
             </div>
-            <span className="w-12 h-1 rounded-full bg-gradient-to-r from-dnc-blue via-dnc-orange to-dnc-red"></span>
           </div>
 
           <div className="relative overflow-hidden">

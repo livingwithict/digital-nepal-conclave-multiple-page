@@ -86,7 +86,7 @@ const inputClass =
 
 /* ---------- small form primitives ---------- */
 
-function Field({
+export function Field({
   label,
   required,
   children,
@@ -108,7 +108,7 @@ function Field({
   );
 }
 
-function Text({
+export function Text({
   label,
   name,
   value,
@@ -139,7 +139,7 @@ function Text({
   );
 }
 
-function Dropdown({
+export function Dropdown({
   label,
   name,
   value,
@@ -170,7 +170,7 @@ function Dropdown({
   );
 }
 
-function FileUpload({
+export function FileUpload({
   label,
   required,
   file,
@@ -201,7 +201,7 @@ function FileUpload({
   );
 }
 
-function SectionHeading({ step, title }: { step: number; title: string }) {
+export function SectionHeading({ step, title }: { step: number; title: string }) {
   return (
     <h3 className="text-lg font-bold text-slate-900 mb-5 flex items-center gap-2">
       <span className="w-8 h-8 rounded-full bg-dnc-blue text-white flex items-center justify-center text-sm font-bold shrink-0">
@@ -212,7 +212,7 @@ function SectionHeading({ step, title }: { step: number; title: string }) {
   );
 }
 
-function FormCard({ title, children }: { title: string; children: React.ReactNode }) {
+export function FormCard({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm">
       <span className="text-[10px] font-sans font-bold text-slate-400 uppercase tracking-widest block mb-6">
@@ -223,7 +223,7 @@ function FormCard({ title, children }: { title: string; children: React.ReactNod
   );
 }
 
-function StatusBlock({
+export function StatusBlock({
   state,
   error,
 }: {
@@ -249,7 +249,7 @@ function StatusBlock({
   );
 }
 
-function SubmitButton({
+export function SubmitButton({
   state,
   label,
 }: {
@@ -268,7 +268,7 @@ function SubmitButton({
   );
 }
 
-function InfoPanel({
+export function InfoPanel({
   icon,
   title,
   children,
@@ -322,10 +322,11 @@ async function fileToBase64(file: File) {
   return btoa(binary);
 }
 
-async function postForm(
+export async function postForm(
   fields: Record<string, string>,
   formType: string,
-  files: Record<string, File | null> = {}
+  files: Record<string, File | null> = {},
+  url: string = APPS_SCRIPT_URL
 ) {
   const params = new URLSearchParams({ ...fields, form_type: formType });
 
@@ -336,7 +337,7 @@ async function postForm(
     params.set(`${field}_type`, file.type || "application/octet-stream");
   }
 
-  const response = await fetch(APPS_SCRIPT_URL, { method: "POST", body: params });
+  const response = await fetch(url, { method: "POST", body: params });
   const text = await response.text().catch(() => "");
   const result = text.trim().startsWith("{") ? JSON.parse(text) : null;
 
@@ -348,7 +349,7 @@ async function postForm(
   }
 }
 
-function readableError(error: unknown) {
+export function readableError(error: unknown) {
   const message = error instanceof Error ? error.message : "Unknown error";
   if (message.includes("Failed to fetch")) {
     return "Network error. Please check your connection and try again.";
@@ -356,7 +357,7 @@ function readableError(error: unknown) {
   return "Error submitting form: " + message;
 }
 
-function checkFile(file: File | null, label: string) {
+export function checkFile(file: File | null, label: string) {
   if (!file) return `Please upload ${label}.`;
   if (file.size > MAX_FILE_BYTES) return `${label} must be 5MB or smaller.`;
   return "";
@@ -365,7 +366,7 @@ function checkFile(file: File | null, label: string) {
 /* ---------- page ---------- */
 
 type Tab = "participant" | "solutions" | "media";
-type FormState = "idle" | "sending" | "success" | "error";
+export type FormState = "idle" | "sending" | "success" | "error";
 
 const TRACKS: {
   id: Tab;
@@ -396,7 +397,7 @@ const TRACKS: {
     label: "Digital Solutions Showcase",
     icon: <Building2 className="w-5 h-5" />,
     tagline: "Showcase your product, platform, or service to key industry leaders, policymakers, and tech enthusiasts. (2 members per stall)",
-    price: "Rs. 35,000",
+    price: "Rs. 50,000",
     priceNote: "per stall, incl. VAT",
     details: [
       "Stall space of 8 ft x 8 ft",
@@ -427,7 +428,7 @@ export default function RegistrationComponent() {
   const [activeTab, setActiveTab] = useState<Tab | null>(null);
 
   return (
-    <section id="registration-page" className="bg-white py-12 animate-fade-in">
+    <section id="registration-page" className="bg-slate-50 py-12 animate-fade-in">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header */}
@@ -845,7 +846,7 @@ function SolutionsForm() {
             {[
               ["Stall space", "8 ft x 8 ft"],
               ["Furniture", "One 6 ft table, two chairs"],
-              ["Stall cost", "Rs. 35,000 incl. VAT"],
+              ["Stall cost", "Rs. 50,000 incl. VAT"],
               ["Package covers", "2 representatives at the stall"],
             ].map(([k, v]) => (
               <div key={k} className="flex justify-between gap-4 py-2">
@@ -888,7 +889,7 @@ function SolutionsForm() {
 
               <div className="mb-5 text-sm text-slate-600 leading-relaxed bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-2">
                 <p>
-                  The Rs. 35,000 package covers 2 representatives at your stall. If both will be
+                  The Rs. 50,000 package covers 2 representatives at your stall. If both will be
                   present, please fill in the details of both members.
                 </p>
                 <p>
@@ -993,7 +994,7 @@ function SolutionsForm() {
                   className="mt-0.5 w-4 h-4 shrink-0 accent-dnc-blue cursor-pointer"
                 />
                 <span className="text-sm text-slate-600 leading-relaxed">
-                  I confirm that our organization will complete the stall payment of Rs. 35,000
+                  I confirm that our organization will complete the stall payment of Rs. 50,000
                   (incl. VAT) through the billing procedure shared by the ICT Foundation team during
                   their follow-up. <span className="text-dnc-red">*</span>
                 </span>

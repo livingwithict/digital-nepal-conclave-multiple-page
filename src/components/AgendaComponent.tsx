@@ -90,7 +90,7 @@ export default function AgendaComponent() {
   const filters = ["All", "Inaugural", "Governance", "Data", "Economy"] as const;
 
   return (
-    <section id="agenda-section" className="bg-gradient-to-b from-white via-slate-50/30 to-white py-20 sm:py-16">
+    <section id="agenda-section" className="bg-slate-50 py-20 sm:py-16">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Enhanced Header */}
@@ -157,7 +157,7 @@ export default function AgendaComponent() {
                 onKeyDown={(e) => {
                   if (e.key === "Enter" || e.key === " ") setSelectedItem(item);
                 }}
-                className={`group relative overflow-hidden rounded-2xl border-2 ${config.borderColor} ${config.bgColor} transition-all duration-300 hover:shadow-lg hover:shadow-slate-200/40 hover:scale-[1.01] cursor-pointer`}
+                className={`group relative overflow-hidden rounded-2xl border-2 ${config.borderColor} bg-white transition-all duration-300 hover:shadow-lg hover:shadow-slate-200/40 hover:scale-[1.01] cursor-pointer`}
               >
                 <div className={`absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b ${config.accentColor}`}></div>
 

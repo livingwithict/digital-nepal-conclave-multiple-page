@@ -3,6 +3,8 @@ export interface SponsorGroup {
   sponsors: { name: string; logoUrl: string; url?: string }[];
 }
 
+const DNC_LOGO = "/images/DNC-Logo.png";
+
 export const SPONSOR_GROUPS: SponsorGroup[] = [
   { title: "Organized by", sponsors: [{ name: "ICT Foundation Nepal", logoUrl: "/images/partners/ifn.png", url: "https://ictfoundation.org.np" }] },
   {
@@ -12,9 +14,15 @@ export const SPONSOR_GROUPS: SponsorGroup[] = [
       { name: "ThirdFactor", logoUrl: "/images/partners/thirdfactor-logo.png", url: "https://thirdfactor.ai/" },
     ],
   },
-  { title: "Associated Partner", sponsors: [{ name: "Ncell", logoUrl: "/images/partners/ncell_footer_logo.png", url: "https://www.ncell.com.np/" }] },
-  { title: "Digital Health Partner", sponsors: [{ name: "Mavorian", logoUrl: "/images/partners/mavorian-Logo_Only-600x138.png", url: "https://mavorion.com/" }] },
-  { title: "Digital Education Partner", sponsors: [{ name: "Neema Education Academy", logoUrl: "/images/partners/neema_education_foundation.png", url: "https://neemaeducation.com/" }] },
-  { title: "Event Partner", sponsors: [{ name: "Global Spark", logoUrl: "/images/partners/Global Spark.png", url: "https://www.globalspark.com.np/" }] },
+  {
+    title: "Powered by",
+    sponsors: [
+      { name: "SastoTickets", logoUrl: "/images/partners/Sasto Tickets Filled.png", url: "https://sastotickets.com/" },
+      // { name: "fonepay", logoUrl: DNC_LOGO, url: "https://fonepay.com/" },
+    ],
+  },
+  { title: "Supporting Partner", sponsors: [{ name: "Ncell Business", logoUrl: "/images/partners/Ncell Business Logo JPG.jpg", url: "https://www.ncell.com.np/en/business" }] },
+  { title: "Digital Education Partner", sponsors: [{ name: "CodeXSchool", logoUrl: "/images/partners/CodeXSchool.png" }] },
   { title: "MSP Partner", sponsors: [{ name: "SkyIT", logoUrl: "/images/partners/skyit.jpg", url: "https://skybroadband.com.np/" }] },
+  { title: "Event Partner", sponsors: [{ name: "Global Spark", logoUrl: "/images/partners/Global Spark.png", url: "https://www.globalspark.com.np/" }] },
 ];

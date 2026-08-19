@@ -68,8 +68,8 @@ export default function Footer() {
               <div className="flex items-start gap-2.5">
                 <Phone className="w-5 h-5 text-dnc-orange-light shrink-0 mt-0.5" />
                 <div className="space-y-0.5">
-                  <span className="block text-sm select-all">+977 9851141348 / +977 9801263604</span>
-                  <span className="block text-sm select-all">01-5314322 (Landline)</span>
+                  <span className="block text-sm select-all">01-5971958 (Hotline) | 01-5314322</span>
+                  <span className="block text-sm select-all">+977 9851141348 | +977 9801263604</span>
                 </div>
               </div>
 

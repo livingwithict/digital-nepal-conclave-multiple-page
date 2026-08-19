@@ -22,7 +22,7 @@ export const AGENDA_DATA: AgendaItem[] = [
     title: "Delegate Registration & Welcome Reception",
     category: "Inaugural",
     session: "Session 0: Inaugural Session",
-    description: "Delegate badge issuance, exhibition engagement, and informal networking",
+    description: "",
     speakers: [],
   },
   {
@@ -30,7 +30,7 @@ export const AGENDA_DATA: AgendaItem[] = [
     title: "Inaugural Session: Lighting the Digital Path",
     category: "Inaugural",
     session: "Session 0: Inaugural Session",
-    description: "Formal commencement, ceremonial lamp lighting, and introductory address by the organizing committee, Documentary and Flashback DNC 2022-2025",
+    description: "",
     speakers: [],
   },
   {
@@ -39,7 +39,7 @@ export const AGENDA_DATA: AgendaItem[] = [
     subtitle: "The Trajectory of Nepal's Digital Progress: Strategic Essentials",
     category: "Inaugural",
     session: "Session 0: Inaugural Session",
-    description: "A profound, nationally oriented discourse by a prominent digital visionary analyzing institutional progress, structural gaps, and the transformative roadmap for the coming decade",
+    description: "",
     speakers: [],
   },
   {
@@ -48,7 +48,7 @@ export const AGENDA_DATA: AgendaItem[] = [
     subtitle: "Transformative Digital Paradigms: Success Drivers for Emerging Economies",
     category: "Inaugural",
     session: "Session 0: Inaugural Session",
-    description: "An international expert in digital governance will outline successful frameworks from pioneering nations, offering practical insights customized for Nepal's unique developmental context.",
+    description: "",
     speakers: [],
   },
 
@@ -63,10 +63,10 @@ export const AGENDA_DATA: AgendaItem[] = [
   {
     time: "11:00 AM",
     title: "Strategic Panel I: Redefining Digital Governance Architecture",
-    subtitle: "Citizen-Centric Services: 100++ Agendas for a Digital Nation",
+    subtitle: "Citizen-Centric Services: 100+ Agendas for a Digital Nation",
     category: "Governance",
     session: "Session 1: Governance & Digital Public Infrastructure",
-    description: "A high-level, multi-stakeholder discussion focused on the evolution of Nepal's governance through the implementation of open government principles and robust digital public infrastructure.",
+    description: "",
     speakers: [],
   },
 
@@ -86,7 +86,7 @@ export const AGENDA_DATA: AgendaItem[] = [
     title: "Digital Launchpad II - Innovative Solutions in Governance & Data (2-3 Pitches)",
     category: "Data",
     session: "Session 2: Data, AI & Innovation",
-    description: "A curated showcase featuring three strategic startup presentations centered on GovTech advancements, data-centric architectures, and transformative digital public service delivery, allocating 5 minutes for each visionary pitch.",
+    description: "",
     speakers: [],
   },
   {
@@ -95,7 +95,7 @@ export const AGENDA_DATA: AgendaItem[] = [
     subtitle: "Reimagining Citizen Service Delivery: Can Nagarik App Become Nepal's Digital Gateway?",
     category: "Data",
     session: "Session 2: Data, AI & Innovation",
-    description: "This session will explore the evolution of Nagarik App as a unified digital platform for citizen services, its potential to become Nepal's super app, and the opportunities and challenges in delivering seamless, secure, and citizen-centric services while advancing smart governance.",
+    description: "",
     speakers: [],
   },
   {
@@ -103,7 +103,7 @@ export const AGENDA_DATA: AgendaItem[] = [
     title: "Keynote III: Leveraging Frontier Technologies, Data Exchange, and Solution Architecture for Digital Transformation",
     category: "Data",
     session: "Session 2: Data, AI & Innovation",
-    description: "This keynote explores how AI, interoperable data exchange, and modern digital architecture can accelerate Nepal's digital transformation. It highlights the role of frontier technologies in enabling smarter governance, improving public service delivery, strengthening digital trust, and building a secure, citizen-centric digital ecosystem.",
+    description: "",
     speakers: [],
   },
   {
@@ -112,7 +112,7 @@ export const AGENDA_DATA: AgendaItem[] = [
     subtitle: "Establishing Data Sovereignty, Uniform Standards, and Robust Architectures",
     category: "Data",
     session: "Session 2: Data, AI & Innovation",
-    description: "This high-level discussion explores the critical themes of national data ownership and the necessity of technical interoperability. It aims to identify strategic methodologies for building trust and resilience within the comprehensive digital landscape.",
+    description: "",
     speakers: [],
   },
 
@@ -132,16 +132,16 @@ export const AGENDA_DATA: AgendaItem[] = [
     title: "Nepal Startup Launchpad - Innovative Solutions in Digital Economy & Deep Tech Ideas (3-4 Pitches)",
     category: "Economy",
     session: "Session 3: Digital Economy & Innovation",
-    description: "A final showcase featuring select startup presentations centered on the digital trade landscape, fintech architectures, and AI-driven innovations, allocating 5 minutes for each visionary pitch.",
+    description: "",
     speakers: [],
   },
   {
     time: "5:00 PM",
-    title: "Strategic Panel IV: Unlocking Digital Procurement",
-    subtitle: "Unlocking Digital Procurement: Driving Transparency, Innovation, and the Digital Economy",
+    title: "Strategic Panel IV: Unlocking Digital Nepal",
+    subtitle: "Unlocking Digital Nepal: Advancing Transparency, Innovation and the Digital Economy",
     category: "Economy",
     session: "Session 3: Digital Economy & Innovation",
-    description: "Timely procurement is a critical enabler of digital transformation. Delays and outdated procurement processes often slow innovation, increase costs, and hinder effective public service delivery. This session will explore how strategic, agile, and innovation-friendly procurement can accelerate digital transformation, enable the adoption of emerging technologies, and maximize public value.",
+    description: "",
     speakers: [],
   },
   {
@@ -150,7 +150,7 @@ export const AGENDA_DATA: AgendaItem[] = [
     subtitle: "A Framework for Broad-Based Prosperity",
     category: "Economy",
     session: "Session 3: Digital Economy & Innovation",
-    description: "This visionary address will examine the development of a resilient digital economy by advancing fintech systems, e-commerce networks, and digital trade opportunities to establish the country as a prime location for international tech investment.",
+    description: "",
     speakers: [],
   },
   {
@@ -159,7 +159,7 @@ export const AGENDA_DATA: AgendaItem[] = [
     subtitle: "Mobilizing Capital for Digital Transformation & Reimagining Governance.",
     category: "Economy",
     session: "Session 3: Digital Economy & Innovation",
-    description: "An unscripted, high-level deliberation with the finance minister exploring the fiscal architecture of Nepal's digital journey, examining strategic investment priorities, public-private synergy models, and the catalytic role of national capital markets.",
+    description: "",
     speakers: [],
   },
 

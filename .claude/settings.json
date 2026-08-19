@@ -5,12 +5,16 @@
       "Bash(./node_modules/.bin/tsc --noEmit)",
       "Bash(git checkout *)",
       "Bash(python -)",
-      "Bash(node -e \"new Function\\(require\\('fs'\\).readFileSync\\('scripts/apps-script/Code.gs','utf8'\\)\\); console.log\\('parses ok'\\)\")"
+      "Bash(node -e \"new Function\\(require\\('fs'\\).readFileSync\\('scripts/apps-script/Code.gs','utf8'\\)\\); console.log\\('parses ok'\\)\")",
+      "Bash(cp src/pages/Registration.tsx /d/ICT/DNC-Register/src/pages/Registration.tsx && cd /d/ICT/DNC-Register && npx tsc --noEmit && echo TSC_OK)",
+      "Bash(npm i *)",
+      "Bash(sed -i -E 's/^function \\(Field|Text|Dropdown|SectionHeading|FormCard|StatusBlock|SubmitButton|InfoPanel|useUnsavedGuard|readableError|postForm\\)\\\\\\(/export function \\\\1\\(/; s/^type FormState =/export type FormState =/' src/pages/Registration.tsx && grep -n \"^export function \\\\|^export type\\\\|^async function postForm\" src/pages/Registration.tsx)"
     ],
     "additionalDirectories": [
       "D:\\ICT\\IFN\\src\\data",
       "D:\\ICT\\IFN\\scripts",
-      "D:\\ICT\\IFN"
+      "D:\\ICT\\IFN",
+      "D:\\ICT\\DNC-Register\\src\\pages"
     ]
   }
 }

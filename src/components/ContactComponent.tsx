@@ -81,7 +81,7 @@ export default function ContactComponent() {
   };
 
   return (
-    <section id="contact-page" className="bg-white py-12 animate-fade-in">
+    <section id="contact-page" className="bg-slate-50 py-12 animate-fade-in">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header Block */}
@@ -128,6 +128,24 @@ export default function ContactComponent() {
                     <Phone className="w-4 h-4" />
                   </div>
                   <div>
+                    <p className="text-sm font-semibold text-slate-900 select-all">01-5971958 (Hotline)</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <div className="p-2 bg-slate-50 border rounded-lg text-dnc-blue">
+                    <Phone className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-slate-900 select-all">01-5314322</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <div className="p-2 bg-slate-50 border rounded-lg text-dnc-blue">
+                    <Phone className="w-4 h-4" />
+                  </div>
+                  <div>
                     <p className="text-sm font-semibold text-slate-900 select-all">+977 9851141348</p>
                   </div>
                 </div>
@@ -141,14 +159,6 @@ export default function ContactComponent() {
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3">
-                  <div className="p-2 bg-slate-50 border rounded-lg text-dnc-blue">
-                    <Phone className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <p className="text-sm font-semibold text-slate-900 select-all">01-5314322</p>
-                  </div>
-                </div>
               </div>
             </div>
 
